@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>供应链学习记录（始于 2026.08.04）</title>
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 <div class="scroll-progress" id="progress"></div>
@@ -88,8 +88,8 @@
   </div>
   <div class="count-tip" id="countTip">共 <b>18</b> 个内容 · 点胶囊按板块筛选，或在上面搜索关键字</div>
 
-  <!-- ===================== 板块一：运输干线（默认收起） ===================== -->
-  <details class="board" data-board>
+  <!-- ===================== 板块一：运输干线（默认展开，仅展示前 3 条） ===================== -->
+  <details class="board" data-board open>
     <summary class="board-title">
       <span class="board-ico">🚚</span>
       <h2 class="bt-label">每日学习 · 运输干线</h2>
@@ -98,9 +98,10 @@
     </summary>
     <div class="board-body">
       <p class="board-desc">每条干线对应一天的学习，点击货车查看当日笔记</p>
+      <p class="board-hint">🕓 更新每日学习记录</p>
       <div class="road">
         <div class="road-line"></div>
-        <div class="road-grid">
+        <div class="road-grid" id="dailyGrid">
 
           <a class="tl-card truck reveal" data-cat="daily" data-title="供应链到底是个啥 第1章 全貌 五大角色 SCOR" href="entries/2026-08-04.html">
             <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 6h12v9H2z"/><path d="M14 9h4l4 4v2h-8z"/><circle cx="7" cy="17" r="1.7"/><circle cx="17" cy="17" r="1.7"/></svg></span>
@@ -193,6 +194,7 @@
           </a>
 
         </div>
+        <button class="show-more" id="dailyMore" type="button">展开全部 · 共 15 篇 ▾</button>
       </div>
     </div>
   </details>
@@ -298,16 +300,24 @@
   var boards=[].slice.call(document.querySelectorAll('[data-board]'));
   var empty=document.getElementById('empty'), tip=document.getElementById('countTip');
   var curCat='all', curQ='';
+  var dailyGrid=document.getElementById('dailyGrid');
+  var dailyMore=document.getElementById('dailyMore');
+  var dailyCollapsed=true;
   function filter(){
     var shownCards=0;
+    var filtering = !!curQ || curCat!=='all';
     boards.forEach(function(b){
       var bCards=[].slice.call(b.querySelectorAll('.tl-card'));
       var bVisible=0;
-      bCards.forEach(function(c){
+      var isDaily = dailyGrid && b.contains(dailyGrid);
+      bCards.forEach(function(c,i){
         var okCat=(curCat==='all'||c.getAttribute('data-cat')===curCat);
         var hay=(c.getAttribute('data-title')||'')+' '+c.textContent;
         var okQ = !curQ || hay.toLowerCase().indexOf(curQ)>-1;
-        var show=okCat&&okQ;
+        var match=okCat&&okQ;
+        /* 每日学习：未筛选时默认只展示前 3 条，其余隐藏 */
+        var previewHide = dailyCollapsed && !filtering && isDaily && i>=3;
+        var show=match && !previewHide;
         c.classList.toggle('hide',!show);
         if(show){bVisible++;shownCards++;}
       });
@@ -321,6 +331,11 @@
     tip.innerHTML='共 <b>'+cards.length+'</b> 个内容 · 当前显示 <b>'+shownCards+'</b> 个'
       + (curCat!=='all'?' · 板块：'+catName(curCat):'')
       + (curQ?' · 关键词：「'+curQ+'」':'');
+    if(dailyMore){
+      var total=dailyGrid.querySelectorAll('.tl-card').length;
+      dailyMore.textContent = dailyCollapsed ? '展开全部 · 共 '+total+' 篇 ▾' : '收起 ▴';
+      dailyMore.style.display = filtering ? 'none' : '';
+    }
   }
   function catName(c){var m={daily:'运输干线',topic:'仓储中心',glossary:'词表码头'};return m[c]||c;}
   chips.addEventListener('click',function(e){
@@ -329,6 +344,18 @@
     chip.classList.add('active'); curCat=chip.getAttribute('data-cat'); filter();
   });
   search.addEventListener('input',function(){curQ=this.value.trim().toLowerCase();filter();});
+
+  /* 每日学习：展开全部 / 收起（默认仅展示前 3 条） */
+  if(dailyMore){
+    dailyMore.addEventListener('click',function(){
+      dailyCollapsed=!dailyCollapsed;
+      if(!dailyCollapsed){
+        /* 展开时点亮被隐藏卡片的渐显动画 */
+        dailyGrid.querySelectorAll('.tl-card').forEach(function(el){el.classList.add('in');});
+      }
+      filter();
+    });
+  }
 
   /* 滚动渐显 */
   var io=new IntersectionObserver(function(es){
