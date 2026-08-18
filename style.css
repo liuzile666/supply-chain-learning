@@ -337,3 +337,43 @@ body{
 .marshal-bubble.show{opacity:1;transform:translateX(-50%) scale(1)}
 .marshal-bubble::after{content:"";position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);
   border:6px solid transparent;border-top-color:var(--accent);border-bottom:0}
+
+/* —— 调度员进阶交互 —— */
+/* 眼睛 + 太阳镜（亮色主题戴墨镜） */
+.m-eye{fill:#2a2a2a}
+.m-sun{display:none;fill:#0b1220}
+.m-sun bridge,.m-sun rect{fill:#0b1220}
+.marshal.sunglasses .m-sun{display:block}
+.marshal.sunglasses .m-eye{display:none}
+
+/* 指挥棒信号灯：红 / 绿 */
+.marshal.redlight .m-baton{stroke:#f87171;filter:drop-shadow(0 0 8px rgba(248,113,113,.95))}
+.marshal.greenlight .m-baton{stroke:#34d399;filter:drop-shadow(0 0 8px rgba(52,211,153,.95))}
+
+/* 手势：指向板块 / 敬礼 / 挥手 / 蹦迪 */
+.marshal.point .arm-flat{transform:rotate(42deg)}
+.marshal.salute .arm-baton{transform:rotate(-80deg)}
+.marshal.salute .arm-flat{transform:rotate(-62deg)}
+.marshal.wave .arm-baton{transform:rotate(-50deg)}
+.marshal.wave .arm-flat{transform:rotate(-32deg)}
+.marshal.dance{animation:jdance .5s ease-in-out 2}
+@keyframes jdance{0%,100%{transform:rotate(0) translateY(0)}25%{transform:rotate(-6deg) translateY(-5px)}75%{transform:rotate(6deg) translateY(-5px)}}
+
+/* 迷你工牌弹窗 */
+.marshal-id{position:absolute;top:8px;left:-156px;width:146px;background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;padding:10px 12px;box-shadow:var(--shadow-hover);font-size:11px;color:var(--muted);line-height:1.7;
+  opacity:0;pointer-events:none;transform:translateX(12px);transition:opacity .25s,transform .25s;z-index:3}
+.marshal-id.show{opacity:1;transform:none}
+.marshal-id b{color:var(--ink);font-size:13px;display:block;margin-bottom:4px}
+.marshal-id .id-no{color:var(--accent);font-weight:800;letter-spacing:1px}
+
+/* 派送货车：从右到左横穿屏幕 */
+.truck-runner{position:fixed;right:-160px;z-index:48;pointer-events:none;will-change:transform}
+.truck-runner.go{animation:drive 3.4s linear forwards}
+@keyframes drive{from{transform:translateX(0)}to{transform:translateX(calc(-100vw - 240px))}}
+
+@media(prefers-reduced-motion:reduce){
+  .marshal-inner,.baton-swing{animation:none!important}
+  .truck-runner.go{animation-duration:.01s!important}
+  .marshal.dance{animation:none!important}
+}
