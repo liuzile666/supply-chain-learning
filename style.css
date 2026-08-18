@@ -1,0 +1,91 @@
+:root{
+  --paper:#f6f3ec;
+  --ink:#33312e;
+  --ink-soft:#6b6660;
+  --line:#e4ddd0;
+  --green:#2f7d6b;
+  --green-soft:#e9f3ef;
+  --terra:#c2683f;
+  --terra-soft:#fbf0e6;
+  --card:#fffdf9;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  line-height:1.85;
+  font-size:17px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:780px;margin:0 auto;padding:48px 22px 80px}
+
+/* 总目录 */
+.cover{text-align:center;padding:30px 10px 10px}
+.cover .kicker{letter-spacing:6px;color:var(--terra);font-size:13px;font-weight:700}
+.cover h1{font-size:34px;margin:14px 0 6px;line-height:1.3}
+.cover .sub{color:var(--ink-soft);font-size:15px}
+.about{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:20px 24px;margin:26px 0;font-size:15.5px;color:var(--ink-soft)
+}
+.about b{color:var(--ink)}
+
+.timeline{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-top:24px}
+.tl-card{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:14px 16px;text-decoration:none;color:inherit;display:block;transition:.18s
+}
+.tl-card:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(0,0,0,.07);border-color:#d8cfbd}
+.tl-card .d{font-size:12px;color:var(--terra);font-weight:700;letter-spacing:1px}
+.tl-card .t{font-size:16px;font-weight:700;margin:4px 0 2px}
+.tl-card .meta{font-size:12.5px;color:var(--ink-soft)}
+.tl-card .stat{display:inline-block;margin-top:8px;font-size:11.5px;padding:2px 9px;border-radius:20px}
+.stat.done{background:var(--green-soft);color:var(--green)}
+.stat.soon{background:#f0ece3;color:var(--ink-soft)}
+
+/* 单篇 */
+.entry{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:38px 40px 30px;box-shadow:0 6px 24px rgba(0,0,0,.04)}
+.entry-head{display:flex;gap:18px;align-items:flex-start;border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:8px}
+.day-badge{
+  flex:0 0 auto;width:62px;height:62px;border-radius:50%;
+  background:var(--green);color:#fff;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;font-weight:800;line-height:1
+}
+.day-badge .lab{font-size:10px;letter-spacing:1px;opacity:.85}
+.day-badge .num{font-size:22px;margin-top:3px}
+.entry-head h1{font-size:25px;margin:4px 0 4px;line-height:1.35}
+.entry-head .date{color:var(--ink-soft);font-size:13.5px;margin:0}
+.entry-body{padding-top:14px}
+.entry-body .lead{font-size:18.5px;color:var(--ink);font-style:italic;border-left:3px solid var(--terra);padding-left:14px;margin:18px 0 22px}
+.entry-body p{margin:16px 0}
+.entry-body h2{font-size:19px;margin:30px 0 6px;padding-left:11px;border-left:4px solid var(--green)}
+.entry-body ul{margin:14px 0;padding-left:22px}
+.entry-body li{margin:8px 0}
+.note{
+  background:var(--terra-soft);border:1px solid #f0d8c4;border-radius:12px;
+  padding:14px 18px;margin:24px 0;font-size:15.5px
+}
+.note .tag{display:block;font-weight:800;color:var(--terra);font-size:13px;margin-bottom:4px}
+.takeaway{
+  background:var(--green-soft);border:1px solid #cfe6dd;border-radius:12px;
+  padding:14px 18px;margin:24px 0;font-size:15.5px
+}
+.takeaway .tag{display:block;font-weight:800;color:var(--green);font-size:13px;margin-bottom:4px}
+.entry-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);margin-top:30px;padding-top:18px;font-size:14px}
+.entry-foot a{color:var(--green);text-decoration:none;font-weight:600}
+.entry-foot a:hover{text-decoration:underline}
+.entry-foot .next{color:var(--ink-soft)}
+.q{background:#fbf7ef;border:1px dashed var(--line);border-radius:12px;padding:14px 18px;margin:20px 0}
+.q .qt{font-weight:700;color:var(--terra)}
+.pager{display:flex;justify-content:space-between;margin-top:22px;gap:12px;flex-wrap:wrap}
+.pager a{flex:1;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-size:14px;min-width:140px;transition:.18s}
+.pager a:hover{border-color:#d8cfbd;box-shadow:0 4px 14px rgba(0,0,0,.05)}
+.pager .pn{color:var(--ink-soft);font-size:12px}
+.pager .pt{font-weight:700;display:block;margin-top:2px}
+@media(max-width:560px){
+  .entry{padding:26px 20px}
+  .wrap{padding:30px 14px 60px}
+  body{font-size:16px}
+}
