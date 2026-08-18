@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>供应链学习记录（始于 2026.08.04）</title>
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
 <div class="scroll-progress" id="progress"></div>
@@ -444,6 +444,7 @@
   if(!isNaN(saved)) m.style.bottom=saved+'px';
 
   var poseTimer=null, clsTimer=null, lastY=window.scrollY, bubbleTimer=null, lastInteract=Date.now(), lastDbl=0;
+  var supervising=false, superviseTimer=null, supBubbleTimer=null, supCard=null;
   function showBubble(text){ if(!bubble) return;
     bubble.textContent=text; bubble.classList.add('show');
     clearTimeout(bubbleTimer); bubbleTimer=setTimeout(function(){bubble.classList.remove('show');},1300); }
@@ -454,7 +455,7 @@
     clearTimeout(clsTimer); clsTimer=setTimeout(function(){m.classList.remove(cls);},ms); }
 
   /* 随滚动切换手势：下滑放行 / 上滑停止 */
-  window.addEventListener('scroll',function(){ lastInteract=Date.now(); var y=window.scrollY;
+  window.addEventListener('scroll',function(){ lastInteract=Date.now(); if(supervising) return; var y=window.scrollY;
     if(Math.abs(y-lastY)>4){ setPose(y>lastY?'go':'stop'); lastY=y;
       clearTimeout(poseTimer); poseTimer=setTimeout(function(){m.classList.remove('stop','go');},900); }
   },{passive:true});
@@ -498,6 +499,57 @@
   var quips=['牛鞭效应要防住 🐂','时效就是生命 ⏱️','推拉边界前移 📦','库存压到个位数 📉','在途 15 篇，注意时效 🚚','小单快反，返单要快 🔁'];
   setInterval(function(){ if(Date.now()-lastInteract>5000) showBubble(quips[Math.floor(Math.random()*quips.length)]); },7000);
 
+  /* 随机监工：走过去站到某篇日记卡旁边“监工” */
+  var supPhrases=['装车核对 ✅','这车装得不错 📦','盘点中 🔍','时效 OK 👍','出库复核 🚀','在途监控 📡'];
+  function visibleDaily(){
+    return [].slice.call(document.querySelectorAll('#dailyGrid .tl-card'))
+      .filter(function(c){ return c.offsetParent!==null && !c.classList.contains('hide'); });
+  }
+  function supervise(){
+    if(supervising || window.innerWidth<1240) return;
+    var cards=visibleDaily(); if(!cards.length) return;
+    var chosen=cards[Math.floor(Math.random()*cards.length)];
+    var all=[].slice.call(document.querySelectorAll('#dailyGrid .tl-card'));
+    var dayNum=all.indexOf(chosen)+1;
+    supCard=chosen;
+    var r0=chosen.getBoundingClientRect();
+    if(r0.top<90 || r0.bottom>window.innerHeight-90){
+      chosen.scrollIntoView({block:'center',behavior:'smooth'});
+      clearTimeout(supBubbleTimer);
+      supBubbleTimer=setTimeout(function(){ doSupervise(dayNum); }, 680);
+    } else doSupervise(dayNum);
+  }
+  function doSupervise(dayNum){
+    if(supervising || !supCard) return;
+    supervising=true; lastInteract=Date.now();
+    var r=supCard.getBoundingClientRect();
+    var mw=m.offsetWidth, mh=m.offsetHeight;
+    var left=r.left-mw-16; if(left<8) left=r.right+16;
+    left=Math.max(8,Math.min(window.innerWidth-mw-8,left));
+    var top=r.top+r.height/2-mh/2;
+    top=Math.max(8,Math.min(window.innerHeight-mh-8,top));
+    var cur=m.getBoundingClientRect();
+    var dx=left-cur.left, dy=top-cur.top;
+    supCard.classList.add('being-supervised');
+    m.classList.add('supervising');
+    m.style.transform='translate('+dx+'px,'+dy+'px)';
+    setTemp('point',3400);
+    showBubble('👀 监工 Day '+dayNum+'：'+(supPhrases[Math.floor(Math.random()*supPhrases.length)]));
+    clearTimeout(superviseTimer);
+    superviseTimer=setTimeout(function(){
+      m.style.transform='';
+      setTimeout(function(){
+        m.classList.remove('supervising');
+        if(supCard) supCard.classList.remove('being-supervised');
+        supCard=null; supervising=false;
+      }, 950);
+    }, 3400);
+  }
+  /* 自动随机监工：空闲时约每 22 秒有 50% 概率出动 */
+  setInterval(function(){
+    if(!supervising && Date.now()-lastInteract>8000 && Math.random()<0.5) supervise();
+  }, 22000);
+
   /* 派送货车：从右到左横穿 */
   function spawnTruck(){
     var t=document.createElement('div'); t.className='truck-runner go';
@@ -526,6 +578,7 @@
   /* 拖动 + 轻点（区分部位 / 派送货车） */
   var dragging=false, startY=0, startBottom=0, moved=0, downPart=null;
   m.addEventListener('pointerdown',function(e){
+    if(supervising) return;
     dragging=true; moved=0; lastInteract=Date.now(); startY=e.clientY;
     startBottom=parseFloat(getComputedStyle(m).bottom)||118;
     downPart=(e.target.closest&&e.target.closest('.mpart'))?e.target.closest('.mpart').getAttribute('data-part'):null;
@@ -545,7 +598,7 @@
   }
   m.addEventListener('pointerup',endDrag);
   m.addEventListener('pointercancel',endDrag);
-  m.addEventListener('dblclick',function(){ lastDbl=Date.now(); setTemp('dance',1000); showBubble('🕺 收工蹦迪！'); });
+  m.addEventListener('dblclick',function(){ if(supervising) return; lastDbl=Date.now(); setTemp('dance',1000); showBubble('🕺 收工蹦迪！'); });
 })();
 </script>
 </body>
