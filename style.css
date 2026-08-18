@@ -372,8 +372,15 @@ body{
 .truck-runner.go{animation:drive 3.4s linear forwards}
 @keyframes drive{from{transform:translateX(0)}to{transform:translateX(calc(-100vw - 240px))}}
 
+/* 随机监工：走过去站到日记卡旁 + 卡片高亮 */
+.marshal{transition:transform .9s cubic-bezier(.34,1.08,.64,1)}
+.marshal.supervising{z-index:60;cursor:pointer}
+.tl-card.being-supervised{outline:2px solid var(--accent);outline-offset:3px;
+  box-shadow:0 0 0 4px rgba(34,211,238,.18);border-radius:14px}
+
 @media(prefers-reduced-motion:reduce){
   .marshal-inner,.baton-swing{animation:none!important}
+  .marshal{transition:none!important}
   .truck-runner.go{animation-duration:.01s!important}
   .marshal.dance{animation:none!important}
 }
