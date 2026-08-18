@@ -171,6 +171,26 @@ body{
 .pager .pn{color:var(--ink-soft);font-size:12px}
 .pager .pt{font-weight:700;display:block;margin-top:2px}
 
+/* ===== 三板块布局 ===== */
+.board{margin-top:34px}
+.board-title{font-size:22px;margin:6px 0 2px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.board-title .sub{font-size:13px;color:var(--ink-soft);font-weight:400}
+.board-desc{font-size:13.5px;color:var(--ink-soft);margin:0 0 16px;line-height:1.7}
+.board-ico{font-size:24px}
+
+/* ===== 术语对照表（glossary） ===== */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.pair .pc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.pair .pc h3{margin:0 0 6px;font-size:16px;display:flex;align-items:center;gap:8px}
+.pair .pc .vs{font-size:11px;color:#fff;background:var(--terra);border-radius:20px;padding:1px 8px;font-weight:700}
+.pair .pc p{margin:4px 0 0;font-size:14px;color:var(--ink-soft)}
+.gloss{margin:16px 0;padding:0;list-style:none}
+.gloss li{display:flex;gap:14px;padding:13px 4px;border-bottom:1px dashed var(--line)}
+.gloss li:last-child{border-bottom:none}
+.gloss .k{flex:0 0 116px;font-weight:800;color:var(--green)}
+.gloss .v{flex:1;color:var(--ink-soft);font-size:15px}
+@media(max-width:560px){.pair{grid-template-columns:1fr}.gloss li{flex-direction:column;gap:2px}.gloss .k{flex:none}}
+
 /* 站点页脚 */
 .site-foot{text-align:center;color:var(--ink-soft);font-size:13px;margin-top:36px}
 .site-foot a{color:var(--green);text-decoration:none}
