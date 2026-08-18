@@ -44,8 +44,8 @@
   <div class="count-tip" id="countTip">共 <b>18</b> 个内容 · 点胶囊按板块筛选，或在上面搜索关键字</div>
 
   <!-- ===== 板块一：每日学习 ===== -->
-  <section class="board" data-board>
-    <h2 class="board-title"><span class="board-ico">📅</span> 每日学习 <span class="sub">Day 1–15 · 第一人称学习日记</span></h2>
+  <section class="board collapsed" data-board>
+    <h2 class="board-title"><span class="board-ico">📅</span> 每日学习 <span class="sub">Day 1–15 · 第一人称学习日记</span><span class="caret">▾</span></h2>
     <div class="timeline">
 
       <a class="tl-card reveal" data-cat="daily" data-title="供应链到底是个啥 第1章 全貌 五大角色 SCOR" href="entries/2026-08-04.html">
@@ -158,7 +158,7 @@
 
   <!-- ===== 板块二：专题 ===== -->
   <section class="board" data-board>
-    <h2 class="board-title"><span class="board-ico">🧩</span> 专题 <span class="sub">用书的框架，套一次真实业务</span></h2>
+    <h2 class="board-title"><span class="board-ico">🧩</span> 专题 <span class="sub">用书的框架，套一次真实业务</span><span class="caret">▾</span></h2>
     <div class="timeline">
 
       <a class="tl-card reveal" data-cat="topic" data-title="拼多多 广东 物流 产地直发 专题感悟" href="entries/2026-08-18-pdd-gd.html">
@@ -180,7 +180,7 @@
 
   <!-- ===== 板块三：词组对照解释 ===== -->
   <section class="board" data-board>
-    <h2 class="board-title"><span class="board-ico">📖</span> 词组对照解释专题 <span class="sub">书里那些容易混的概念，一对一对摆清楚</span></h2>
+    <h2 class="board-title"><span class="board-ico">📖</span> 词组对照解释专题 <span class="sub">书里那些容易混的概念，一对一对摆清楚</span><span class="caret">▾</span></h2>
     <div class="timeline">
 
       <a class="tl-card reveal" data-cat="glossary" data-title="术语 对照 SPU SKU SN 推拉 牛鞭  glossary 词表" href="entries/glossary.html">
@@ -230,6 +230,17 @@
   toTop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
   onScroll();
 
+  /* 板块折叠：点标题展开/收起，展开时补 .reveal 显示 */
+  function expandBoard(b){ if(!b)return; b.classList.remove('collapsed');
+    b.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');}); }
+  document.querySelectorAll('.board-title').forEach(function(h){
+    h.setAttribute('role','button'); h.setAttribute('tabindex','0');
+    function toggle(){ var b=h.closest('.board'); if(!b)return;
+      var col=b.classList.toggle('collapsed'); if(!col) expandBoard(b); }
+    h.addEventListener('click',toggle);
+    h.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();} });
+  });
+
   /* 筛选（板块级）+ 搜索 */
   var chips=document.getElementById('chips'), search=document.getElementById('search');
   var cards=[].slice.call(document.querySelectorAll('.tl-card'));
@@ -250,7 +261,11 @@
         if(show){bVisible++;shownCards++;}
       });
       b.classList.toggle('hide', curCat!=='all' && bVisible===0);
-      if(bVisible>0)shownBoards++;
+      if(bVisible>0){
+        shownBoards++;
+        /* 搜索或指定板块筛选命中时，自动展开被收起的板块，免得结果藏在里面看不到 */
+        if(b.classList.contains('collapsed') && (curQ || curCat!=='all')) expandBoard(b);
+      }
     });
     empty.classList.toggle('show',shownCards===0);
     tip.innerHTML='共 <b>'+cards.length+'</b> 个内容 · 当前显示 <b>'+shownCards+'</b> 个'
