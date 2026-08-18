@@ -1,135 +1,160 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>我的供应链学习记录 · 半月连载（2026.08.04–08.18）</title>
+<title>我的供应链学习记录 · 第一人称连载（始于 2026.08.04）</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="scroll-progress" id="progress"></div>
+<button class="float-btn theme-toggle" id="themeBtn" title="切换日间 / 夜间">🌙</button>
+<button class="float-btn to-top" id="toTop" title="回到顶部">↑</button>
+
 <div class="wrap">
 
-  <section class="cover">
+  <section class="cover reveal">
     <div class="kicker">SUPPLY CHAIN · 学习手帐</div>
     <h1>我的供应链学习记录</h1>
-    <p class="sub">2026.08.04 – 08.18 · 连续 15 天的第一人称学习日记</p>
+    <p class="sub">从 <b>2026.08.04</b> 起 · 第一人称供应链学习日记 · 持续更新中</p>
+    <div class="badge-live"><span class="dot"></span> 连载进行中</div>
+    <div class="stats">
+      <div class="s"><div class="n">16</div><div class="l">已发布篇数</div></div>
+      <div class="s"><div class="n">08/04</div><div class="l">开始日期</div></div>
+      <div class="s"><div class="n">第1–5章</div><div class="l">已覆盖内容</div></div>
+    </div>
   </section>
 
-  <section class="about">
+  <section class="about reveal">
     这是我用 <b>《实战供应链：业务梳理、系统设计与项目实战》</b>（罗静 著）做教材，
-    自己给自己开的"半月训练营"。每天一篇，用<strong>我自己的视角</strong>记下：今天读到哪、卡在哪、想通了什么。
+    自己给自己开的"学习训练营"。每天一篇，用<strong>我自己的视角</strong>记下：今天读到哪、卡在哪、想通了什么。
     不追求辞藻，只求真实——毕竟学习本来就是"先懵、再通、偶尔回头懵"的过程。<br>
     如果你也在学供应链，欢迎从 Day 1 跟我一起走；如果已经是大佬，当作一个新人的唠叨也好 😊
   </section>
 
-  <div class="timeline">
+  <div class="toolbar reveal">
+    <input class="search" id="search" type="search" placeholder="🔍 搜点什么？试试「牛鞭」「中台」「推拉」…" autocomplete="off">
+    <div class="chips" id="chips">
+      <span class="chip active" data-cat="all">全部</span>
+      <span class="chip" data-cat="ch1">第1章</span>
+      <span class="chip" data-cat="ch2">第2章</span>
+      <span class="chip" data-cat="ch3">第3章</span>
+      <span class="chip" data-cat="ch4">第4章</span>
+      <span class="chip" data-cat="ch5">第5章</span>
+      <span class="chip" data-cat="summary">收官</span>
+      <span class="chip" data-cat="topic">专题</span>
+    </div>
+  </div>
+  <div class="count-tip" id="countTip">共 <b>16</b> 篇 · 点胶囊按章节筛选，或在上面搜索关键字</div>
 
-    <a class="tl-card" href="entries/2026-08-04.html">
+  <div class="timeline" id="timeline">
+
+    <a class="tl-card reveal" data-cat="ch1" data-title="供应链到底是个啥 第1章 全貌 五大角色 SCOR" href="entries/2026-08-04.html">
       <div class="d">DAY 01 · 08/04</div>
       <div class="t">供应链到底是个啥</div>
       <div class="meta">第1章 · 全貌与五大角色</div>
       <span class="stat done">已发布</span>
     </a>
 
-    <a class="tl-card" href="entries/2026-08-05.html">
+    <a class="tl-card reveal" data-cat="ch1" data-title="管理和系统 是两兄弟 第1章 ERP SCM" href="entries/2026-08-05.html">
       <div class="d">DAY 02 · 08/05</div>
       <div class="t">管理和系统，是两兄弟</div>
       <div class="meta">第1章 · ERP 与 SCM</div>
       <span class="stat done">已发布</span>
     </a>
 
-    <a class="tl-card" href="entries/2026-08-06.html">
+    <a class="tl-card reveal" data-cat="ch2" data-title="三流 物流 资金流 信息流 第2章 经典三流" href="entries/2026-08-06.html">
       <div class="d">DAY 03 · 08/06</div>
       <div class="t">三流：物流、资金流、信息流</div>
       <div class="meta">第2章 · 经典三流</div>
       <span class="stat done">已发布</span>
     </a>
 
-    <a class="tl-card" href="entries/2026-08-07.html">
+    <a class="tl-card reveal" data-cat="ch2" data-title="目标 原则 协同 降本增效 精简 第2章" href="entries/2026-08-07.html">
       <div class="d">DAY 04 · 08/07</div>
       <div class="t">目标、原则与协同</div>
       <div class="meta">第2章 · 降本增效·精简·协同</div>
       <span class="stat done">已发布</span>
     </a>
 
-    <a class="tl-card" href="entries/2026-08-08.html">
+    <a class="tl-card reveal" data-cat="ch2" data-title="牛鞭效应 双11 爆仓 第2章" href="entries/2026-08-08.html">
       <div class="d">DAY 05 · 08/08</div>
       <div class="t">牛鞭效应：双11爆仓的元凶</div>
       <div class="meta">第2章 · 牛鞭效应</div>
       <span class="stat done">已发布</span>
     </a>
 
-    <a class="tl-card" href="entries/2026-08-09.html">
+    <a class="tl-card reveal" data-cat="ch2" data-title="推式 拉式 推拉结合 供应链战略 第2章" href="entries/2026-08-09.html">
       <div class="d">DAY 06 · 08/09</div>
       <div class="t">推式、拉式、推拉结合</div>
       <div class="meta">第2章 · 供应链战略</div>
       <span class="stat done">已发布</span>
     </a>
 
-    <a class="tl-card" href="entries/2026-08-10.html">
+    <a class="tl-card reveal" data-cat="ch2" data-title="术语 BOM 提前期 MTS MTO 第2章 常识" href="entries/2026-08-10.html">
       <div class="d">DAY 07 · 08/10</div>
       <div class="t">术语拆墙：BOM / 提前期 / MTS-MTO</div>
       <div class="meta">第2章 · 重要常识</div>
       <span class="stat done">已发布</span>
     </a>
 
-    <a class="tl-card" href="entries/2026-08-11.html">
+    <a class="tl-card reveal" data-cat="ch3" data-title="电商 新零售 人货场 第3章" href="entries/2026-08-11.html">
       <div class="d">DAY 08 · 08/11</div>
       <div class="t">电商新零售：铁打的人货，流水的场</div>
       <div class="meta">第3章 · 人货场</div>
       <span class="stat done">已发布</span>
     </a>
 
-    <a class="tl-card" href="entries/2026-08-12.html">
+    <a class="tl-card reveal" data-cat="ch3" data-title="电商 O2O 新零售 零售演变 第3章" href="entries/2026-08-12.html">
       <div class="d">DAY 09 · 08/12</div>
       <div class="t">从电商到O2O到新零售：一种"必然"</div>
       <div class="meta">第3章 · 零售演变</div>
       <span class="stat done">已发布</span>
     </a>
 
-    <a class="tl-card" href="entries/2026-08-13.html">
+    <a class="tl-card reveal" data-cat="ch3" data-title="十大业务流程 进销存 第3章" href="entries/2026-08-13.html">
       <div class="d">DAY 10 · 08/13</div>
       <div class="t">十大业务流程：说到底就是进销存</div>
       <div class="meta">第3章 · 业务流程</div>
       <span class="stat done">已发布</span>
     </a>
 
-    <a class="tl-card" href="entries/2026-08-14.html">
+    <a class="tl-card reveal" data-cat="ch4" data-title="中台化 系统规划 B端产品 第4章" href="entries/2026-08-14.html">
       <div class="d">DAY 11 · 08/14</div>
       <div class="t">中台化系统规划：B端产品是地球还是太阳系</div>
       <div class="meta">第4章 · 系统规划</div>
       <span class="stat done">已发布</span>
     </a>
 
-    <a class="tl-card" href="entries/2026-08-15.html">
+    <a class="tl-card reveal" data-cat="ch4" data-title="供应链中台 接口 第4章" href="entries/2026-08-15.html">
       <div class="d">DAY 12 · 08/15</div>
       <div class="t">供应链中台：把复杂包成一个接口</div>
       <div class="meta">第4章 · 供应链中台</div>
       <span class="stat done">已发布</span>
     </a>
 
-    <a class="tl-card" href="entries/2026-08-16.html">
+    <a class="tl-card reveal" data-cat="ch4" data-title="系统设计 六脉神剑 画图 第4章" href="entries/2026-08-16.html">
       <div class="d">DAY 13 · 08/16</div>
       <div class="t">系统设计心法：六脉神剑与画图</div>
       <div class="meta">第4章 · 设计内功</div>
       <span class="stat done">已发布</span>
     </a>
 
-    <a class="tl-card" href="entries/2026-08-17.html">
+    <a class="tl-card reveal" data-cat="ch5" data-title="基础数据中心 SPU SKU SN 主数据 第5章" href="entries/2026-08-17.html">
       <div class="d">DAY 14 · 08/17</div>
       <div class="t">基础数据中心：SPU、SKU、SN 到底差在哪</div>
       <div class="meta">第5章 · 主数据</div>
       <span class="stat done">已发布</span>
     </a>
 
-    <a class="tl-card" href="entries/2026-08-18.html">
+    <a class="tl-card reveal" data-cat="summary" data-title="半月收官 总结 第1-5章" href="entries/2026-08-18.html">
       <div class="d">DAY 15 · 08/18</div>
       <div class="t">半月收官：我学到了什么</div>
       <div class="meta">第1–5章 · 总结</div>
       <span class="stat done">已发布</span>
     </a>
 
-    <a class="tl-card" href="entries/2026-08-18-pdd-gd.html">
+    <a class="tl-card reveal" data-cat="topic" data-title="拼多多 广东 物流 产地直发 专题感悟" href="entries/2026-08-18-pdd-gd.html">
       <div class="d">专题 · 08/18</div>
       <div class="t">拼多多广东物流：产地直发为什么能打</div>
       <div class="meta">专题感悟 · 用书的框架套真实业务</div>
@@ -138,10 +163,80 @@
 
   </div>
 
-  <p style="text-align:center;color:var(--ink-soft);font-size:13px;margin-top:34px">
-    未完待续 · 下个半月继续啃采购管理 / 中央库存 / WMS ……
+  <div class="empty" id="empty">没找到匹配的内容，换个关键词或章节试试 🔍</div>
+
+  <p class="site-foot">
+    未完待续 · 下个阶段继续啃采购管理 / 中央库存 / WMS ……<br>
+    用 ❤️ 与一点点代码记录于 <a href="https://github.com/liuzile666/supply-chain-learning" target="_blank" rel="noopener">GitHub Pages</a>
   </p>
 
 </div>
+
+<script>
+(function(){
+  document.body.classList.add('js');
+
+  /* 主题：读取记忆 / 跟随系统 */
+  var root=document.documentElement, btn=document.getElementById('themeBtn');
+  var saved=localStorage.getItem('sc-theme');
+  var sysDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var theme=saved||(sysDark?'dark':'light');
+  apply(theme);
+  function apply(t){root.setAttribute('data-theme',t);btn.textContent=(t==='dark'?'☀️':'🌙');
+    localStorage.setItem('sc-theme',t);}
+  btn.addEventListener('click',function(){
+    apply(root.getAttribute('data-theme')==='dark'?'light':'dark');
+  });
+
+  /* 阅读进度条 + 回到顶部 */
+  var prog=document.getElementById('progress'), toTop=document.getElementById('toTop');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    prog.style.width=(max>0?(sc/max*100):0)+'%';
+    toTop.classList.toggle('show',sc>360);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  toTop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+  onScroll();
+
+  /* 筛选 + 搜索 */
+  var chips=document.getElementById('chips'), search=document.getElementById('search');
+  var cards=[].slice.call(document.querySelectorAll('.tl-card'));
+  var empty=document.getElementById('empty'), tip=document.getElementById('countTip');
+  var curCat='all', curQ='';
+  function filter(){
+    var n=0;
+    cards.forEach(function(c){
+      var okCat=(curCat==='all'||c.getAttribute('data-cat')===curCat);
+      var okQ=(!curQ||(c.getAttribute('data-title')||'').toLowerCase().indexOf(curQ)>-1
+                        ||c.textContent.toLowerCase().indexOf(curQ)>-1);
+      var show=okCat&&okQ;
+      c.classList.toggle('hide',!show);
+      if(show)n++;
+    });
+    empty.classList.toggle('show',n===0);
+    tip.innerHTML='共 <b>'+(cards.length)+'</b> 篇 · 当前显示 <b>'+n+'</b> 篇'
+      + (curCat!=='all'?' · 章节：'+catName(curCat):'')
+      + (curQ?' · 关键词：「'+curQ+'」':'');
+  }
+  function catName(c){var m={ch1:'第1章',ch2:'第2章',ch3:'第3章',ch4:'第4章',ch5:'第5章',summary:'收官',topic:'专题'};return m[c]||c;}
+  chips.addEventListener('click',function(e){
+    var chip=e.target.closest('.chip'); if(!chip)return;
+    [].slice.call(chips.children).forEach(function(x){x.classList.remove('active');});
+    chip.classList.add('active'); curCat=chip.getAttribute('data-cat'); filter();
+  });
+  search.addEventListener('input',function(){curQ=this.value.trim().toLowerCase();filter();});
+
+  /* 滚动渐显 */
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
+  },{threshold:.08});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+  filter();
+})();
+</script>
 </body>
 </html>
