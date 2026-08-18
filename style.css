@@ -173,8 +173,14 @@ body{
 
 /* ===== 三板块布局 ===== */
 .board{margin-top:34px}
-.board-title{font-size:22px;margin:6px 0 2px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.board-title{font-size:22px;margin:6px 0 2px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  cursor:pointer;user-select:none;transition:color .2s}
+.board-title:hover{color:var(--green)}
+.board-title:focus-visible{outline:none;color:var(--green)}
 .board-title .sub{font-size:13px;color:var(--ink-soft);font-weight:400}
+.board-title .caret{margin-left:auto;font-size:13px;color:var(--ink-soft);transition:transform .28s ease;line-height:1;padding-left:6px}
+.board.collapsed .board-title .caret{transform:rotate(-90deg)}
+.board.collapsed .timeline{display:none}
 .board-desc{font-size:13.5px;color:var(--ink-soft);margin:0 0 16px;line-height:1.7}
 .board-ico{font-size:24px}
 
