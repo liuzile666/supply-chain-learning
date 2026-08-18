@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 14 · 基础数据中心：SPU、SKU、SN 到底差在哪 — 我的供应链学习记录</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="wrap">
+<article class="entry">
+  <header class="entry-head">
+    <div class="day-badge"><span class="lab">DAY</span><span class="num">14</span></div>
+    <div>
+      <h1>基础数据中心：SPU、SKU、SN 到底差在哪</h1>
+      <p class="date">2026年8月17日 · 读《实战供应链》第5章</p>
+    </div>
+  </header>
+  <div class="entry-body">
+    <p class="lead">今天进第5章"基础数据中心"。书里开篇一句话特实在：基础数据不准，上面所有系统都是沙上建塔。我深以为然——这不就是软件圈的"垃圾进，垃圾出"嘛。</p>
+    <p>书里给数据中心定了三条设计思路：<strong>集中管控统一分发、开放录入信息互通、权限分离责任到人</strong>。说白了，数据要有一个权威来源，谁都能用，但改要有规矩、要留痕。</p>
+
+    <h2>SPU / SKU / SN：三个最容易混的字母</h2>
+    <p>这节我专门停下来啃，因为这仨天天见却总说不清：</p>
+    <ul>
+      <li><b>SPU（标准化产品单元）</b>：一类"特性相同"的商品的聚合。比如"iPhone 12"就是一个 SPU；</li>
+      <li><b>SKU（库存量单位）</b>：一个具体可卖的规格。iPhone 12 + 黑色 + 128G，是一个 SKU，对应一个定价、一个库存数；</li>
+      <li><b>SN（序列号）</b>：每一个实物的"身份证"。每台 iPhone 的 IMEI 都不同，就是 SN。</li>
+    </ul>
+    <p>关系就像：<strong>一个 SPU 包含多个 SKU，一个 SKU 又包含多个 SN</strong>。书里举的例子我直接抄进脑子了：iPhone 12（SPU）有 9 台，按颜色内存拆成 4 个 SKU，每台 IMEI（SN）都不一样。</p>
+
+    <div class="note">
+      <span class="tag">💭 今天卡住的地方</span>
+      书里说标准品行业用"69码"区分 SKU、用"品牌+型号"算 SPU；但<strong>非标准品没有国标，得业务自己定规则</strong>。我琢磨，像服装这种"颜色+尺码"组合爆炸的，SKU 规则定不好，库存能乱到怀疑人生。
+    </div>
+
+    <div class="takeaway">
+      <span class="tag">✅ 今天记住的一句话</span>
+      SPU 是"这一类"，SKU 是"这一个规格"，SN 是"这一台实物"。<strong>基础数据准了，整条链才转得动</strong>。
+    </div>
+  </div>
+  <footer class="entry-foot">
+    <a href="../index.html">← 返回总目录</a>
+    <span class="next">下一篇：半月收官，我学到了什么 →</span>
+  </footer>
+</article>
+</div>
+</body>
+</html>
