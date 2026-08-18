@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>供应链学习记录（始于 2026.08.04）</title>
-<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="style.css?v=7">
 </head>
 <body>
 <div class="scroll-progress" id="progress"></div>
@@ -371,9 +371,13 @@
 </script>
 
 <!-- ===================== 仓库调度员 · 刘子乐（右侧指挥交通） ===================== -->
-<div class="marshal" id="marshal" title="调度员 刘子乐 · 按住上下拖动我 / 点我挥手">
-  <div class="marshal-tag">🦺 调度员</div>
+<div class="marshal" id="marshal" title="调度员 刘子乐 · 按住拖动 / 点我派送货车 / 点头盔·铭牌·指挥棒有彩蛋">
+  <div class="marshal-tag">🦺 调度员 · <span id="marshalCount">在途 0/15</span></div>
   <div class="marshal-bubble" id="marshalBubble">👋 刘子乐</div>
+  <div class="marshal-id" id="marshalId">
+    <b>🪪 调度员工牌</b>
+    姓名：刘子乐<br>岗位：供应链学习搭子<br>编号：<span class="id-no">SC-0818</span>
+  </div>
   <div class="marshal-inner">
     <svg class="marshal-svg" viewBox="0 0 200 340" aria-label="穿反光背心、印有刘子乐的仓库调度员">
       <!-- 地面阴影 -->
@@ -388,24 +392,34 @@
       <rect class="m-stripe" x="70" y="124" width="60" height="7"/>
       <rect class="m-stripe" x="70" y="182" width="60" height="7"/>
       <rect class="m-stripe" x="96" y="100" width="8" height="112" opacity=".5"/>
-      <!-- 胸前铭牌：刘子乐 -->
-      <rect class="m-nameplate" x="72" y="146" width="56" height="22" rx="5"/>
-      <text class="m-name" x="100" y="161" text-anchor="middle">刘子乐</text>
-      <!-- 头 + 安全帽 -->
+      <!-- 胸前铭牌：刘子乐（可点 → 工牌） -->
+      <g class="mpart" data-part="name">
+        <rect class="m-nameplate" x="72" y="146" width="56" height="22" rx="5"/>
+        <text class="m-name" x="100" y="161" text-anchor="middle">刘子乐</text>
+      </g>
+      <!-- 头 + 脸 + 眼睛 + 墨镜 -->
       <circle class="m-skin" cx="100" cy="70" r="24"/>
-      <circle cx="92" cy="74" r="2.4" fill="#2a2a2a"/>
-      <circle cx="108" cy="74" r="2.4" fill="#2a2a2a"/>
+      <circle class="m-eye m-eye-l" cx="92" cy="74" r="2.4"/>
+      <circle class="m-eye m-eye-r" cx="108" cy="74" r="2.4"/>
       <path d="M90 84 Q100 91 110 84" stroke="#b5651d" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-      <path class="m-hat" d="M74 70 Q74 34 100 34 Q126 34 126 70 Z"/>
-      <rect class="m-hat" x="66" y="66" width="68" height="8" rx="4"/>
-      <rect class="m-hat-band" x="74" y="48" width="52" height="6" rx="3"/>
+      <g class="m-sun">
+        <rect x="84" y="68" width="16" height="11" rx="4"/>
+        <rect x="100" y="68" width="16" height="11" rx="4"/>
+        <rect x="99" y="71" width="6" height="4" rx="2"/>
+      </g>
+      <!-- 安全帽（可点 → 敬礼） -->
+      <g class="mpart" data-part="hat">
+        <path class="m-hat" d="M74 70 Q74 34 100 34 Q126 34 126 70 Z"/>
+        <rect class="m-hat" x="66" y="66" width="68" height="8" rx="4"/>
+        <rect class="m-hat-band" x="74" y="48" width="52" height="6" rx="3"/>
+      </g>
       <!-- 右臂（平伸指挥） -->
       <g class="arm-flat">
         <path class="m-arm" d="M120 112 L150 150"/>
         <circle class="m-hand" cx="150" cy="150" r="7"/>
       </g>
-      <!-- 左臂 + 荧光指挥棒 -->
-      <g class="arm-baton">
+      <!-- 左臂 + 荧光指挥棒（可点 → 红绿灯） -->
+      <g class="arm-baton mpart" data-part="baton">
         <path class="m-arm" d="M80 112 L54 150"/>
         <circle class="m-hand" cx="54" cy="150" r="7"/>
         <g class="baton-swing">
@@ -418,66 +432,120 @@
 </div>
 
 <script>
-/* 仓库调度员：刘子乐 —— 滚动做手势 + 上下拖动 + 点击挥手 */
+/* 仓库调度员：刘子乐 —— 滚动手势 + 板块喊话 + 在途计数 + 主题反应 + 彩蛋 + 派送货车 */
 (function(){
-  var m=document.getElementById('marshal');
-  if(!m) return;
+  var m=document.getElementById('marshal'); if(!m) return;
   var bubble=document.getElementById('marshalBubble');
+  var idCard=document.getElementById('marshalId');
+  var countEl=document.getElementById('marshalCount');
 
   /* 恢复上次拖动位置 */
   var saved=parseFloat(localStorage.getItem('marshal-bottom'));
   if(!isNaN(saved)) m.style.bottom=saved+'px';
 
-  var poseTimer=null, lastY=window.scrollY, bubbleTimer=null;
-  function showBubble(text){
-    if(!bubble) return;
-    bubble.textContent=text;
-    bubble.classList.add('show');
-    clearTimeout(bubbleTimer);
-    bubbleTimer=setTimeout(function(){bubble.classList.remove('show');},1200);
-  }
-  function setPose(p){
-    m.classList.remove('stop','go');
-    if(p==='stop') m.classList.add('stop');
-    else if(p==='go') m.classList.add('go');
-    showBubble(p==='stop'?'🛑 稍等！':p==='go'?'🚚 放行！':'👋 刘子乐');
-  }
+  var poseTimer=null, clsTimer=null, lastY=window.scrollY, bubbleTimer=null, lastInteract=Date.now(), lastDbl=0;
+  function showBubble(text){ if(!bubble) return;
+    bubble.textContent=text; bubble.classList.add('show');
+    clearTimeout(bubbleTimer); bubbleTimer=setTimeout(function(){bubble.classList.remove('show');},1300); }
+  function setPose(p){ m.classList.remove('stop','go');
+    if(p==='stop') m.classList.add('stop'); else if(p==='go') m.classList.add('go');
+    showBubble(p==='stop'?'🛑 稍等！':p==='go'?'🚚 放行！':'👋 刘子乐'); }
+  function setTemp(cls,ms){ m.classList.remove('stop','go','point','salute','wave','dance'); m.classList.add(cls);
+    clearTimeout(clsTimer); clsTimer=setTimeout(function(){m.classList.remove(cls);},ms); }
 
   /* 随滚动切换手势：下滑放行 / 上滑停止 */
-  window.addEventListener('scroll',function(){
-    var y=window.scrollY;
-    if(Math.abs(y-lastY)>4){
-      setPose(y>lastY?'go':'stop');
-      lastY=y;
-      clearTimeout(poseTimer);
-      poseTimer=setTimeout(function(){m.classList.remove('stop','go');},900);
-    }
+  window.addEventListener('scroll',function(){ lastInteract=Date.now(); var y=window.scrollY;
+    if(Math.abs(y-lastY)>4){ setPose(y>lastY?'go':'stop'); lastY=y;
+      clearTimeout(poseTimer); poseTimer=setTimeout(function(){m.classList.remove('stop','go');},900); }
   },{passive:true});
 
-  /* 按住上下拖动；轻点视为挥手 */
-  var dragging=false, startY=0, startBottom=0, moved=0;
+  /* 主题切换反应：亮色戴墨镜 + 敬礼 */
+  new MutationObserver(function(){
+    var t=document.documentElement.getAttribute('data-theme');
+    m.classList.toggle('sunglasses', t==='light');
+    setTemp('salute',900);
+    showBubble(t==='light'?'😎 白天上岗':'🌙 夜间调度');
+  }).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+  /* 在途计数：15 篇日记卡进入视口即 +1 */
+  var counted=new Set(), counter=0;
+  function updateCount(){ if(countEl) countEl.textContent='在途 '+counter+'/15'; }
+  if(countEl && document.getElementById('dailyGrid')){
+    var ioC=new IntersectionObserver(function(es){ es.forEach(function(en){
+      if(en.isIntersecting && !counted.has(en.target)){ counted.add(en.target); counter++; updateCount(); }
+    }); },{threshold:.35});
+    document.querySelectorAll('#dailyGrid .tl-card').forEach(function(c){ioC.observe(c);});
+  }
+
+  /* 板块喊话：滚到某板块他指向并喊 */
+  var boardLine={daily:'🚚 运输干线 · 发车！',topic:'🏭 仓储中心 · 入库！',glossary:'📦 词表码头 · 调箱！'};
+  var ratios={}, curBoard='';
+  function typeOf(b){ return b.querySelector('#dailyGrid')?'daily':b.querySelector('.warehouse')?'topic':b.querySelector('.dock')?'glossary':''; }
+  var ioB=new IntersectionObserver(function(es){
+    es.forEach(function(en){ var k=en.target.getAttribute('data-k'); ratios[k]=en.isIntersecting?en.intersectionRatio:0; });
+    var best='',bestR=0; Object.keys(ratios).forEach(function(k){ if(ratios[k]>bestR){bestR=ratios[k];best=k;} });
+    if(bestR>0.3 && best!==curBoard){ curBoard=best; setTemp('point',1100); showBubble(boardLine[best]||'🚦 调度中'); }
+  },{threshold:[.2,.4,.6]});
+  document.querySelectorAll('[data-board]').forEach(function(b,i){ b.setAttribute('data-k','b'+i); ioB.observe(b); });
+
+  /* 页脚：挥手告别 */
+  var foot=document.querySelector('.site-foot');
+  if(foot) new IntersectionObserver(function(es){ es.forEach(function(en){
+    if(en.isIntersecting){ setTemp('wave',1600); showBubble('👋 未完待续'); }
+  }); },{threshold:.5}).observe(foot);
+
+  /* 随机调度口令（空闲时） */
+  var quips=['牛鞭效应要防住 🐂','时效就是生命 ⏱️','推拉边界前移 📦','库存压到个位数 📉','在途 15 篇，注意时效 🚚','小单快反，返单要快 🔁'];
+  setInterval(function(){ if(Date.now()-lastInteract>5000) showBubble(quips[Math.floor(Math.random()*quips.length)]); },7000);
+
+  /* 派送货车：从右到左横穿 */
+  function spawnTruck(){
+    var t=document.createElement('div'); t.className='truck-runner go';
+    var rect=m.getBoundingClientRect();
+    var top=rect.top+rect.height*0.45;
+    t.style.top=Math.max(20,Math.min(window.innerHeight-90,top))+'px';
+    t.innerHTML='<svg width="120" height="64" viewBox="0 0 120 64">'
+      +'<rect x="2" y="18" width="58" height="30" rx="5" fill="#f59e0b" stroke="#b45309" stroke-width="2"/>'
+      +'<path d="M60 26 h26 l18 14 v8 h-44 z" fill="#fde68a" stroke="#b45309" stroke-width="2"/>'
+      +'<rect x="9" y="22" width="20" height="11" rx="2" fill="#a5f3fc"/>'
+      +'<circle cx="26" cy="52" r="8" fill="#0b1220"/><circle cx="86" cy="52" r="8" fill="#0b1220"/></svg>';
+    document.body.appendChild(t);
+    t.addEventListener('animationend',function(){ t.remove(); });
+  }
+
+  /* 点不同部位的彩蛋 */
+  function partReact(part){
+    if(part==='hat'){ setTemp('salute',900); showBubble('🫡 收到，敬礼！'); }
+    else if(part==='name'){ idCard.classList.toggle('show'); showBubble(idCard.classList.contains('show')?'🪪 这是我的工牌':'🪪 工牌收好'); }
+    else if(part==='baton'){ var red=m.classList.contains('redlight');
+      m.classList.toggle('redlight',!red); m.classList.toggle('greenlight',red);
+      showBubble(red?'🟢 绿灯 · 放行':'🔴 红灯 · 止步'); }
+    else { spawnTruck(); showBubble('🚚 派送出发！'); }
+  }
+
+  /* 拖动 + 轻点（区分部位 / 派送货车） */
+  var dragging=false, startY=0, startBottom=0, moved=0, downPart=null;
   m.addEventListener('pointerdown',function(e){
-    dragging=true; moved=0; startY=e.clientY;
+    dragging=true; moved=0; lastInteract=Date.now(); startY=e.clientY;
     startBottom=parseFloat(getComputedStyle(m).bottom)||118;
+    downPart=(e.target.closest&&e.target.closest('.mpart'))?e.target.closest('.mpart').getAttribute('data-part'):null;
     m.classList.add('dragging');
     try{m.setPointerCapture(e.pointerId);}catch(_){}
-    e.preventDefault();
   });
   m.addEventListener('pointermove',function(e){
     if(!dragging) return;
-    var dy=startY-e.clientY;
-    moved+=Math.abs(e.movementY||0);
+    var dy=startY-e.clientY; moved+=Math.abs(e.movementY||0);
     var nb=Math.max(10,Math.min(window.innerHeight-m.offsetHeight-10,startBottom+dy));
     m.style.bottom=nb+'px';
   });
   function endDrag(){
-    if(!dragging) return;
-    dragging=false; m.classList.remove('dragging');
+    if(!dragging) return; dragging=false; m.classList.remove('dragging');
     try{localStorage.setItem('marshal-bottom',parseFloat(m.style.bottom)||118);}catch(_){}
-    if(moved<6) showBubble('👋 刘子乐'); /* 轻点 = 挥手 */
+    if(moved<6 && Date.now()-lastDbl>350) partReact(downPart||'');
   }
   m.addEventListener('pointerup',endDrag);
   m.addEventListener('pointercancel',endDrag);
+  m.addEventListener('dblclick',function(){ lastDbl=Date.now(); setTemp('dance',1000); showBubble('🕺 收工蹦迪！'); });
 })();
 </script>
 </body>
