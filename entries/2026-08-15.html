@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 12 · 供应链中台：把复杂包成一个接口 — 我的供应链学习记录</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="wrap">
+<article class="entry">
+  <header class="entry-head">
+    <div class="day-badge"><span class="lab">DAY</span><span class="num">12</span></div>
+    <div>
+      <h1>供应链中台：把复杂包成一个接口</h1>
+      <p class="date">2026年8月15日 · 读《实战供应链》第4.3节</p>
+    </div>
+  </header>
+  <div class="entry-body">
+    <p class="lead">"中台"这词我之前听烂了，风很大，我也一直以为是个跟风的概念。今天书里把它讲透了，我反而肃然起敬。</p>
+    <p>中台这个词源于阿里 2015 年"大中台、小前台"战略，借鉴的是游戏公司 Supercell 小团队作战的思路。<strong>但书里一句话点醒我：中台不是新东西，它就是一种"复用和共享"的思想</strong>——把通用的能力抽出来，让前端不同业务都能直接调用。</p>
+
+    <h2>书里用 Z 公司的故事讲透了演化</h2>
+    <p>这部分是我今天最喜欢的。书里虚拟了一家 Z 公司，看它怎么一步步长出供应链中台：</p>
+    <ul>
+      <li>起步就 3 套系统，业务简单，改起来痛快；</li>
+      <li>扩品类后每个业务各搞一套，资源浪费、标准不一；</li>
+      <li>先上"交易中台"收拢交易，供应链还是各自为政；</li>
+      <li>再把供应链拆成订单履约中心、中央库存、仓储交互中心，<strong>供应链中台雏形</strong>出现；</li>
+      <li>最后把各系统功能拆散、重组成标准服务——<strong>前端调一个接口，就能完成"订单取消"这种跨多系统的动作</strong>；</li>
+      <li>再进化到接第三方平台，加一层"平台交互中心"抹平差异。</li>
+    </ul>
+
+    <h2>中台是双刃剑</h2>
+    <p>书里没把中台吹上天，反而讲了 Z 公司的结局：中台越来越臃肿，遇到全新业务模式又支撑不了，业务方干脆自己另起炉灶。<strong>中台是手段，不是目的</strong>；用得好是加速器，用不好是瓶颈。</p>
+
+    <div class="note">
+      <span class="tag">💭 今天卡住的地方</span>
+      我原以为中台就是"一个很大的系统"。书里纠正：中台可以是一个系统、一群系统的合集、甚至只是个业务形态——<strong>只要能快速复用、应对不同场景，都叫中台化</strong>。它重思想，不重形态。
+    </div>
+
+    <div class="takeaway">
+      <span class="tag">✅ 今天记住的一句话</span>
+      中台的本质是<strong>把复杂的底层能力，封装成前端随手可调的标准服务</strong>。别神化它，也别小看它。
+    </div>
+  </div>
+  <footer class="entry-foot">
+    <a href="../index.html">← 返回总目录</a>
+    <span class="next">下一篇：系统设计内功心法，六脉神剑 →</span>
+  </footer>
+</article>
+</div>
+</body>
+</html>
