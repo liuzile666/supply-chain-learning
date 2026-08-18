@@ -1,212 +1,278 @@
+/* =========================================================
+   供应链学习记录 · 指挥中心视觉系统 (v4)
+   暗色为默认，保留明暗切换；适度炫酷动效
+   ========================================================= */
+
+/* ---------- 明亮主题（基线） ---------- */
 :root{
-  /* 浅色主题（默认） */
-  --paper:#f7f4ee;
-  --paper-2:#fffefb;
-  --ink:#2b2926;
-  --ink-soft:#726b62;
-  --line:#e7dfd2;
-  --green:#1f8a6d;
-  --green-2:#2fae8f;
-  --terra:#e0734a;
-  --terra-2:#f0a06b;
-  --card:#fffefb;
-  --green-soft:#e9f3ef;
-  --terra-soft:#fbf0e6;
-  --shadow:0 8px 26px rgba(60,50,40,.08);
-  --shadow-hover:0 14px 34px rgba(31,138,109,.16);
-  --grad:linear-gradient(120deg,var(--green),var(--green-2));
-  --grad-warm:linear-gradient(120deg,var(--terra),var(--terra-2));
-  --bg-glow:radial-gradient(900px 420px at 80% -8%,rgba(47,174,143,.14),transparent 60%),
-            radial-gradient(720px 380px at -6% 4%,rgba(224,115,74,.12),transparent 58%);
+  --bg:#eef2f8;
+  --bg-grid:rgba(14,165,233,.06);
+  --panel:#ffffff;
+  --panel-2:#f4f8fd;
+  --ink:#0f1b33;
+  --muted:#5b6b8c;
+  --line:#d8e2f1;
+  --accent:#0ea5e9;
+  --accent-2:#0284c7;
+  --cargo:#f59e0b;
+  --go:#10b981;
+  --danger:#ef4444;
+  --glow:rgba(14,165,233,.22);
+  --grad:linear-gradient(120deg,#0ea5e9,#22d3ee);
+  --grad-warm:linear-gradient(120deg,#f59e0b,#fb923c);
+  --shadow:0 8px 26px rgba(20,40,80,.10);
+  --shadow-hover:0 16px 38px rgba(14,165,233,.22);
 }
+
+/* ---------- 暗色指挥中心（默认） ---------- */
 [data-theme="dark"]{
-  --paper:#13161a;
-  --paper-2:#16191e;
-  --ink:#ece9e2;
-  --ink-soft:#a59d91;
-  --line:#2a2f36;
-  --green:#34d6b3;
-  --green-2:#46e0bd;
-  --terra:#fb9a5e;
-  --terra-2:#ffb680;
-  --card:#1b1f25;
-  --green-soft:#11261f;
-  --terra-soft:#2a1d14;
-  --shadow:0 8px 26px rgba(0,0,0,.42);
-  --shadow-hover:0 14px 34px rgba(52,214,179,.22);
-  --grad:linear-gradient(120deg,var(--green),var(--green-2));
-  --grad-warm:linear-gradient(120deg,var(--terra),var(--terra-2));
-  --bg-glow:radial-gradient(900px 420px at 82% -8%,rgba(52,214,179,.16),transparent 60%),
-            radial-gradient(720px 380px at -6% 4%,rgba(251,154,94,.14),transparent 58%);
+  --bg:#070b15;
+  --bg-grid:rgba(34,211,238,.07);
+  --panel:#0c1428;
+  --panel-2:#0e1832;
+  --ink:#e8eefb;
+  --muted:#8aa0c8;
+  --line:#1d2c4a;
+  --accent:#22d3ee;
+  --accent-2:#38bdf8;
+  --cargo:#fbbf24;
+  --go:#34d399;
+  --danger:#f87171;
+  --glow:rgba(34,211,238,.32);
+  --grad:linear-gradient(120deg,#22d3ee,#38bdf8);
+  --grad-warm:linear-gradient(120deg,#fbbf24,#fb923c);
+  --shadow:0 10px 30px rgba(0,0,0,.5);
+  --shadow-hover:0 18px 44px rgba(34,211,238,.28);
 }
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 html,body{margin:0;padding:0}
 body{
-  background:var(--paper);
+  background:var(--bg);
   color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-  line-height:1.85;
-  font-size:17px;
+  line-height:1.8;
+  font-size:16px;
   -webkit-font-smoothing:antialiased;
-  background-image:var(--bg-glow);
+  /* 指挥中心网格底纹 */
+  background-image:
+    linear-gradient(var(--bg-grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--bg-grid) 1px,transparent 1px);
+  background-size:42px 42px;
   background-attachment:fixed;
   transition:background-color .35s,color .35s;
 }
-.wrap{max-width:860px;margin:0 auto;padding:56px 22px 90px}
+[data-theme="dark"] body{
+  background-image:
+    radial-gradient(900px 460px at 82% -10%,rgba(34,211,238,.12),transparent 60%),
+    radial-gradient(720px 380px at -8% 6%,rgba(56,189,248,.10),transparent 58%),
+    linear-gradient(var(--bg-grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--bg-grid) 1px,transparent 1px);
+}
+
+.wrap{max-width:980px;margin:0 auto;padding:54px 22px 90px}
 
 /* ===== 顶部阅读进度条 ===== */
 .scroll-progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:60;
-  background:var(--grad);box-shadow:0 0 12px rgba(47,174,143,.5);transition:width .1s linear}
+  background:var(--grad);box-shadow:0 0 14px var(--glow);transition:width .1s linear}
 
-/* ===== 悬浮按钮：主题切换 / 回到顶部 ===== */
+/* ===== 悬浮按钮 ===== */
 .float-btn{position:fixed;z-index:55;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);
-  background:var(--card);color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;
-  font-size:20px;box-shadow:var(--shadow);transition:.25s; backdrop-filter:blur(6px)}
-.float-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover);border-color:var(--green-2)}
+  background:var(--panel);color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:20px;box-shadow:var(--shadow);transition:.25s;backdrop-filter:blur(8px)}
+.float-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover);border-color:var(--accent)}
 .theme-toggle{right:20px;top:18px}
 .to-top{right:20px;bottom:22px;opacity:0;pointer-events:none;transform:translateY(8px)}
 .to-top.show{opacity:1;pointer-events:auto;transform:none}
 
-/* ===== 封面 / Hero ===== */
-.cover{position:relative;text-align:center;padding:46px 26px 30px;margin-top:6px;
-  background:linear-gradient(135deg,rgba(31,138,109,.10),rgba(224,115,74,.09));
-  border:1px solid var(--line);border-radius:24px;overflow:hidden}
-.cover .kicker{letter-spacing:5px;color:var(--terra);font-size:13px;font-weight:700}
-.cover h1{font-size:36px;margin:14px 0 8px;line-height:1.3;
+/* =========================================================
+   HERO · 物流网络指挥中心
+   ========================================================= */
+.hero{position:relative;border:1px solid var(--line);border-radius:26px;overflow:hidden;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 12%,var(--panel)),var(--panel));
+  box-shadow:var(--shadow);margin-top:6px}
+.hero-map{position:absolute;inset:0;width:100%;height:100%;opacity:.9;pointer-events:none}
+.hero-content{position:relative;z-index:2;padding:34px 30px 26px}
+.hero .kicker{letter-spacing:6px;color:var(--accent);font-size:12.5px;font-weight:800;
+  display:inline-flex;align-items:center;gap:8px}
+.hero .kicker .live{width:8px;height:8px;border-radius:50%;background:var(--go);
+  box-shadow:0 0 0 0 rgba(52,211,153,.6);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.55)}70%{box-shadow:0 0 0 8px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+.hero h1{font-size:38px;margin:12px 0 6px;line-height:1.28;font-weight:900;
   background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.cover .sub{color:var(--ink-soft);font-size:15px;margin:0}
-.cover .sub b{color:var(--green);font-weight:800}
-.badge-live{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12.5px;
-  color:var(--green);background:var(--green-soft);border:1px solid #cfe6dd;padding:4px 12px;border-radius:20px}
-.badge-live .dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 1.6s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(31,138,109,.5)}70%{box-shadow:0 0 0 7px rgba(31,138,109,0)}100%{box-shadow:0 0 0 0 rgba(31,138,109,0)}}
+.hero .sub{color:var(--muted);font-size:15px;margin:0}
+.hero .sub b{color:var(--accent);font-weight:800}
 
-/* 统计条 */
-.stats{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:18px}
-.stats .s{flex:1 1 120px;min-width:110px;background:var(--card);border:1px solid var(--line);
-  border-radius:14px;padding:12px 10px;box-shadow:var(--shadow)}
-.stats .s .n{font-size:24px;font-weight:800;
-  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.stats .s .l{font-size:12px;color:var(--ink-soft);margin-top:2px}
+/* 调度概览 */
+.overview{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.overview .o{flex:1 1 130px;min-width:120px;background:color-mix(in srgb,var(--panel) 80%,transparent);
+  border:1px solid var(--line);border-radius:14px;padding:12px 14px;backdrop-filter:blur(6px)}
+.overview .o .n{font-size:23px;font-weight:900;background:var(--grad);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.overview .o .l{font-size:12px;color:var(--muted);margin-top:2px}
 
-.about{background:var(--card);border:1px solid var(--line);border-radius:18px;
-  padding:20px 24px;margin:26px 0;font-size:15.5px;color:var(--ink-soft);box-shadow:var(--shadow)}
-.about b{color:var(--ink)}
+/* 在途播报 跑马灯 */
+.ticker{position:relative;z-index:2;margin-top:0;border-top:1px solid var(--line);
+  background:color-mix(in srgb,var(--panel) 70%,transparent);overflow:hidden;
+  display:flex;align-items:center;gap:10px;padding:9px 0}
+.ticker .lab{flex:0 0 auto;font-size:11px;font-weight:800;letter-spacing:1px;color:var(--accent);
+  padding:0 14px;border-right:1px solid var(--line);display:flex;align-items:center;gap:6px}
+.ticker .lab .dot{width:7px;height:7px;border-radius:50%;background:var(--cargo);animation:pulse 1.8s infinite}
+.ticker .track-mask{flex:1;overflow:hidden;white-space:nowrap}
+.ticker .track{display:inline-block;padding-left:100%;animation:marquee 22s linear infinite;
+  font-size:13px;color:var(--muted)}
+.ticker .track span{margin:0 26px}
+.ticker .track b{color:var(--ink);font-weight:800}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-100%)}}
 
-/* ===== 工具栏：搜索 + 筛选胶囊 ===== */
-.toolbar{position:sticky;top:0;z-index:40;background:var(--paper);background:color-mix(in srgb,var(--paper) 86%,transparent);
-  backdrop-filter:blur(10px);padding:14px 0 12px;margin-top:6px;border-bottom:1px solid var(--line)}
+/* =========================================================
+   工具栏
+   ========================================================= */
+.toolbar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(10px);padding:14px 0 12px;margin-top:10px;border-bottom:1px solid var(--line)}
 .search{width:100%;padding:11px 16px;border-radius:12px;border:1px solid var(--line);
-  background:var(--card);color:var(--ink);font-size:15px;outline:none;transition:.2s}
-.search:focus{border-color:var(--green-2);box-shadow:0 0 0 3px rgba(47,174,143,.18)}
-.search::placeholder{color:var(--ink-soft)}
+  background:var(--panel);color:var(--ink);font-size:15px;outline:none;transition:.2s}
+.search:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--glow)}
+.search::placeholder{color:var(--muted)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.chip{cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);
+.chip{cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--muted);
   font-size:13px;padding:6px 14px;border-radius:20px;transition:.2s;user-select:none}
-.chip:hover{border-color:var(--green-2);color:var(--ink)}
+.chip:hover{border-color:var(--accent);color:var(--ink)}
 .chip.active{background:var(--grad);color:#fff;border-color:transparent;font-weight:700;
-  box-shadow:0 4px 12px rgba(31,138,109,.28)}
-.count-tip{font-size:13px;color:var(--ink-soft);margin:14px 2px 0}
-.count-tip b{color:var(--green)}
+  box-shadow:0 4px 14px var(--glow)}
+.count-tip{font-size:13px;color:var(--muted);margin:14px 2px 0}
+.count-tip b{color:var(--accent)}
 
-/* ===== 时间轴卡片 ===== */
-.timeline{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:14px;margin-top:18px}
-.tl-card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;
-  padding:16px 17px 14px;text-decoration:none;color:inherit;display:block;overflow:hidden;
-  transition:transform .2s,box-shadow .2s,border-color .2s}
+/* =========================================================
+   三板块（原生 <details> 折叠）
+   ========================================================= */
+.board{margin-top:36px;border:1px solid var(--line);border-radius:22px;overflow:hidden;
+  background:var(--panel);box-shadow:var(--shadow)}
+.board.hide{display:none}
+.board-title{display:flex;align-items:center;gap:12px;flex-wrap:wrap;cursor:pointer;
+  user-select:none;list-style:none;padding:18px 22px;transition:.2s;
+  background:linear-gradient(120deg,color-mix(in srgb,var(--accent) 10%,transparent),transparent)}
+.board-title::-webkit-details-marker{display:none}
+.board-title:focus{outline:none}
+.board-title:hover{filter:brightness(1.06)}
+.board-title h2.bt-label{font-size:21px;margin:0;font-weight:900;line-height:1.3}
+.board-title .sub{font-size:13px;color:var(--muted);font-weight:400}
+.board-title .caret{margin-left:auto;font-size:13px;color:var(--muted);transition:transform .28s ease;line-height:1;padding-left:6px}
+.board:not([open]) .caret{transform:rotate(-90deg)}
+.board-ico{font-size:24px;filter:drop-shadow(0 0 8px var(--glow))}
+.board-body{padding:6px 22px 24px}
+
+/* 板块说明条 */
+.board-desc{font-size:13.5px;color:var(--muted);margin:2px 0 16px;line-height:1.7;
+  display:flex;align-items:center;gap:8px}
+.board-desc::before{content:"";width:18px;height:2px;border-radius:2px;background:var(--grad)}
+
+/* =========================================================
+   板块一 · 运输干线（公路 + 货车）
+   ========================================================= */
+.road{position:relative;padding-top:6px}
+.road-line{height:2px;border-radius:2px;margin:6px 2px 18px;
+  background:repeating-linear-gradient(90deg,var(--accent) 0 14px,transparent 14px 28px);
+  opacity:.55;animation:march 1.2s linear infinite}
+@keyframes march{to{background-position:-28px 0}}
+.road-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(236px,1fr));gap:14px}
+
+/* 货车卡片（复用 .tl-card 基类） */
+.tl-card{position:relative;background:var(--panel-2);border:1px solid var(--line);border-radius:16px;
+  padding:15px 16px 14px;text-decoration:none;color:inherit;display:block;overflow:hidden;
+  transition:transform .22s,box-shadow .22s,border-color .22s;isolation:isolate}
 .tl-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;
-  background:var(--grad);opacity:0;transition:.2s}
-.tl-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-color:var(--green-2)}
+  background:var(--grad);opacity:.0;transition:.22s}
+.tl-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover);border-color:var(--accent)}
 .tl-card:hover::before{opacity:1}
 .tl-card.hide{display:none}
-.tl-card .d{font-size:12px;color:var(--terra);font-weight:700;letter-spacing:1px}
-.tl-card .t{font-size:16.5px;font-weight:700;margin:5px 0 3px;line-height:1.4}
-.tl-card .meta{font-size:12.5px;color:var(--ink-soft)}
-.tl-card .stat{display:inline-block;margin-top:9px;font-size:11.5px;padding:2px 9px;border-radius:20px}
-.stat.done{background:var(--green-soft);color:var(--green)}
-.stat.soon{background:#efe9df;color:var(--ink-soft)}
-.empty{display:none;text-align:center;color:var(--ink-soft);padding:40px 0;font-size:15px}
+
+.truck{display:flex;align-items:flex-start;gap:13px}
+.truck .ico{flex:0 0 auto;width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  background:color-mix(in srgb,var(--accent) 16%,transparent);border:1px solid var(--line);
+  transition:transform .25s}
+.truck:hover .ico{transform:translateX(3px) rotate(-2deg)}
+.truck .ico svg{width:26px;height:26px}
+.truck .body{flex:1;min-width:0}
+.truck .d{font-size:12px;color:var(--cargo);font-weight:800;letter-spacing:1px}
+.truck .t{font-size:16px;font-weight:800;margin:3px 0 3px;line-height:1.4}
+.truck .meta{font-size:12.5px;color:var(--muted)}
+.truck .stat{display:inline-block;margin-top:8px;font-size:11px;padding:2px 9px;border-radius:20px}
+.stat.done{background:color-mix(in srgb,var(--go) 18%,transparent);color:var(--go);border:1px solid color-mix(in srgb,var(--go) 40%,transparent)}
+.stat.soon{background:var(--panel);color:var(--muted)}
+
+/* =========================================================
+   板块二 · 仓储中心（库区）
+   ========================================================= */
+.warehouse{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;
+  padding:14px;background:
+    repeating-linear-gradient(0deg,transparent 0 26px,rgba(120,140,180,.08) 26px 27px),
+    color-mix(in srgb,var(--line) 30%,transparent);
+  border-radius:14px;border:1px dashed var(--line)}
+.zone{position:relative;display:flex;gap:14px;align-items:flex-start;padding:16px 18px;
+  background:var(--panel-2);border:1px solid var(--line);border-radius:14px;text-decoration:none;color:inherit;
+  overflow:hidden;transition:transform .22s,box-shadow .22s,border-color .22s}
+.zone:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover);border-color:var(--accent)}
+.zone .code{position:absolute;top:10px;right:12px;font-size:11px;font-weight:800;letter-spacing:1px;
+  color:var(--cargo);background:color-mix(in srgb,var(--cargo) 16%,transparent);padding:2px 8px;border-radius:8px}
+.zone .ico{flex:0 0 auto;width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  background:color-mix(in srgb,var(--accent) 16%,transparent);border:1px solid var(--line)}
+.zone .ico svg{width:26px;height:26px}
+.zone .body{flex:1;min-width:0}
+.zone .d{font-size:12px;color:var(--cargo);font-weight:800;letter-spacing:1px}
+.zone .t{font-size:16px;font-weight:800;margin:3px 0 3px;line-height:1.4}
+.zone .meta{font-size:12.5px;color:var(--muted)}
+
+/* =========================================================
+   板块三 · 集装箱码头（货柜）
+   ========================================================= */
+.dock{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.container-card{position:relative;display:flex;flex-direction:column;gap:8px;padding:18px 18px 16px;
+  text-decoration:none;color:inherit;border-radius:14px;overflow:hidden;
+  background:
+    repeating-linear-gradient(115deg,color-mix(in srgb,var(--cargo) 22%,transparent) 0 16px,transparent 16px 34px),
+    var(--panel-2);
+  border:1px solid var(--line);transition:transform .22s,box-shadow .22s,border-color .22s}
+.container-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover);border-color:var(--accent)}
+.container-card .tag{font-size:11px;font-weight:800;letter-spacing:1.5px;color:var(--cargo)}
+.container-card .t{font-size:17px;font-weight:800;line-height:1.35}
+.container-card .meta{font-size:12.5px;color:var(--muted)}
+.container-card .ribs{height:6px;border-radius:4px;margin-top:2px;
+  background:repeating-linear-gradient(90deg,var(--line) 0 3px,transparent 3px 12px);opacity:.6}
+
+/* 通用空状态 */
+.empty{display:none;text-align:center;color:var(--muted);padding:40px 0;font-size:15px}
 .empty.show{display:block}
 
-/* 滚动渐显（JS 启用时） */
+/* 滚动渐显 */
 .js .reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
 .js .reveal.in{opacity:1;transform:none}
 
-/* ===== 单篇日记 ===== */
-.entry{background:var(--card);border:1px solid var(--line);border-radius:20px;
-  padding:38px 40px 30px;box-shadow:var(--shadow);position:relative;overflow:hidden}
-.entry::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad)}
-.entry-head{display:flex;gap:18px;align-items:flex-start;border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:8px}
-.day-badge{flex:0 0 auto;width:62px;height:62px;border-radius:50%;
-  background:var(--grad);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  font-weight:800;line-height:1;box-shadow:0 6px 16px rgba(31,138,109,.3)}
-.day-badge .lab{font-size:10px;letter-spacing:1px;opacity:.9}
-.day-badge .num{font-size:22px;margin-top:3px}
-.entry-head h1{font-size:25px;margin:4px 0 4px;line-height:1.35}
-.entry-head .date{color:var(--ink-soft);font-size:13.5px;margin:0}
-.entry-body{padding-top:14px}
-.entry-body .lead{font-size:18.5px;color:var(--ink);font-style:italic;
-  border-left:3px solid transparent;border-image:var(--grad-warm) 1;padding-left:14px;margin:18px 0 22px}
-.entry-body p{margin:16px 0}
-.entry-body h2{font-size:19px;margin:30px 0 6px;padding-left:11px;
-  border-left:4px solid var(--green);position:relative}
-.entry-body ul{margin:14px 0;padding-left:22px}
-.entry-body li{margin:8px 0}
-.note{background:var(--terra-soft);border:1px solid #f0d8c4;border-radius:12px;padding:14px 18px;margin:24px 0;font-size:15.5px}
-.note .tag{display:block;font-weight:800;color:var(--terra);font-size:13px;margin-bottom:4px}
-.takeaway{background:var(--green-soft);border:1px solid #cfe6dd;border-radius:12px;padding:14px 18px;margin:24px 0;font-size:15.5px}
-.takeaway .tag{display:block;font-weight:800;color:var(--green);font-size:13px;margin-bottom:4px}
-.entry-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);
-  margin-top:30px;padding-top:18px;font-size:14px;flex-wrap:wrap;gap:8px}
-.entry-foot a{color:var(--green);text-decoration:none;font-weight:600}
-.entry-foot a:hover{text-decoration:underline}
-.entry-foot .next{color:var(--ink-soft)}
-.q{background:#fbf7ef;border:1px dashed var(--line);border-radius:12px;padding:14px 18px;margin:20px 0}
-.q .qt{font-weight:700;color:var(--terra)}
-.pager{display:flex;justify-content:space-between;margin-top:22px;gap:12px;flex-wrap:wrap}
-.pager a{flex:1;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);
-  border-radius:12px;padding:12px 16px;font-size:14px;min-width:140px;transition:.18s}
-.pager a:hover{border-color:var(--green-2);box-shadow:var(--shadow-hover)}
-.pager .pn{color:var(--ink-soft);font-size:12px}
-.pager .pt{font-weight:700;display:block;margin-top:2px}
-
-/* ===== 三板块布局（用原生 <details> 折叠，无需 JS） ===== */
-.board{margin-top:34px}
-.board.hide{display:none}
-.board-title{display:flex;align-items:center;gap:10px;flex-wrap:wrap;cursor:pointer;
-  user-select:none;transition:color .2s;list-style:none;padding:4px 0}
-.board-title::-webkit-details-marker{display:none}
-.board-title:focus{outline:none}
-.board-title:hover{color:var(--green)}
-.board-title h2.bt-label{font-size:22px;margin:0;font-weight:800;line-height:1.3}
-.board-title .sub{font-size:13px;color:var(--ink-soft);font-weight:400}
-.board-title .caret{margin-left:auto;font-size:13px;color:var(--ink-soft);transition:transform .28s ease;line-height:1;padding-left:6px}
-.board:not([open]) .caret{transform:rotate(-90deg)}
-.board-desc{font-size:13.5px;color:var(--ink-soft);margin:0 0 16px;line-height:1.7}
-.board-ico{font-size:24px}
-
-/* ===== 术语对照表（glossary） ===== */
-.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
-.pair .pc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
-.pair .pc h3{margin:0 0 6px;font-size:16px;display:flex;align-items:center;gap:8px}
-.pair .pc .vs{font-size:11px;color:#fff;background:var(--terra);border-radius:20px;padding:1px 8px;font-weight:700}
-.pair .pc p{margin:4px 0 0;font-size:14px;color:var(--ink-soft)}
-.gloss{margin:16px 0;padding:0;list-style:none}
-.gloss li{display:flex;gap:14px;padding:13px 4px;border-bottom:1px dashed var(--line)}
-.gloss li:last-child{border-bottom:none}
-.gloss .k{flex:0 0 116px;font-weight:800;color:var(--green)}
-.gloss .v{flex:1;color:var(--ink-soft);font-size:15px}
-@media(max-width:560px){.pair{grid-template-columns:1fr}.gloss li{flex-direction:column;gap:2px}.gloss .k{flex:none}}
-
 /* 站点页脚 */
-.site-foot{text-align:center;color:var(--ink-soft);font-size:13px;margin-top:36px}
-.site-foot a{color:var(--green);text-decoration:none}
+.site-foot{text-align:center;color:var(--muted);font-size:13px;margin-top:36px;line-height:1.9}
+.site-foot a{color:var(--accent);text-decoration:none}
+
+/* ===== Hero 物流网络 SVG ===== */
+.hm-route{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:5 9;opacity:.45}
+.hm-route-glow{fill:none;stroke:var(--accent);stroke-width:10;opacity:.10}
+.hm-ring{fill:color-mix(in srgb,var(--panel) 70%,transparent);stroke:var(--accent);stroke-width:2}
+.hm-core{fill:var(--accent)}
+.hm-core.cargo{fill:var(--cargo)}
+.hm-label{fill:var(--ink);font-size:13px;font-weight:800}
+.hm-tag{fill:var(--muted);font-size:9.5px;letter-spacing:1.5px;font-weight:700}
+.hm-dot{fill:var(--cargo);filter:drop-shadow(0 0 5px var(--glow))}
+
+/* 卡片内 SVG 图标 */
+.truck .ico svg,.zone .ico svg{stroke:var(--accent);fill:none;stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
+.zone .ico svg{stroke:var(--cargo)}
 
 @media(max-width:560px){
-  .entry{padding:26px 20px}
   .wrap{padding:34px 14px 64px}
-  body{font-size:16px}
-  .cover h1{font-size:28px}
+  body{font-size:15px}
+  .hero h1{font-size:27px}
+  .hero-content{padding:26px 18px 20px}
   .toolbar{position:static}
+  .board-title{padding:15px 16px}
+  .board-body{padding:4px 14px 18px}
 }
