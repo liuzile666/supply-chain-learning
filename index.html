@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>供应链学习记录（始于 2026.08.04）</title>
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 <div class="scroll-progress" id="progress"></div>
@@ -367,6 +367,117 @@
   boards.forEach(function(b){ if(b.open) b.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');}); });
 
   filter();
+})();
+</script>
+
+<!-- ===================== 仓库调度员 · 刘子乐（右侧指挥交通） ===================== -->
+<div class="marshal" id="marshal" title="调度员 刘子乐 · 按住上下拖动我 / 点我挥手">
+  <div class="marshal-tag">🦺 调度员</div>
+  <div class="marshal-bubble" id="marshalBubble">👋 刘子乐</div>
+  <div class="marshal-inner">
+    <svg class="marshal-svg" viewBox="0 0 200 340" aria-label="穿反光背心、印有刘子乐的仓库调度员">
+      <!-- 地面阴影 -->
+      <ellipse class="m-shadow" cx="100" cy="324" rx="56" ry="10"/>
+      <!-- 腿 + 靴 -->
+      <rect class="m-leg" x="80" y="198" width="16" height="104" rx="7"/>
+      <rect class="m-leg" x="104" y="198" width="16" height="104" rx="7"/>
+      <rect class="m-boot" x="72" y="298" width="32" height="18" rx="6"/>
+      <rect class="m-boot" x="96" y="298" width="32" height="18" rx="6"/>
+      <!-- 反光马甲（躯干） -->
+      <rect class="m-vest" x="70" y="100" width="60" height="112" rx="15"/>
+      <rect class="m-stripe" x="70" y="124" width="60" height="7"/>
+      <rect class="m-stripe" x="70" y="182" width="60" height="7"/>
+      <rect class="m-stripe" x="96" y="100" width="8" height="112" opacity=".5"/>
+      <!-- 胸前铭牌：刘子乐 -->
+      <rect class="m-nameplate" x="72" y="146" width="56" height="22" rx="5"/>
+      <text class="m-name" x="100" y="161" text-anchor="middle">刘子乐</text>
+      <!-- 头 + 安全帽 -->
+      <circle class="m-skin" cx="100" cy="70" r="24"/>
+      <circle cx="92" cy="74" r="2.4" fill="#2a2a2a"/>
+      <circle cx="108" cy="74" r="2.4" fill="#2a2a2a"/>
+      <path d="M90 84 Q100 91 110 84" stroke="#b5651d" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <path class="m-hat" d="M74 70 Q74 34 100 34 Q126 34 126 70 Z"/>
+      <rect class="m-hat" x="66" y="66" width="68" height="8" rx="4"/>
+      <rect class="m-hat-band" x="74" y="48" width="52" height="6" rx="3"/>
+      <!-- 右臂（平伸指挥） -->
+      <g class="arm-flat">
+        <path class="m-arm" d="M120 112 L150 150"/>
+        <circle class="m-hand" cx="150" cy="150" r="7"/>
+      </g>
+      <!-- 左臂 + 荧光指挥棒 -->
+      <g class="arm-baton">
+        <path class="m-arm" d="M80 112 L54 150"/>
+        <circle class="m-hand" cx="54" cy="150" r="7"/>
+        <g class="baton-swing">
+          <path class="m-baton" d="M54 150 L46 104"/>
+          <circle class="m-baton-tip" cx="46" cy="104" r="5"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<script>
+/* 仓库调度员：刘子乐 —— 滚动做手势 + 上下拖动 + 点击挥手 */
+(function(){
+  var m=document.getElementById('marshal');
+  if(!m) return;
+  var bubble=document.getElementById('marshalBubble');
+
+  /* 恢复上次拖动位置 */
+  var saved=parseFloat(localStorage.getItem('marshal-bottom'));
+  if(!isNaN(saved)) m.style.bottom=saved+'px';
+
+  var poseTimer=null, lastY=window.scrollY, bubbleTimer=null;
+  function showBubble(text){
+    if(!bubble) return;
+    bubble.textContent=text;
+    bubble.classList.add('show');
+    clearTimeout(bubbleTimer);
+    bubbleTimer=setTimeout(function(){bubble.classList.remove('show');},1200);
+  }
+  function setPose(p){
+    m.classList.remove('stop','go');
+    if(p==='stop') m.classList.add('stop');
+    else if(p==='go') m.classList.add('go');
+    showBubble(p==='stop'?'🛑 稍等！':p==='go'?'🚚 放行！':'👋 刘子乐');
+  }
+
+  /* 随滚动切换手势：下滑放行 / 上滑停止 */
+  window.addEventListener('scroll',function(){
+    var y=window.scrollY;
+    if(Math.abs(y-lastY)>4){
+      setPose(y>lastY?'go':'stop');
+      lastY=y;
+      clearTimeout(poseTimer);
+      poseTimer=setTimeout(function(){m.classList.remove('stop','go');},900);
+    }
+  },{passive:true});
+
+  /* 按住上下拖动；轻点视为挥手 */
+  var dragging=false, startY=0, startBottom=0, moved=0;
+  m.addEventListener('pointerdown',function(e){
+    dragging=true; moved=0; startY=e.clientY;
+    startBottom=parseFloat(getComputedStyle(m).bottom)||118;
+    m.classList.add('dragging');
+    try{m.setPointerCapture(e.pointerId);}catch(_){}
+    e.preventDefault();
+  });
+  m.addEventListener('pointermove',function(e){
+    if(!dragging) return;
+    var dy=startY-e.clientY;
+    moved+=Math.abs(e.movementY||0);
+    var nb=Math.max(10,Math.min(window.innerHeight-m.offsetHeight-10,startBottom+dy));
+    m.style.bottom=nb+'px';
+  });
+  function endDrag(){
+    if(!dragging) return;
+    dragging=false; m.classList.remove('dragging');
+    try{localStorage.setItem('marshal-bottom',parseFloat(m.style.bottom)||118);}catch(_){}
+    if(moved<6) showBubble('👋 刘子乐'); /* 轻点 = 挥手 */
+  }
+  m.addEventListener('pointerup',endDrag);
+  m.addEventListener('pointercancel',endDrag);
 })();
 </script>
 </body>
