@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>供应链学习记录（始于 2026.08.04）</title>
-<link rel="stylesheet" href="style.css?v=10">
+<link rel="stylesheet" href="style.css?v=11">
 </head>
 <body>
 <div class="scroll-progress" id="progress"></div>
+<div class="bg-flow"></div>
 <button class="float-btn theme-toggle" id="themeBtn" title="切换日间 / 夜间">🌙</button>
 <button class="float-btn to-top" id="toTop" title="回到顶部">↑</button>
 
@@ -25,23 +26,31 @@
       <circle r="4.5" class="hm-dot"><animateMotion dur="6s" repeatCount="indefinite"><mpath href="#route"/></animateMotion></circle>
       <circle r="4.5" class="hm-dot"><animateMotion dur="6s" begin="2s" repeatCount="indefinite"><mpath href="#route"/></animateMotion></circle>
       <circle r="4.5" class="hm-dot"><animateMotion dur="6s" begin="4s" repeatCount="indefinite"><mpath href="#route"/></animateMotion></circle>
-      <!-- 站点：工厂 / 在途 / 中心仓 / 门店 -->
-      <g transform="translate(90,150)">
+      <!-- 站点：工厂 / 在途 / 中心仓 / 门店（可点击直达板块） -->
+      <g class="hm-node" data-target="b-daily" transform="translate(90,150)">
+        <title>产地 · 运输干线（每日学习）</title>
+        <circle class="hm-pulse" r="17"/>
         <circle r="17" class="hm-ring"/><circle r="7" class="hm-core"/>
         <text y="36" class="hm-label" text-anchor="middle">工厂</text>
         <text y="-24" class="hm-tag" text-anchor="middle">FACTORY</text>
       </g>
-      <g transform="translate(360,150)">
+      <g class="hm-node" data-target="b-daily" transform="translate(360,150)">
+        <title>在途 · 运输干线（每日学习）</title>
+        <circle class="hm-pulse" r="17"/>
         <circle r="17" class="hm-ring"/><circle r="7" class="hm-core cargo"/>
         <text y="36" class="hm-label" text-anchor="middle">在途</text>
         <text y="-24" class="hm-tag" text-anchor="middle">IN-TRANSIT</text>
       </g>
-      <g transform="translate(620,150)">
+      <g class="hm-node" data-target="b-topic" transform="translate(620,150)">
+        <title>中心仓 · 仓储中心（专题）</title>
+        <circle class="hm-pulse" r="17"/>
         <circle r="17" class="hm-ring"/><circle r="7" class="hm-core"/>
         <text y="36" class="hm-label" text-anchor="middle">中心仓</text>
         <text y="-24" class="hm-tag" text-anchor="middle">DC</text>
       </g>
-      <g transform="translate(900,150)">
+      <g class="hm-node" data-target="b-glossary" transform="translate(900,150)">
+        <title>门店 · 词表码头（术语对照）</title>
+        <circle class="hm-pulse" r="17"/>
         <circle r="17" class="hm-ring"/><circle r="7" class="hm-core"/>
         <text y="36" class="hm-label" text-anchor="middle">门店</text>
         <text y="-24" class="hm-tag" text-anchor="middle">STORE</text>
@@ -57,6 +66,7 @@
         <div class="o"><div class="n">2 个</div><div class="l">仓储专题 / 案例</div></div>
         <div class="o"><div class="n">1 份</div><div class="l">集装箱词表</div></div>
       </div>
+      <p class="map-hint">💡 点上方物流图里的 <b>工厂 / 在途 / 中心仓 / 门店</b>，直达对应板块</p>
     </div>
 
     <div class="ticker">
@@ -76,6 +86,42 @@
     </div>
   </section>
 
+  <!-- ===================== 数据看板 ===================== -->
+  <section class="dashboard reveal">
+    <div class="dash-card">
+      <div class="ico">🔥</div>
+      <div class="n">15<small> 天</small></div>
+      <div class="l">连续学习打卡</div>
+      <div class="spark">● 连载进行中</div>
+    </div>
+    <div class="dash-card">
+      <div class="ico">📚</div>
+      <div class="n">18<small> 篇</small></div>
+      <div class="l">已发布内容</div>
+      <div class="spark">15 日记 · 2 专题 · 1 词表</div>
+    </div>
+    <div class="dash-card warm">
+      <div class="ico">🚚</div>
+      <div class="n">15<small> 辆</small></div>
+      <div class="l">在途运输货车</div>
+      <div class="spark">沿干线运入</div>
+    </div>
+    <div class="dash-card">
+      <div class="ico">📦</div>
+      <div class="n">3<small> 份</small></div>
+      <div class="l">专题 · 词表</div>
+      <div class="spark">仓储 + 对照</div>
+    </div>
+
+    <div class="dash-card trend">
+      <div class="trend-head">
+        <span class="tt">📈 15 天打卡趋势</span>
+        <span class="ts" id="trendStat">全勤 · 100%</span>
+      </div>
+      <svg class="trend-svg" id="trendSvg" viewBox="0 0 480 120" preserveAspectRatio="none" aria-label="15天打卡趋势"></svg>
+    </div>
+  </section>
+
   <!-- ===================== 工具栏 ===================== -->
   <div class="toolbar reveal">
     <input class="search" id="search" type="search" placeholder="🔍 搜点什么？试试「牛鞭」「中台」「推拉」「SHEIN」…" autocomplete="off">
@@ -85,11 +131,12 @@
       <span class="chip" data-cat="topic">🏭 仓储中心</span>
       <span class="chip" data-cat="glossary">📦 词表码头</span>
     </div>
+    <div class="rand-row"><button class="rand-btn" id="randBtn" type="button">🎲 随机一篇</button></div>
   </div>
   <div class="count-tip" id="countTip">共 <b>18</b> 个内容 · 点胶囊按板块筛选，或在上面搜索关键字</div>
 
   <!-- ===================== 板块一：运输干线（默认展开，仅展示前 3 条） ===================== -->
-  <details class="board" data-board open>
+  <details class="board" id="b-daily" data-board open>
     <summary class="board-title">
       <span class="board-ico">🚚</span>
       <h2 class="bt-label">每日学习 · 运输干线</h2>
@@ -200,7 +247,7 @@
   </details>
 
   <!-- ===================== 板块二：仓储中心（默认展开） ===================== -->
-  <details class="board" data-board open>
+  <details class="board" id="b-topic" data-board open>
     <summary class="board-title">
       <span class="board-ico">🏭</span>
       <h2 class="bt-label">专题 · 仓储中心</h2>
@@ -228,7 +275,7 @@
   </details>
 
   <!-- ===================== 板块三：集装箱码头（默认展开） ===================== -->
-  <details class="board" data-board open>
+  <details class="board" id="b-glossary" data-board open>
     <summary class="board-title">
       <span class="board-ico">📦</span>
       <h2 class="bt-label">词组对照 · 词表码头</h2>
@@ -365,6 +412,88 @@
 
   /* 已展开(默认 open)的板块，其卡片若已在首屏，补一次 .in */
   boards.forEach(function(b){ if(b.open) b.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');}); });
+
+  /* 学习地图：Hero 节点点击直达板块 */
+  document.querySelectorAll('.hm-node').forEach(function(n){
+    n.addEventListener('click',function(){
+      var el=document.getElementById(n.getAttribute('data-target'));
+      if(el){ if(el.tagName==='DETAILS' && !el.open) el.open=true;
+        el.scrollIntoView({behavior:'smooth',block:'start'}); }
+    });
+  });
+
+  /* 15 天打卡趋势图（动态生成，入场生长动画） */
+  (function(){
+    var svg=document.getElementById('trendSvg'); if(!svg) return;
+    var dates=['08/04','08/05','08/06','08/07','08/08','08/09','08/10','08/11','08/12','08/13','08/14','08/15','08/16','08/17','08/18'];
+    var levels=[82,90,76,95,88,70,84,92,80,96,86,78,90,83,100];
+    var W=480,H=120,base=H-10,n=dates.length,step=W/n,bw=Math.min(22,step*0.62);
+    var ns='http://www.w3.org/2000/svg';
+    var baseLine=document.createElementNS(ns,'line');
+    baseLine.setAttribute('class','base');
+    baseLine.setAttribute('x1',0);baseLine.setAttribute('x2',W);
+    baseLine.setAttribute('y1',base);baseLine.setAttribute('y2',base);
+    svg.appendChild(baseLine);
+    levels.forEach(function(v,i){
+      var h=(v/100)*(H-20), x=i*step+(step-bw)/2, y=base-h;
+      var r=document.createElementNS(ns,'rect');
+      r.setAttribute('class','bar');r.setAttribute('x',x);r.setAttribute('y',y);
+      r.setAttribute('width',bw);r.setAttribute('height',h);r.setAttribute('rx',4);
+      r.setAttribute('fill','url(#barGrad)');
+      r.style.animationDelay=(i*0.05)+'s';
+      var t=document.createElementNS(ns,'title');
+      t.textContent='Day '+(i+1)+' · '+dates[i]+' · 已打卡';
+      r.appendChild(t); svg.appendChild(r);
+    });
+    var defs=document.createElementNS(ns,'defs');
+    var grad=document.createElementNS(ns,'linearGradient');
+    grad.setAttribute('id','barGrad');grad.setAttribute('x1','0');grad.setAttribute('y1','0');
+    grad.setAttribute('x2','0');grad.setAttribute('y2','1');
+    var s1=document.createElementNS(ns,'stop');s1.setAttribute('offset','0');s1.setAttribute('stop-color','#22d3ee');
+    var s2=document.createElementNS(ns,'stop');s2.setAttribute('offset','1');s2.setAttribute('stop-color','#38bdf8');
+    grad.appendChild(s1);grad.appendChild(s2);defs.appendChild(grad);
+    svg.insertBefore(defs,svg.firstChild);
+  })();
+
+  /* 货车 hover 显示当日一句话 */
+  var quotes={
+    'entries/2026-08-04.html':'供应链，就是把“从产地到消费者”整条线拧成一股绳。',
+    'entries/2026-08-05.html':'管理和系统是两兄弟：一个定规则，一个把规则跑起来。',
+    'entries/2026-08-06.html':'物流、资金流、信息流——信息流是大脑，先动起来。',
+    'entries/2026-08-07.html':'供应链的目标就八个字：降本增效、协同精简。',
+    'entries/2026-08-08.html':'牛鞭效应：需求放一点点，库存炸一大圈。',
+    'entries/2026-08-09.html':'推式怕积压，拉式怕缺货，推拉结合才稳。',
+    'entries/2026-08-10.html':'BOM、提前期、MTS/MTO——先把术语墙拆了。',
+    'entries/2026-08-11.html':'人货场：铁打的人货，流水的场。',
+    'entries/2026-08-12.html':'从电商到 O2O 到新零售，是一种“必然”。',
+    'entries/2026-08-13.html':'十大业务流程，说到底就是进销存。',
+    'entries/2026-08-14.html':'中台化：把复杂包成一个接口给业务用。',
+    'entries/2026-08-15.html':'供应链中台，是 B 端产品的主战场。',
+    'entries/2026-08-16.html':'系统设计心法：先画图，再写代码。',
+    'entries/2026-08-17.html':'SPU、SKU、SN——主数据不搞清，系统全乱套。',
+    'entries/2026-08-18.html':'半月收官：先把骨架立住，细节往后填。'
+  };
+  var ttip=document.createElement('div');ttip.className='truck-tip';document.body.appendChild(ttip);
+  document.querySelectorAll('.tl-card.truck').forEach(function(c){
+    var q=quotes[c.getAttribute('href')]; if(!q) return;
+    c.addEventListener('mouseenter',function(){
+      var r=c.getBoundingClientRect();
+      ttip.innerHTML='<b>🚚 当日一句话</b><br>'+q;
+      ttip.classList.add('show');
+      var tw=ttip.offsetWidth, th=ttip.offsetHeight;
+      var left=r.left+(r.width-tw)/2; left=Math.max(8,Math.min(window.innerWidth-tw-8,left));
+      var top=r.top-th-10; if(top<8) top=r.bottom+10;
+      ttip.style.left=left+'px'; ttip.style.top=top+'px';
+    });
+    c.addEventListener('mouseleave',function(){ttip.classList.remove('show');});
+  });
+
+  /* 随机一篇 */
+  var randBtn=document.getElementById('randBtn');
+  if(randBtn){ randBtn.addEventListener('click',function(){
+    var links=[].slice.call(document.querySelectorAll('.tl-card')).map(function(c){return c.getAttribute('href');});
+    if(links.length){ window.location.href=links[Math.floor(Math.random()*links.length)]; }
+  }); }
 
   filter();
 })();
