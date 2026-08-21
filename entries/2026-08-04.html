@@ -4,10 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Day 1 · 供应链到底是个啥 — 我的供应链学习记录</title>
-<link rel="stylesheet" href="../style.css">
-<script>var t=localStorage.getItem('sc-theme');if(t)document.documentElement.setAttribute('data-theme',t);</script>
+<link rel="stylesheet" href="../style.css?v=10">
+<script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
 </head>
-<body>
+<body class="entry-page">
+<div class="fxbar" id="fxbar">
+  <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
+  <div class="fx-info">
+    <div class="fx-title">供应链到底是个啥</div>
+    <div class="fx-sub">DAY 1 · 2026年8月4日 · 翻开《实战供应链》第1章</div>
+  </div>
+  <div class="fx-actions">
+    <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
+    <button class="fx-theme" id="fxTheme" title="&#20999;&#25442;&#26126;&#26263;">&#127771;</button>
+  </div>
+</div>
+<div class="fx-progress" id="fxProgress"></div>
+
 <div class="wrap">
 <article class="entry">
   <header class="entry-head">
@@ -42,12 +55,54 @@
       供应链突出的不是"流"也不是"购"，而是那个<strong>"链"</strong>字——把原本各管各的人，串成一条能一起赚钱、一起扛事的线。
     </div>
   </div>
-  <footer class="entry-foot">
-    <a href="../index.html">← 返回总目录</a>
-    <span class="next">下一篇：管理与系统，到底啥关系 →</span>
-  </footer>
+  <nav class="entry-nav">
+  <a class="enav prev disabled" href="../index.html">
+    <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
+    <span class="enav-title">已是最后一篇</span>
+  </a>
+  <a class="enav home" href="../index.html">
+    <span class="enav-lab">&#127968; &#25353;&#25353;&#25353;&#25353;</span>
+  </a>
+  <a class="enav next " href="2026-08-05.html">
+    <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
+    <span class="enav-title">管理和系统，是两兄弟</span>
+  </a>
+</nav>
+
 </article>
 </div>
 <script src="../theme.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  var bar=document.getElementById('fxProgress');
+  var timeEl=document.getElementById('fxTime');
+  var themeBtn=document.getElementById('fxTheme');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    var p=max>0?sc/max*100:0;
+    if(bar) bar.style.width=p+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  try{
+    var body=document.querySelector('.entry-body');
+    var txt=body?body.innerText.replace(/\s/g,''):'';
+    var mins=Math.max(1,Math.round(txt.length/350));
+    if(timeEl) timeEl.textContent='≈ '+mins+' 分钟';
+  }catch(e){}
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var next=cur==='light'?'dark':'light';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('sc-theme',next);}catch(e){}
+    });
+  }
+})();
+</script>
+
 </body>
 </html>
