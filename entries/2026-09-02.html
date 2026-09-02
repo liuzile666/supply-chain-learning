@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 30 · 补打卡，然后开第 3 章 — 我的供应链学习记录</title>
+<link rel="stylesheet" href="../style.css?v=11">
+<script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
+</head>
+<body class="entry-page">
+<div class="fxbar" id="fxbar">
+  <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
+  <div class="fx-info">
+    <div class="fx-title">补打卡，然后开第 3 章</div>
+    <div class="fx-sub">DAY 30 · 2026年9月2日 · 补打卡 8/19–9/02 · 准备第 3 章</div>
+  </div>
+  <div class="fx-actions">
+    <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
+    <button class="fx-theme" id="fxTheme" title="&#20999;&#25442;&#26126;&#26263;">&#127771;</button>
+  </div>
+</div>
+<div class="fx-progress" id="fxProgress"></div>
+
+<div class="wrap">
+<article class="entry">
+  <header class="entry-head">
+    <div class="day-badge"><span class="lab">DAY</span><span class="num">30</span></div>
+    <div>
+      <h1>补打卡，然后开第 3 章</h1>
+      <p class="date">2026年9月2日 · 补打卡 8/19–9/02 · 准备第 3 章</p>
+    </div>
+  </header>
+  <div class="entry-body">
+    <p class="lead">断更了好几天，今天回来。第一件事是把 8/19 到今天的打卡全部补上——算上这篇，30 篇了。</p>
+    <p>回看这半个月的日记，有个明显的变化：前 15 天我基本在"接收"（第 1–5 章，中台、主数据），后面这 15 天我的重心变成了"找方法"。</p>
+    <h2>最大的收获其实不是供应链知识</h2>
+    <ul>
+      <li><b>承认方法错了就换。</b>我先后否掉了"让 AI 讲全书"（太空）、"一个人闷头读"（太无聊），最后定下来 A/B 穿插：抽象概念先听懂再印证，轻量内容碎片化 + 即时测验。</li>
+      <li><b>把新东西翻成自己的语言。</b>三流翻成三类数据流，牛鞭翻成信号级联放大，推拉边界翻成架构里的分化点。翻译层建起来之后，速度完全不一样。</li>
+    </ul>
+    <h2>供应链本身走到哪了</h2>
+    <p>第 1、2 章算扎住了：三流、牛鞭、降本增效、协同、推拉光谱。下一步开<strong>第 3 章——电商与新零售</strong>，那是全书最贴拼多多的一章（拼多多本身就是"货找人"的新电商范式）。</p>
+
+    <div class="note">
+      <span class="tag">💭 给自己留的话</span>
+      补打卡不是为了保住那个连续数字，是为了把断掉的线索重新接上。以后尽量别断这么久。
+    </div>
+
+    <div class="takeaway">
+      <span class="tag">✅ 一句话总结</span>
+      一个月，30 篇，两章扎住。方法比进度重要——下一步开第 3 章，电商与新零售。
+    </div>
+  </div>
+  <nav class="entry-nav">
+  <a class="enav prev " href="2026-09-01.html">
+    <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
+    <span class="enav-title">我到底缺什么</span>
+  </a>
+  <a class="enav home" href="../index.html">
+    <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
+  </a>
+  <a class="enav next " href="2026-08-18-case-shein.html">
+    <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
+    <span class="enav-title">希音 SHEIN：小单快反怎么把库存压到个位数</span>
+  </a>
+</nav>
+
+
+</article>
+</div>
+<script src="../theme.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  var bar=document.getElementById('fxProgress');
+  var timeEl=document.getElementById('fxTime');
+  var themeBtn=document.getElementById('fxTheme');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    var p=max>0?sc/max*100:0;
+    if(bar) bar.style.width=p+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  try{
+    var body=document.querySelector('.entry-body');
+    var txt=body?body.innerText.replace(/\s/g,''):'';
+    var mins=Math.max(1,Math.round(txt.length/350));
+    if(timeEl) timeEl.textContent='≈ '+mins+' 分钟';
+  }catch(e){}
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var next=cur==='light'?'dark':'light';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('sc-theme',next);}catch(e){}
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
