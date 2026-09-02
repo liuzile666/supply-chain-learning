@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day 27 · 补一补第 2 章的常识词典 — 我的供应链学习记录</title>
+<title>Day 27 · 上架那一刻，才叫真的在库了 — 我的供应链学习记录</title>
 <link rel="stylesheet" href="../style.css?v=11">
 <script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
 </head>
@@ -11,8 +11,8 @@
 <div class="fxbar" id="fxbar">
   <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
   <div class="fx-info">
-    <div class="fx-title">补一补第 2 章的常识词典</div>
-    <div class="fx-sub">DAY 27 · 2026年8月30日 · 第 2 章 · 常识词典</div>
+    <div class="fx-title">上架那一刻，才叫真的在库了</div>
+    <div class="fx-sub">DAY 27 · 2026年8月30日 · 第8章 · WMS 入库流程（p308–316）</div>
   </div>
   <div class="fx-actions">
     <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
@@ -26,43 +26,48 @@
   <header class="entry-head">
     <div class="day-badge"><span class="lab">DAY</span><span class="num">27</span></div>
     <div>
-      <h1>补一补第 2 章的常识词典</h1>
-      <p class="date">2026年8月30日 · 第 2 章 · 常识词典</p>
+      <h1>上架那一刻，才叫真的在库了</h1>
+      <p class="date">2026年8月30日 · 第8章 · WMS 入库流程（p308–316）</p>
     </div>
   </header>
   <div class="entry-body">
-    <p class="lead">今天没开新章节，回头把第 2 章剩下的「常识词典」补了。</p>
-    <p>一堆术语，之前都是"听过但不精确"。今天集中扫了一遍，最值得记的是这四个生产策略——它们和推拉战略其实是<strong>同一条光谱</strong>：</p>
+    <p class="lead">今天读入库。四步流程，但第四步"上架"才是整条链的关键节点。</p>
+    <h2>入库四步</h2>
     <ul>
-      <li><b>MTS</b> 备货型：先生产再卖 = 推式</li>
-      <li><b>ATO</b> 按单装配：半成品先备、接单组装 = 推拉结合</li>
-      <li><b>MTO</b> 按单生产：接单才做 = 拉式</li>
-      <li><b>ETO</b> 按单设计：连设计都按单 = 深度拉式</li>
+      <li><b>预约送货</b>：供应商接到采购订单后先和仓库预约送货时间。</li>
+      <li><b>收货</b>：收货员核对来货清单和实物，一致后提取系统中的预约单，核实数量后提交实际收货信息。</li>
+      <li><b>验收</b>：验收员提取已保存的收货信息，打印验收单或用 PDA 验收；合格的商品进入指定区域准备上架，不合格的拒收。</li>
+      <li><b>上架</b>：上架员按系统推荐的货位上架，推荐不合适可人工调整；若发现验收信息录入错误，可通过入库错误修改功能修正后重新上架。</li>
     </ul>
-    <p>另外几个：BOM（物料清单，树形结构，我理解成 JSON 树）、提前期（下单到收货的时间，我理解成网络延迟，它直接决定要备多少安全库存）、VMI（把库存托管给供应商管）、JIT（刚好及时，逼近零库存）。</p>
-    <p>这些词后面每章都会出现，我不打算背，就当书签，用到再查。</p>
+    <h2>上架为什么是关键节点</h2>
+    <p>书里写得很明确：<strong>上架后，说明此商品真实在库了</strong>，此时才同步入库流水至中央库存系统加库存，才通知财务系统做存货和应付账款处理；如果是退货入库，还要通知售后系统和财务做退款处理。</p>
+    <p>也就是说，前面三步（预约、收货、验收）都只是"在路上"——库存不涨、钱不记账。上架是那个<strong>提交（commit）的时刻</strong>。这个设计我以前从来没想过：为什么收货了不算数？因为没验收的货可能是坏的，没上架的货找不到在哪。</p>
+    <h2>收货错误修改</h2>
+    <p>在上架确认之前，如果发现批次录错、数量录错，可以在系统中修正，系统会更新收货和验收明细，并重新推荐货位。这个"提交前允许回滚修正"的设计，和我们熟悉的事务思路一模一样。</p>
+    <h2>自动化上架</h2>
+    <p>由 WCS 驱动堆垛机或 AGV 按系统指引把商品送往指定货位并增加实物库存；如果需要管理到 SN 库存，上架时还要扫描每个 SN 条码。</p>
 
     <div class="note">
       <span class="tag">💭 给自己留的话</span>
-      术语不用背，但要能定位。知道「这个词属于哪一类问题」，比背下定义重要。
+      上架 = commit。前面所有步骤都在路上，不涨库存、不记账。找到"提交点"是理解任何流程的捷径。
     </div>
 
     <div class="takeaway">
       <span class="tag">✅ 一句话总结</span>
-      MTS → ATO → MTO → ETO 是一条光谱。看懂业务在光谱哪一端，就懂它该用什么库存策略。
+      入库四步：预约→收货→验收→上架。上架才是 commit——加库存、记应付、通知财务。
     </div>
   </div>
   <nav class="entry-nav">
   <a class="enav prev " href="2026-08-29.html">
     <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
-    <span class="enav-title">断更一天</span>
+    <span class="enav-title">SKU 库存和 SN 库存，是两层</span>
   </a>
   <a class="enav home" href="../index.html">
     <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
   </a>
   <a class="enav next " href="2026-08-31.html">
     <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
-    <span class="enav-title">试着把前两章讲出来</span>
+    <span class="enav-title">播种式和摘果式</span>
   </a>
 </nav>
 
