@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 18 · 我把学习站重做了一遍 — 我的供应链学习记录</title>
+<link rel="stylesheet" href="../style.css?v=11">
+<script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
+</head>
+<body class="entry-page">
+<div class="fxbar" id="fxbar">
+  <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
+  <div class="fx-info">
+    <div class="fx-title">我把学习站重做了一遍</div>
+    <div class="fx-sub">DAY 18 · 2026年8月21日 · 站点升级 · 数据看板与学习地图</div>
+  </div>
+  <div class="fx-actions">
+    <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
+    <button class="fx-theme" id="fxTheme" title="&#20999;&#25442;&#26126;&#26263;">&#127771;</button>
+  </div>
+</div>
+<div class="fx-progress" id="fxProgress"></div>
+
+<div class="wrap">
+<article class="entry">
+  <header class="entry-head">
+    <div class="day-badge"><span class="lab">DAY</span><span class="num">18</span></div>
+    <div>
+      <h1>我把学习站重做了一遍</h1>
+      <p class="date">2026年8月21日 · 站点升级 · 数据看板与学习地图</p>
+    </div>
+  </header>
+  <div class="entry-body">
+    <p class="lead">今天没读书，改了一整天网站。但意外的是，这比读书更让我理解「供应链中台」到底在干什么。</p>
+    <p>我给学习站加了三样东西：数据看板（连续天数、已发布篇数、在途货车数、打卡趋势图）、可点击的学习地图（工厂 / 在途 / 中心仓 / 门店四个节点，点一下跳到对应板块）、还有一堆微动效。</p>
+    <p>做的时候我一直在想一件事：这个数据看板，不就是供应链里的<strong>可视化监控</strong>吗？趋势图 = 需求波动曲线；在途货车数 = 在途库存；连续打卡天数 = 履约率。我居然在自己的学习站上，把书里的概念复刻了一遍。</p>
+    <p>还有个 bug 挺有意思：学习地图的四个节点显示不全。根因是 SVG 用了 <code>preserveAspectRatio="slice"</code>，容器比画布扁的时候会横向裁切，最左的工厂和最右的门店直接被切掉了。改成 <code>meet</code> 就完整了。</p>
+    <h2>做出来，比读进去记得牢</h2>
+    <p>改完之后我对"中台"这个词的理解变具体了：中台不是什么玄乎的架构，就是把反复要用的能力抽出来，做成接口给上层业务调用。我的站点里，主题切换、进度条、导航这些被所有页面复用的东西，就是我的"中台"。</p>
+
+    <div class="note">
+      <span class="tag">💭 给自己留的话</span>
+      以后每学一个概念，都想想"能不能在我的站上实现一遍"。做，是最好的学。
+    </div>
+
+    <div class="takeaway">
+      <span class="tag">✅ 一句话总结</span>
+      今天没读书，但把「数据看板 = 供应链可视化监控」想通了，也顺带把中台理解具体了。
+    </div>
+  </div>
+  <nav class="entry-nav">
+  <a class="enav prev " href="2026-08-20.html">
+    <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
+    <span class="enav-title">状态不好的一天</span>
+  </a>
+  <a class="enav home" href="../index.html">
+    <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
+  </a>
+  <a class="enav next " href="2026-08-22.html">
+    <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
+    <span class="enav-title">在汕头，看餐饮的供应链</span>
+  </a>
+</nav>
+
+
+</article>
+</div>
+<script src="../theme.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  var bar=document.getElementById('fxProgress');
+  var timeEl=document.getElementById('fxTime');
+  var themeBtn=document.getElementById('fxTheme');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    var p=max>0?sc/max*100:0;
+    if(bar) bar.style.width=p+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  try{
+    var body=document.querySelector('.entry-body');
+    var txt=body?body.innerText.replace(/\s/g,''):'';
+    var mins=Math.max(1,Math.round(txt.length/350));
+    if(timeEl) timeEl.textContent='≈ '+mins+' 分钟';
+  }catch(e){}
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var next=cur==='light'?'dark':'light';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('sc-theme',next);}catch(e){}
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
