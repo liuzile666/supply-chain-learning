@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day 18 · 我把学习站重做了一遍 — 我的供应链学习记录</title>
+<title>Day 18 · 五张单据的前后顺序，我终于理顺了 — 我的供应链学习记录</title>
 <link rel="stylesheet" href="../style.css?v=11">
 <script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
 </head>
@@ -11,8 +11,8 @@
 <div class="fxbar" id="fxbar">
   <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
   <div class="fx-info">
-    <div class="fx-title">我把学习站重做了一遍</div>
-    <div class="fx-sub">DAY 18 · 2026年8月21日 · 站点升级 · 数据看板与学习地图</div>
+    <div class="fx-title">五张单据的前后顺序，我终于理顺了</div>
+    <div class="fx-sub">DAY 18 · 2026年8月21日 · 第6章 · 采购订单 PO（p232–238）</div>
   </div>
   <div class="fx-actions">
     <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
@@ -26,39 +26,47 @@
   <header class="entry-head">
     <div class="day-badge"><span class="lab">DAY</span><span class="num">18</span></div>
     <div>
-      <h1>我把学习站重做了一遍</h1>
-      <p class="date">2026年8月21日 · 站点升级 · 数据看板与学习地图</p>
+      <h1>五张单据的前后顺序，我终于理顺了</h1>
+      <p class="date">2026年8月21日 · 第6章 · 采购订单 PO（p232–238）</p>
     </div>
   </header>
   <div class="entry-body">
-    <p class="lead">今天没读书，改了一整天网站。但意外的是，这比读书更让我理解「供应链中台」到底在干什么。</p>
-    <p>我给学习站加了三样东西：数据看板（连续天数、已发布篇数、在途货车数、打卡趋势图）、可点击的学习地图（工厂 / 在途 / 中心仓 / 门店四个节点，点一下跳到对应板块）、还有一堆微动效。</p>
-    <p>做的时候我一直在想一件事：这个数据看板，不就是供应链里的<strong>可视化监控</strong>吗？趋势图 = 需求波动曲线；在途货车数 = 在途库存；连续打卡天数 = 履约率。我居然在自己的学习站上，把书里的概念复刻了一遍。</p>
-    <p>还有个 bug 挺有意思：学习地图的四个节点显示不全。根因是 SVG 用了 <code>preserveAspectRatio="slice"</code>，容器比画布扁的时候会横向裁切，最左的工厂和最右的门店直接被切掉了。改成 <code>meet</code> 就完整了。</p>
-    <h2>做出来，比读进去记得牢</h2>
-    <p>改完之后我对"中台"这个词的理解变具体了：中台不是什么玄乎的架构，就是把反复要用的能力抽出来，做成接口给上层业务调用。我的站点里，主题切换、进度条、导航这些被所有页面复用的东西，就是我的"中台"。</p>
+    <p class="lead">今天最有收获的一件事：我把采购那条单据链的顺序彻底记死了。之前每次看都混。</p>
+    <h2>五张单据，按时间排好队</h2>
+    <ul>
+      <li><b>采购计划</b>：以年度或季度为周期，基于历史数据估算而来。</li>
+      <li><b>采购申请</b>：企业内部提交的非正式审批文件，仅内部流转——此时还不确定从哪个供应商买。</li>
+      <li><b>采购订单（PO）</b>：与供应商约定金额数量后，根据合同创建的正式单据，交给供应商送货和结算，是采购系统里最重要的信息载体。</li>
+      <li><b>收货单</b>：仓库清点到货商品后的收货记录。</li>
+      <li><b>采购入库单</b>：仓库实际入库明细，是<strong>生成应付账款的凭证</strong>。</li>
+    </ul>
+    <p>之前我总分不清收货单和入库单。今天想明白了：收货单是"货到了、点清楚了"，入库单是"验收合格、上架了、可以记账了"。两者之间夹着验收——验收不合格的进不了入库单。</p>
+    <h2>订单的两种创建方式</h2>
+    <p>方式一是手动创建，采购员根据常规采购、缺货补货录入信息生成订单，简单灵活，最常用；方式二是<strong>自动补货建议</strong>，基于历史销售数据计算，结合业务规则给出采购建议。第二种本质上是把补货决策从人脑搬到算法，后面 6.8 节就是讲这个的。</p>
+    <h2>关单：三种方式</h2>
+    <p>入库完成自动关单、超期自动关单、人工关单。今天提前瞄到后面 p316 一句很有意思的：处理超期自动关单和人工关单时，系统都要先询问 WMS，如果 WMS 中的入库单已经取消或已关单，就不允许关单。这就是<strong>跨系统的状态校验</strong>——一个动作能不能做，不只取决于自己系统的状态，还要看下游。</p>
 
     <div class="note">
       <span class="tag">💭 给自己留的话</span>
-      以后每学一个概念，都想想"能不能在我的站上实现一遍"。做，是最好的学。
+      单据链的先后顺序 = 业务的时间线。所谓"理不清业务"，本质上是没搞清楚谁先谁后。
     </div>
 
     <div class="takeaway">
       <span class="tag">✅ 一句话总结</span>
-      今天没读书，但把「数据看板 = 供应链可视化监控」想通了，也顺带把中台理解具体了。
+      采购计划→申请→订单→收货单→入库单。收货是"货到了"，入库是"可以记账了"，中间隔着验收。
     </div>
   </div>
   <nav class="entry-nav">
   <a class="enav prev " href="2026-08-20.html">
     <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
-    <span class="enav-title">状态不好的一天</span>
+    <span class="enav-title">询价单的四个状态，和我想的不一样</span>
   </a>
   <a class="enav home" href="../index.html">
     <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
   </a>
   <a class="enav next " href="2026-08-22.html">
     <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
-    <span class="enav-title">在汕头，看餐饮的供应链</span>
+    <span class="enav-title">供应商不是越多越好</span>
   </a>
 </nav>
 
