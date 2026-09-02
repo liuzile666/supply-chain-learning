@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day 22 · 让 AI 讲全书，然后我把方案否了 — 我的供应链学习记录</title>
+<title>Day 22 · 库存加减：流水模式还是设置模式 — 我的供应链学习记录</title>
 <link rel="stylesheet" href="../style.css?v=11">
 <script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
 </head>
@@ -11,8 +11,8 @@
 <div class="fxbar" id="fxbar">
   <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
   <div class="fx-info">
-    <div class="fx-title">让 AI 讲全书，然后我把方案否了</div>
-    <div class="fx-sub">DAY 22 · 2026年8月25日 · 全书导读 · 改阅读方法</div>
+    <div class="fx-title">库存加减：流水模式还是设置模式</div>
+    <div class="fx-sub">DAY 22 · 2026年8月25日 · 第7章 · 库存计算逻辑（p270–280）</div>
   </div>
   <div class="fx-actions">
     <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
@@ -26,38 +26,46 @@
   <header class="entry-head">
     <div class="day-badge"><span class="lab">DAY</span><span class="num">22</span></div>
     <div>
-      <h1>让 AI 讲全书，然后我把方案否了</h1>
-      <p class="date">2026年8月25日 · 全书导读 · 改阅读方法</p>
+      <h1>库存加减：流水模式还是设置模式</h1>
+      <p class="date">2026年8月25日 · 第7章 · 库存计算逻辑（p270–280）</p>
     </div>
   </header>
   <div class="entry-body">
-    <p class="lead">今天让 AI 把整本书给我讲了一遍，还生成了一张「认知地图」。看完我的评价是：写得不错，但我还是懵。</p>
-    <p>问题出在哪？我想明白了——<strong>它给我的是「关于书的地图」，不是「读这本书的方法」</strong>。地图上标了 12 章分别讲什么、跟我计算机背景的映射、5 周学习路线……信息密度很高，但我一行原文都没碰。概念飘在半空，落不了地。</p>
-    <h2>当场改打法</h2>
-    <p>所以我换了个思路：我读原文，AI 当助手——帮我标"这一章哪些页精读、哪些页速读、哪些页可以直接跳"，读之前给一句话点破这章在讲啥，读完给我 3 道自测题。整本书拆成 12 个 Session。</p>
-    <p>这个改动看着小，其实是把"被动接收"换成了"主动阅读 + 即时检验"。书还是那本书，但我的角色从"听众"变回了"读者"。</p>
+    <p class="lead">今天读整章最硬的一段：库存到底怎么算。书里给了两条路，而且明确说了各自的代价。</p>
+    <h2>两条路</h2>
+    <ul>
+      <li><b>流水加减模式</b>：每次出入库记一条流水，库存 = 所有流水累加。好处是可追溯、可回放；代价是数据量巨大，且一旦某条流水错了，后面全被污染。</li>
+      <li><b>设置模式</b>：直接在某个维度上设置库存值。好处是简单直接、能强制纠正；代价是丢失过程，出了问题查不到是谁改的。</li>
+    </ul>
+    <p>书里的做法是两者结合——日常用流水保证可追溯，特殊场景（盘点差异、系统初始化、纠错）用设置模式兜底。我在实习里见过一模一样的争论：到底用事件溯源还是直接改状态。答案是一样的：<strong>用事件流做主，用状态快照做校正</strong>。</p>
+    <h2>可销售库存</h2>
+    <p>可销售库存 ≠ 实物库存。它要从实物里扣掉已被预占的、被冻结的、不合格的……剩下的才是能卖给用户的。这个"从物理数量到可售数量"的换算，是整章的业务核心。</p>
+    <h2>销售平台库存同步</h2>
+    <p>中央库存算出来的可销售库存要同步到各个销售平台。同步的几个现实问题：同步频率多高（实时还是定时）、同步失败怎么办、不同平台是否要按比例分配配额而不是全量给。</p>
+    <h2>我的连接</h2>
+    <p>拼多多视角：大促时用户看到"仅剩 3 件"，这个数字就是可销售库存。它每秒都在变，背后是各仓流水汇总加预占释放的实时计算。</p>
 
     <div class="note">
       <span class="tag">💭 给自己留的话</span>
-      别人的总结再好，也替代不了自己读原文。总结只能帮你决定「读哪里、读多细」。
+      流水模式可追溯，设置模式能纠偏。真实系统永远是两条腿走路，别指望一条路包打天下。
     </div>
 
     <div class="takeaway">
       <span class="tag">✅ 一句话总结</span>
-      认知地图不是终点，是目录。真正的理解只能发生在你和原文之间。
+      流水加减保障可追溯，设置模式用于纠偏；可销售库存 = 实物 − 预占 − 冻结 − 不合格。
     </div>
   </div>
   <nav class="entry-nav">
   <a class="enav prev " href="2026-08-24.html">
     <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
-    <span class="enav-title">慢读第 1 章：建立翻译层</span>
+    <span class="enav-title">第7章：供应链之魂</span>
   </a>
   <a class="enav home" href="../index.html">
     <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
   </a>
   <a class="enav next " href="2026-08-26.html">
     <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
-    <span class="enav-title">读不进去，然后我们改了玩法</span>
+    <span class="enav-title">预占，就是一把分布式锁</span>
   </a>
 </nav>
 
