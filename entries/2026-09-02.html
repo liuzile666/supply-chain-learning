@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day 30 · 补打卡，然后开第 3 章 — 我的供应链学习记录</title>
+<title>Day 30 · 分仓、拆单、合并，还有暂停和加急 — 我的供应链学习记录</title>
 <link rel="stylesheet" href="../style.css?v=11">
 <script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
 </head>
@@ -11,8 +11,8 @@
 <div class="fxbar" id="fxbar">
   <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
   <div class="fx-info">
-    <div class="fx-title">补打卡，然后开第 3 章</div>
-    <div class="fx-sub">DAY 30 · 2026年9月2日 · 补打卡 8/19–9/02 · 准备第 3 章</div>
+    <div class="fx-title">分仓、拆单、合并，还有暂停和加急</div>
+    <div class="fx-sub">DAY 30 · 2026年9月2日 · 第9章 · 履约核心功能 · 开第10章（p355–376）</div>
   </div>
   <div class="fx-actions">
     <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
@@ -26,35 +26,41 @@
   <header class="entry-head">
     <div class="day-badge"><span class="lab">DAY</span><span class="num">30</span></div>
     <div>
-      <h1>补打卡，然后开第 3 章</h1>
-      <p class="date">2026年9月2日 · 补打卡 8/19–9/02 · 准备第 3 章</p>
+      <h1>分仓、拆单、合并，还有暂停和加急</h1>
+      <p class="date">2026年9月2日 · 第9章 · 履约核心功能 · 开第10章（p355–376）</p>
     </div>
   </header>
   <div class="entry-body">
-    <p class="lead">断更了好几天，今天回来。第一件事是把 8/19 到今天的打卡全部补上——算上这篇，30 篇了。</p>
-    <p>回看这半个月的日记，有个明显的变化：前 15 天我基本在"接收"（第 1–5 章，中台、主数据），后面这 15 天我的重心变成了"找方法"。</p>
-    <h2>最大的收获其实不是供应链知识</h2>
+    <p class="lead">一个月，30 篇。今天把第 9 章的核心功能读完，顺手开了第 10 章配送。</p>
+    <h2>分仓有两个时机</h2>
+    <p>一是订单履约系统刚接到订单、需要尽快预占库存时的<strong>预分仓</strong>；二是订单审核完成后，核心信息（收货地址、商品、数量）发生变更后的<strong>重新分仓</strong>。书里特别提到：重新分仓后如果结果变了，需要<strong>释放</strong>预分仓环节在中央库存系统中的分配库存。</p>
+    <p>这里我停下来想了一会儿：预占—释放—再预占，这不就是<strong>锁的释放与重入</strong>吗。而且书里说，预售类无实物库存的订单不需要预分仓（没库存，只会分仓失败），等采购入库后再流转——没有资源就不加锁，很自然。</p>
+    <h2>拆分与合并</h2>
     <ul>
-      <li><b>承认方法错了就换。</b>我先后否掉了"让 AI 讲全书"（太空）、"一个人闷头读"（太无聊），最后定下来 A/B 穿插：抽象概念先听懂再印证，轻量内容碎片化 + 即时测验。</li>
-      <li><b>把新东西翻成自己的语言。</b>三流翻成三类数据流，牛鞭翻成信号级联放大，推拉边界翻成架构里的分化点。翻译层建起来之后，速度完全不一样。</li>
+      <li><b>拆分</b>：一张订单需要在不同时间、不同仓库发出，就按拆单规则拆成多张子订单各自流转。拆单会出现在履约的多个环节，所以书里建议<strong>把拆单设计成一个公共功能供多个环节调用</strong>——这句话我划了线，是很实在的架构建议。</li>
+      <li><b>合并</b>：同一用户、满足条件的订单可以合并为一个订单下发仓库，仓库按一个包裹拣货发货，省一次包装和配送。</li>
     </ul>
-    <h2>供应链本身走到哪了</h2>
-    <p>第 1、2 章算扎住了：三流、牛鞭、降本增效、协同、推拉光谱。下一步开<strong>第 3 章——电商与新零售</strong>，那是全书最贴拼多多的一章（拼多多本身就是"货找人"的新电商范式）。</p>
+    <h2>暂停、加急、拉回</h2>
+    <p>这三个功能我特别喜欢，因为它们说明<strong>履约流程不是一条写死的管道</strong>：订单可以中途暂停（风控拦截、信息待确认）、可以插队加急、可以在下发仓库后被拉回来。真实业务永远有例外，系统必须为例外留口子。</p>
+    <h2>顺手开了第 10 章</h2>
+    <p>自营物流、第三方物流与第四方物流的区别，物流配送全流程，快递单与包裹，物流配送状态。明天正式读。</p>
+    <h2>回看这一个月</h2>
+    <p>从第 1 章的"供应链是什么"，到今天能画出"接单→分仓→预占→下发仓库→拣货→发货"这条完整链路。最大的变化不是记住了多少术语，而是<strong>开始能看出系统边界画在哪</strong>。</p>
 
     <div class="note">
       <span class="tag">💭 给自己留的话</span>
-      补打卡不是为了保住那个连续数字，是为了把断掉的线索重新接上。以后尽量别断这么久。
+      一个月啃了五章半。最大的变化不是记了多少词，是开始能看出"系统边界画在哪"。
     </div>
 
     <div class="takeaway">
       <span class="tag">✅ 一句话总结</span>
-      一个月，30 篇，两章扎住。方法比进度重要——下一步开第 3 章，电商与新零售。
+      分仓是预占-释放-再预占的锁迁移；拆单要做成公共功能；暂停/加急/拉回是给例外留的口子。
     </div>
   </div>
   <nav class="entry-nav">
   <a class="enav prev " href="2026-09-01.html">
     <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
-    <span class="enav-title">我到底缺什么</span>
+    <span class="enav-title">OFC：承上启下的调度中心</span>
   </a>
   <a class="enav home" href="../index.html">
     <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
