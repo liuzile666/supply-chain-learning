@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>专题案例 · 京东物流：把仓网做成一台"缓存机器" — 我的供应链学习记录</title>
+<link rel="stylesheet" href="../style.css?v=10">
+<script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
+</head>
+<body class="entry-page">
+<div class="fxbar" id="fxbar">
+  <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
+  <div class="fx-info">
+    <div class="fx-title">京东物流：把仓网做成一台"缓存机器"</div>
+    <div class="fx-sub">案例研究 · 用第3章的电商流程，拆开仓配一体</div>
+  </div>
+  <div class="fx-actions">
+    <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
+    <button class="fx-theme" id="fxTheme" title="&#20999;&#25442;&#26126;&#26263;">&#127771;</button>
+  </div>
+</div>
+<div class="fx-progress" id="fxProgress"></div>
+
+<div class="wrap">
+<article class="entry">
+  <header class="entry-head">
+    <div class="day-badge"><span class="lab">案例</span><span class="num">京东</span></div>
+    <div>
+      <h1>京东物流：把仓网做成一台"缓存机器"</h1>
+      <p class="date">2026年9月2日 · 案例研究 · 用第3章的电商流程，拆开仓配一体</p>
+    </div>
+  </header>
+  <div class="entry-body">
+    <p class="lead">今天拆的是京东物流。起因很直接：第 3 章讲电商供应链流程，那张图是"采购 → 入库上架 → 用户下单 → 仓库拣货打包 → 物流配送 → 签收"。京东做的事，是把中间那几步做到了极致——<strong>货在你下单之前，就已经躺在你隔壁区县的仓里了</strong>。下面这些数字来自京东物流财报、券商研报和官方公告，我把它翻译回书里的语言。</p>
+
+    <h2>先看清这门生意的骨架</h2>
+    <p>京东 2007 年开始自建物流，2010 年 3 月推出<strong>"211 限时达"</strong>——每天 11:00 前的现货订单当日送达，23:00 前的订单次日 15:00 前送达。这个标准当年直接重定义了国内电商的时效上限。到 2025 年底，京东物流有 <strong>42 座"亚洲一号"超级枢纽</strong>，全网仓储节点超 3600 个，总管理面积约 3400 万平方米。</p>
+
+    <h2>框架一：三级仓网 = 缓存分层</h2>
+    <p>京东的仓分成三层，跟书里第 8 章的仓网是一个意思：</p>
+    <p><strong>CDC</strong>（中央物流中心）存绝大多数 SKU，覆盖一个省甚至大区；<strong>RDC</strong>（区域物流中心）介于两者之间；<strong>FDC</strong>（前端物流中心）只存爆款，离消费者最近。</p>
+    <p>我当时看到这三层，脑子里"啪"一下就对上了——这根本就是<strong>计算机的多级缓存</strong>：CDC 是主存，RDC 是 L2，FDC 是 L1 cache。用户在 FDC 命中就直接发货（当日达），没命中就回源到 RDC 或 CDC（次日达或更久）。<strong>所谓仓网设计，本质就是决定"什么东西放在第几层、每层放多少"——这跟缓存替换策略是同一道题。</strong></p>
+
+    <h2>框架二：这是"推式"的一次完胜</h2>
+    <p>第 2 章讲推拉战略，推式是按预测提前生产铺货。京东的 FDC 备货就是典型<strong>推式</strong>：靠预测把爆款提前铺到离你最近的仓。放到 CS 语境里，这叫 <strong>eager 预取（prefetch）</strong>——先花成本把数据搬到近处，等请求来了立刻命中。</p>
+    <p>收益很明显：时效。代价也很明显——<strong>库存被摊薄到上千个节点，预测一旦错了，压的就是滞销</strong>。所以这个模式的命门不是仓多，是预测准。</p>
+
+    <h2>框架三：规模经济，摊的是固定成本</h2>
+    <p>重资产听起来吓人，但书里那节"规模经济与边际成本"讲的就是这个：前期投入巨大，越过临界点后单位成本快速下降。京东这边有个很直观的指标——<strong>坪效</strong>（每平方米仓储面积带来的收入）从 2020 年的 3494 元，涨到 2023 年的 5207 元，增幅 49%。同样的仓，撑起了更大的业务量，单位仓储成本就下来了。</p>
+
+    <h2>框架四：为什么是"仓配一体"，而不是仓和配各管各的</h2>
+    <p>第 2 章的原则是<strong>全局最优</strong>，最忌讳自己降本却让别人增本。如果仓储部门只求自己省事，把所有货堆在一个大仓里，仓储成本确实低了——但配送半径暴涨，运费和时效全崩。<strong>"仓配一体"就是把这两段放在一起求总账</strong>：多建几个仓（仓储成本上升），换来配送距离缩短（配送成本下降），总账最优。这就是书里那句"全局最优、整体均衡"的活样本。</p>
+
+    <h2>拿它对照我上一篇写的拼多多</h2>
+    <p>拼多多走的是"产地直发 + 更轻的仓网"，京东是"重资产换时效"。两条路没有高下，对应的是两类商品：急用、标准化、愿意为时效付钱的走京东式前置；长尾、价格敏感、不急的走拼多多式直发。<strong>看懂一个仓网，先问它服务的是哪种需求——这比看它有多少个仓有用。</strong></p>
+
+    <div class="note">
+      <span class="tag">💭 今天卡住的地方</span>
+      FDC 只放爆款，那长尾 SKU 怎么办？京东的解法是"云仓"（生态合作仓，超 2000 个）去补长尾。但这里有个我没想透的点：<strong>如果爆款判断错了，FDC 里压的就是滞销库存</strong>。书里 3.4.10 的"仓间调拨"是不是就是这种情况的兜底手段？预测不准时，系统应该允许紧急调拨，还是干脆降价出清？这个决策规则我还答不上来，留着。
+    </div>
+
+    <div class="takeaway">
+      <span class="tag">✅ 记住的一句话</span>
+      仓网不是"把货堆得多"，而是<strong>把对的货放在对的距离上</strong>——本质是多级缓存 + 用空间换时间；而支撑它的，是预测、是全局最优那本总账。
+    </div>
+  </div>
+  <nav class="entry-nav">
+  <a class="enav prev " href="2026-08-18-pdd-gd.html">
+    <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
+    <span class="enav-title">拼多多广东物流：产地直发为什么这么能打</span>
+  </a>
+  <a class="enav home" href="../index.html">
+    <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
+  </a>
+  <a class="enav next " href="2026-09-02-case-dingdong.html">
+    <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
+    <span class="enav-title">叮咚买菜：前置仓，把损耗率抠到 1.5%</span>
+  </a>
+</nav>
+</article>
+</div>
+<script src="../theme.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  var bar=document.getElementById('fxProgress');
+  var timeEl=document.getElementById('fxTime');
+  var themeBtn=document.getElementById('fxTheme');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    var p=max>0?sc/max*100:0;
+    if(bar) bar.style.width=p+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  try{
+    var body=document.querySelector('.entry-body');
+    var txt=body?body.innerText.replace(/\s/g,''):'';
+    var mins=Math.max(1,Math.round(txt.length/350));
+    if(timeEl) timeEl.textContent='≈ '+mins+' 分钟';
+  }catch(e){}
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var next=cur==='light'?'dark':'light';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('sc-theme',next);}catch(e){}
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
