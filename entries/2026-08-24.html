@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 21 · 慢读第 1 章：建立翻译层 — 我的供应链学习记录</title>
+<link rel="stylesheet" href="../style.css?v=11">
+<script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
+</head>
+<body class="entry-page">
+<div class="fxbar" id="fxbar">
+  <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
+  <div class="fx-info">
+    <div class="fx-title">慢读第 1 章：建立翻译层</div>
+    <div class="fx-sub">DAY 21 · 2026年8月24日 · 第 1 章 · 定义与五大流程</div>
+  </div>
+  <div class="fx-actions">
+    <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
+    <button class="fx-theme" id="fxTheme" title="&#20999;&#25442;&#26126;&#26263;">&#127771;</button>
+  </div>
+</div>
+<div class="fx-progress" id="fxProgress"></div>
+
+<div class="wrap">
+<article class="entry">
+  <header class="entry-head">
+    <div class="day-badge"><span class="lab">DAY</span><span class="num">21</span></div>
+    <div>
+      <h1>慢读第 1 章：建立翻译层</h1>
+      <p class="date">2026年8月24日 · 第 1 章 · 定义与五大流程</p>
+    </div>
+  </header>
+  <div class="entry-body">
+    <p class="lead">今天开始啃第 1 章。说实话，进度很慢——但慢的原因我找到了，而且找到了解法。</p>
+    <p>第 1 章讲供应链的全貌：定义、五大角色、五大流程（SCOR）。我 8 月 4 号其实就读过一遍，但那次是"扫过去"，这次想"啃下来"。</p>
+    <p>卡住我的不是概念本身，是那些定义的精确表述。比如供应链的定义，书里引的是马士华教授那版，一环扣一环，我第一遍读完脑子里只剩"网链"两个字。</p>
+    <p>后来我想了个办法：<strong>把每个概念都用我自己熟悉的话重写一遍</strong>。五大角色（供应商→制造商→分销商→零售商→用户）= 一条流水线上的五个节点；SCOR 五大流程（计划、采购、生产、配送、退货）= 这条流水线的五个处理阶段。这么一翻译，立刻就顺了。</p>
+
+    <div class="note">
+      <span class="tag">💭 给自己留的话</span>
+      读不懂不是因为笨，是因为没有自己的翻译层。以后每个新概念，先翻成我能说的话。
+    </div>
+
+    <div class="takeaway">
+      <span class="tag">✅ 一句话总结</span>
+      建立自己的「翻译层」——把供应链术语翻成计算机语言，这是我这种背景的人最快的路径。
+    </div>
+  </div>
+  <nav class="entry-nav">
+  <a class="enav prev " href="2026-08-23.html">
+    <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
+    <span class="enav-title">新鲜和快，是一对矛盾</span>
+  </a>
+  <a class="enav home" href="../index.html">
+    <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
+  </a>
+  <a class="enav next " href="2026-08-25.html">
+    <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
+    <span class="enav-title">让 AI 讲全书，然后我把方案否了</span>
+  </a>
+</nav>
+
+
+</article>
+</div>
+<script src="../theme.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  var bar=document.getElementById('fxProgress');
+  var timeEl=document.getElementById('fxTime');
+  var themeBtn=document.getElementById('fxTheme');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    var p=max>0?sc/max*100:0;
+    if(bar) bar.style.width=p+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  try{
+    var body=document.querySelector('.entry-body');
+    var txt=body?body.innerText.replace(/\s/g,''):'';
+    var mins=Math.max(1,Math.round(txt.length/350));
+    if(timeEl) timeEl.textContent='≈ '+mins+' 分钟';
+  }catch(e){}
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var next=cur==='light'?'dark':'light';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('sc-theme',next);}catch(e){}
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
