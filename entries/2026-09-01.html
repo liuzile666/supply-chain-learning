@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day 29 · 我到底缺什么 — 我的供应链学习记录</title>
+<title>Day 29 · OFC：承上启下的调度中心 — 我的供应链学习记录</title>
 <link rel="stylesheet" href="../style.css?v=11">
 <script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
 </head>
@@ -11,8 +11,8 @@
 <div class="fxbar" id="fxbar">
   <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
   <div class="fx-info">
-    <div class="fx-title">我到底缺什么</div>
-    <div class="fx-sub">DAY 29 · 2026年9月1日 · 反思 · 入职倒计时</div>
+    <div class="fx-title">OFC：承上启下的调度中心</div>
+    <div class="fx-sub">DAY 29 · 2026年9月1日 · 第9章 · 订单履约系统（p345–355）</div>
   </div>
   <div class="fx-actions">
     <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
@@ -26,37 +26,47 @@
   <header class="entry-head">
     <div class="day-badge"><span class="lab">DAY</span><span class="num">29</span></div>
     <div>
-      <h1>我到底缺什么</h1>
-      <p class="date">2026年9月1日 · 反思 · 入职倒计时</p>
+      <h1>OFC：承上启下的调度中心</h1>
+      <p class="date">2026年9月1日 · 第9章 · 订单履约系统（p345–355）</p>
     </div>
   </header>
   <div class="entry-body">
-    <p class="lead">九月了。学历认证说 9 号能下来，入职真的近了。今天我开始想一个更实际的问题：我到底缺什么。</p>
-    <p>供应链的书读了快一个月，第 1、2 章算扎住了。但我很清楚自己的短板：我懂的是<strong>概念和类比</strong>，缺的是<strong>真实的业务数字</strong>。</p>
-    <p>比如我知道牛鞭效应会让库存积压，但一个真实的仓，安全库存到底怎么算？周转天数多少算健康？缺货率控制在几个点？这些数字我一个都答不上来。而进了拼多多，会上讨论的就是这些数字。</p>
-    <p>所以接下来想调一下重心：概念继续学，但要开始找真实的数据和案例往里填。书后面讲中央库存、WMS 那几块，应该就是补这个的。</p>
+    <p class="lead">今天开第 9 章。这一章我读得最快，因为它讲的东西我在实习里见过影子——只是当时不知道叫这个名字。</p>
+    <h2>为什么要单独一个履约系统</h2>
+    <p>书里有句话我直接抄下来了：<strong>"外表再华丽，一张订单便知其真伪。"</strong> 供应链所有的能力，无论是价格、时效、品质还是售后，最终展现在客户面前的只有订单交易。</p>
+    <ul>
+      <li><b>建立口碑、增加壁垒</b>：京东的商品品质和配送时效，就是它相对其他平台的优势。</li>
+      <li><b>及时发现企业问题，反向改进</b>：书里那句说得狠——1000 个客户的呼声，比一个重要的高层决策更有价值。</li>
+      <li><b>增强供应链协同</b>：履约不是某一个人、某一个部门或某一个系统的事，做好它必然要跨部门跨系统协作。</li>
+    </ul>
+    <h2>OFC 的位置</h2>
+    <p>传统叫法 OMS，很多互联网公司叫订单履约中心 OFC。<strong>对上</strong>对接各销售平台，<strong>对下</strong>对接各仓库和门店，<strong>横向</strong>与基础数据中心、中央库存系统、售后系统、配送管理系统交互。它要解决的问题是：多平台、多业务、多仓库、多门店、线上线下同时发售、发货与自提并存，怎么用一套系统承接住。</p>
+    <p>这个"承上启下、横向拉通"的定位，和我理解的编排层几乎一样：它自己不生产库存、不送快递，它负责<strong>调度</strong>。</p>
+    <h2>履约全流程</h2>
+    <p>从接单到发货：接单 → 预分仓 → 订单审核 → 拆单 → 合并订单 → 分物流 → 下发仓库 → 波次分配 → 生成批拣单 → 拣货 → 播种 → 复核打包 → 发货 → 回传物流信息 → 通知平台。</p>
+    <p>前 7 步在 OFC，后面 8 步进了 WMS。这条线比我之前想象的清楚得多——<strong>系统边界就画在"下发仓库"那一步</strong>。</p>
 
     <div class="note">
       <span class="tag">💭 给自己留的话</span>
-      从「懂概念」到「能干活」，中间隔着一层真实业务数字。这层得自己找补。
+      履约系统是供应链的编排层。它不生产库存也不送快递，它决定"谁来做、什么时候做"。
     </div>
 
     <div class="takeaway">
       <span class="tag">✅ 一句话总结</span>
-      我知道牛鞭效应是什么，但不知道安全库存怎么算——这就是我和「能上手」之间的真实距离。
+      OFC 对上接平台、对下接仓店、横向拉通各系统；系统边界画在"下发仓库"这一步。
     </div>
   </div>
   <nav class="entry-nav">
   <a class="enav prev " href="2026-08-31.html">
     <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
-    <span class="enav-title">试着把前两章讲出来</span>
+    <span class="enav-title">播种式和摘果式</span>
   </a>
   <a class="enav home" href="../index.html">
     <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
   </a>
   <a class="enav next " href="2026-09-02.html">
     <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
-    <span class="enav-title">补打卡，然后开第 3 章</span>
+    <span class="enav-title">分仓、拆单、合并，还有暂停和加急</span>
   </a>
 </nav>
 
