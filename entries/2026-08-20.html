@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day 17 · 状态不好的一天 — 我的供应链学习记录</title>
+<title>Day 17 · 询价单的四个状态，和我想的不一样 — 我的供应链学习记录</title>
 <link rel="stylesheet" href="../style.css?v=11">
 <script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
 </head>
@@ -11,8 +11,8 @@
 <div class="fxbar" id="fxbar">
   <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
   <div class="fx-info">
-    <div class="fx-title">状态不好的一天</div>
-    <div class="fx-sub">DAY 17 · 2026年8月20日 · 入职材料 · 低效的一天</div>
+    <div class="fx-title">询价单的四个状态，和我想的不一样</div>
+    <div class="fx-sub">DAY 17 · 2026年8月20日 · 第6章 · 采购询价与维价（p226–232）</div>
   </div>
   <div class="fx-actions">
     <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
@@ -26,37 +26,42 @@
   <header class="entry-head">
     <div class="day-badge"><span class="lab">DAY</span><span class="num">17</span></div>
     <div>
-      <h1>状态不好的一天</h1>
-      <p class="date">2026年8月20日 · 入职材料 · 低效的一天</p>
+      <h1>询价单的四个状态，和我想的不一样</h1>
+      <p class="date">2026年8月20日 · 第6章 · 采购询价与维价（p226–232）</p>
     </div>
   </header>
   <div class="entry-body">
-    <p class="lead">今天基本在处理入职的杂事，书没怎么翻。写下来是因为我觉得低效的日子也该诚实记一笔。</p>
-    <p>学历认证还在走流程，说是九月初能下来。等待的这段时间其实挺难熬——想专心学，又总觉得有件事悬在头顶，注意力一直在飘。</p>
-    <p>晚上我强迫自己看了半小时，但说实话效率很低。合上书之后我发现自己说不出今天看了什么，眼睛在看、脑子没转。后来干脆不看了。</p>
-    <p>我接受了一个以前不太愿意接受的事：<strong>学习不是匀速的</strong>。有快有慢很正常，硬撑着读两页记住一个点，比硬读两章什么都没留下强。</p>
+    <p class="lead">今天啃询价和维价。这两节特别"PM"——全是单据、状态机和审批流，是我熟悉的地盘。</p>
+    <h2>询价：把"货比三家"线上化</h2>
+    <p>采购员在系统里发布询价单，指定询价对象（全部或部分供应商）、询价截止日期、需询价的商品和计划采购数量；供应商登录供应商系统针对询价单报价。书里说很多中小公司还在打电话加 Excel 管，系统化的价值就是报价可追溯、可比价。</p>
+    <p>询价单的生命周期有四个状态：新询价单 → 询价中 → 已报价 → 已关闭。这个状态机简单到一眼就能记住，但我盯着看了一会儿——它跟我在实习里画过的单据状态机是同一套东西：<strong>状态即流程的可视化</strong>。</p>
+    <h2>维价：为什么不能随便改价格</h2>
+    <p>维价是采购价变动时在系统中维护新价，并以新价进货。四种情况需要维价：第一次采购某商品、供应商价格调整、价格维护错误需修正、商品有返利。为什么要走审批？书里说得直白：集中管控进货价、管住毛利，同时<strong>有效避免采购人员与供应商徇私舞弊</strong>。</p>
+    <p>维价单由采购员创建、采购经理审批；价格向上或向下波动超过一定比例、特定供应商、特定商品这些情况还要采购总监或部门副总批。审批走完即用新进价替换原进价，原进价失效；如果有返利，就在返利周期内按返利后价格结算，返利周期结束自动恢复正常价。</p>
+    <h2>我的连接</h2>
+    <p>阶梯报价（购 100 件进价 100 元/件，购 500 件 80 元/件）让我立刻想到<strong>定价接口的分段函数</strong>；返利则是"带有效期的时间区间定价"。一个 SKU 有多个供应商供货、一个供应商供应多个 SKU、同一个 SKU 同一个供应商还能报多个阶梯价——这是典型的<strong>多对多关系加复合维度</strong>建模问题：SKU × 供应商 × 数量区间 × 时间区间。</p>
 
     <div class="note">
       <span class="tag">💭 给自己留的话</span>
-      等待期别浪费，但也别硬撑。状态差的时候，读两页记住一个点就够了。
+      状态机是流程和系统的公共语言。以后看任何单据，先问一句：它的状态机长什么样。
     </div>
 
     <div class="takeaway">
       <span class="tag">✅ 一句话总结</span>
-      今天没什么新知识，但接受了一件事：学习不是匀速的，有快有慢很正常。
+      询价单是状态机，维价单是带审批的价格变更——单据即流程，流程即状态。
     </div>
   </div>
   <nav class="entry-nav">
   <a class="enav prev " href="2026-08-19.html">
     <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
-    <span class="enav-title">半月之后：先喘口气</span>
+    <span class="enav-title">第6章开章：原来采购不是"买东西"</span>
   </a>
   <a class="enav home" href="../index.html">
     <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
   </a>
   <a class="enav next " href="2026-08-21.html">
     <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
-    <span class="enav-title">我把学习站重做了一遍</span>
+    <span class="enav-title">五张单据的前后顺序，我终于理顺了</span>
   </a>
 </nav>
 
