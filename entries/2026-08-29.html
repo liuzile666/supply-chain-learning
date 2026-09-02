@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day 26 · 断更一天 — 我的供应链学习记录</title>
+<title>Day 26 · SKU 库存和 SN 库存，是两层 — 我的供应链学习记录</title>
 <link rel="stylesheet" href="../style.css?v=11">
 <script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
 </head>
@@ -11,8 +11,8 @@
 <div class="fxbar" id="fxbar">
   <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
   <div class="fx-info">
-    <div class="fx-title">断更一天</div>
-    <div class="fx-sub">DAY 26 · 2026年8月29日 · 休息 · 断更</div>
+    <div class="fx-title">SKU 库存和 SN 库存，是两层</div>
+    <div class="fx-sub">DAY 26 · 2026年8月29日 · 第8章 · WMS 库存模型与结构（p302–308）</div>
   </div>
   <div class="fx-actions">
     <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
@@ -26,36 +26,47 @@
   <header class="entry-head">
     <div class="day-badge"><span class="lab">DAY</span><span class="num">26</span></div>
     <div>
-      <h1>断更一天</h1>
-      <p class="date">2026年8月29日 · 休息 · 断更</p>
+      <h1>SKU 库存和 SN 库存，是两层</h1>
+      <p class="date">2026年8月29日 · 第8章 · WMS 库存模型与结构（p302–308）</p>
     </div>
   </header>
   <div class="entry-body">
-    <p class="lead">今天状态不好，基本没学。写下来是因为我觉得「断更」也该诚实记录。</p>
-    <p>早上起来就提不起劲，书翻了两页，发现眼睛在看、脑子没转。这种状态下硬撑，读了也是白读，还会给自己一种"我今天学了"的假象——这比不学更糟，因为它会让我错过真正该休息的信号。</p>
-    <p>所以我今天正式休息。只做了一件事：把前面的日记在站点上从头看了一遍。有几条现在看觉得写得还行，有几条现在看挺幼稚的——这本身也是进度。</p>
+    <p class="lead">今天读 WMS 的库存设计。书里说"设计好库存模型，WMS 的设计就成功了一大半"，我信。</p>
+    <h2>WMS 与中央库存的颗粒度差异</h2>
+    <p>WMS 需要管理到<strong>SKU + 批次 + 货位 + 库存状态</strong>；而中央库存系统只需要管理到<strong>仓库 + SKU + 库存状态</strong>。书里那句关键的话：中央库存的实物总库存与各仓 WMS 库存之和保持一致，<strong>但不是实时一致的</strong>。</p>
+    <p>这句话把两章串起来了：WMS 是精粒度的事实记录，中央库存是粗粒度的汇总视图。一个负责"货到底在哪"，一个负责"总共还能卖多少"。</p>
+    <h2>三种库存管理形态</h2>
+    <ul>
+      <li><b>SKU 标准品模式</b>：管到 SKU 就行，出库时随便拿哪个都一样。</li>
+      <li><b>SKU + SN 模式</b>：3C 这类贵重标准品，既按 SKU 下单，又要精确到每个实物，财务也按每个实物核算。</li>
+      <li><b>SN 单库存模式</b>：每个实物都是独立个体，每个 SN 就是一个独立的 SKU ID。</li>
+    </ul>
+    <p>我的理解：这三层对应<strong>类 / 实例 / 唯一实例即类</strong>。SN 库存是可选扩展，只存 SN 的基本库存属性，其余属性与 SKU 保持一致。</p>
+    <h2>批次 ≠ 批号</h2>
+    <p>批号是生产属性，印在包装上（生产日期、有效期），食品、药品常见；批次则是企业采购的商品进入仓库时 WMS 自行生成的，只用于内部管理——同一 SKU 多次入库，供应商、价格、品质可能不同，就靠批次区分。</p>
+    <p>另外记了一笔：WMS 里库存加减以后，需要同步作业流水到中央库存系统，同步加减，保证两个系统库存的一致性。</p>
 
     <div class="note">
       <span class="tag">💭 给自己留的话</span>
-      允许自己有低效的日子。连续打卡是手段，不是目的，别让仪式感绑架了学习本身。
+      批次是企业视角的"入库版本"，批号是生产视角的"生产版本"。这两个我以前老混。
     </div>
 
     <div class="takeaway">
       <span class="tag">✅ 一句话总结</span>
-      今天休息。承认低效，比假装高效更有用。
+      WMS 管到批次货位，中央库存只管仓库+SKU；批次是内部入库版本，批号是生产版本。
     </div>
   </div>
   <nav class="entry-nav">
   <a class="enav prev " href="2026-08-28.html">
     <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
-    <span class="enav-title">推拉边界，能在奶茶店上用吗</span>
+    <span class="enav-title">仓库里不让走回头路</span>
   </a>
   <a class="enav home" href="../index.html">
     <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
   </a>
   <a class="enav next " href="2026-08-30.html">
     <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
-    <span class="enav-title">补一补第 2 章的常识词典</span>
+    <span class="enav-title">上架那一刻，才叫真的在库了</span>
   </a>
 </nav>
 
