@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day 25 · 推拉边界，能在奶茶店上用吗 — 我的供应链学习记录</title>
+<title>Day 25 · 仓库里不让走回头路 — 我的供应链学习记录</title>
 <link rel="stylesheet" href="../style.css?v=11">
 <script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
 </head>
@@ -11,8 +11,8 @@
 <div class="fxbar" id="fxbar">
   <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
   <div class="fx-info">
-    <div class="fx-title">推拉边界，能在奶茶店上用吗</div>
-    <div class="fx-sub">DAY 25 · 2026年8月28日 · 第 2 章 · 推拉边界的迁移</div>
+    <div class="fx-title">仓库里不让走回头路</div>
+    <div class="fx-sub">DAY 25 · 2026年8月28日 · 第8章 · 库内规划、设备与 WMS 三原则（p290–296）</div>
   </div>
   <div class="fx-actions">
     <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
@@ -26,37 +26,50 @@
   <header class="entry-head">
     <div class="day-badge"><span class="lab">DAY</span><span class="num">25</span></div>
     <div>
-      <h1>推拉边界，能在奶茶店上用吗</h1>
-      <p class="date">2026年8月28日 · 第 2 章 · 推拉边界的迁移</p>
+      <h1>仓库里不让走回头路</h1>
+      <p class="date">2026年8月28日 · 第8章 · 库内规划、设备与 WMS 三原则（p290–296）</p>
     </div>
   </header>
   <div class="entry-body">
-    <p class="lead">今天没开新章节，但脑子一直在转昨天那个「推拉边界」。我发现它的可迁移性比我想的强得多。</p>
-    <p>服务业也一样：理发店是<strong>拉式</strong>（你人到了才开始服务）；自助餐是<strong>推式</strong>（先做出来等你拿）；奶茶店是<strong>推拉结合</strong>（茶汤、珍珠提前备好，你点单了再组合）。</p>
-    <p>顺着这个思路我把拼多多的业务对了一遍：纸巾、垃圾袋这类标品 → 推式（需求稳，预测备到区域仓）；定制礼品 → 拉式；手机 → 推拉结合（标准机身 + 颜色 / 存储）。</p>
-    <p>越想越觉得，"推拉边界画在哪"本质上是个<strong>产品设计决策</strong>：边界越靠近用户，响应越快但成本越高；越远离用户，成本越低但越不灵活。这个 trade-off，和我做产品时在"通用能力"和"定制需求"之间取平衡，完全是同一道题。</p>
+    <p class="lead">今天读库内怎么规划。原以为是最枯燥的一节，结果读出了算法味。</p>
+    <h2>两条原则</h2>
+    <p>最短移动路径 + 单一流向。翻译成人话：<strong>别让拣货员多走一步，也别让他们走回头路。</strong>库区布局有 U 型、I 型、L 型、S 型四种，都是为这两条服务的。</p>
+    <h2>货位怎么规划</h2>
+    <ul>
+      <li>按商品属性和法规分区（药品仓必须规划合格品区、不合格品区、待验区、退货区）</li>
+      <li>按存储条件分区（常温库、阴凉库、冷藏库、恒温库）</li>
+      <li>按体积质量分货架区和堆垛区（大批量整件进出适合堆垛，零散商品适合货架）</li>
+      <li>按业务目标估算货位数，并预留缓冲区域</li>
+    </ul>
+    <p>书里给了个估算例子：1000 个 SKU，每个 SKU 平均 3 个批号，按一批一位，整件库和零散库最少要 3000 个货位，再留 20% 缓冲，就是 3600 个。这种<strong>带缓冲系数的容量估算</strong>，和我们做容量规划是一个思路。</p>
+    <h2>WMS 三大设计原则</h2>
+    <ul>
+      <li><b>精准</b>：SKU 要管理到每一个批次号在某一个货位、当前什么状态、谁能操作、操作过什么，尽可能详细可追溯。</li>
+      <li><b>高效</b>：书里算了一笔账——如果每个订单节省 10 秒，日均 1 万单可节省 27.8 个小时。</li>
+      <li><b>合规</b>：所有操作设计都必须合法合规，决不能为降本增效偷工减料触碰红线。</li>
+    </ul>
 
     <div class="note">
       <span class="tag">💭 给自己留的话</span>
-      一个概念如果只能在书里的例子上用，那就是没真懂。能在奶茶店上用一遍，才算。
+      书里那句"每个订单省 10 秒，日均 1 万单省 27.8 小时"，是我在书上见过最朴素的效率论证。
     </div>
 
     <div class="takeaway">
       <span class="tag">✅ 一句话总结</span>
-      推拉边界 = 一个 trade-off 决策点，和我做产品时在通用 / 定制之间取平衡是同一道题。
+      精准、高效、合规。库内规划的核心命题是：让货和人走的路最短。
     </div>
   </div>
   <nav class="entry-nav">
   <a class="enav prev " href="2026-08-27.html">
     <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
-    <span class="enav-title">一天啃完第 2 章主干</span>
+    <span class="enav-title">第8章：从 CDC 到"门店即前置仓"</span>
   </a>
   <a class="enav home" href="../index.html">
     <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
   </a>
   <a class="enav next " href="2026-08-29.html">
     <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
-    <span class="enav-title">断更一天</span>
+    <span class="enav-title">SKU 库存和 SN 库存，是两层</span>
   </a>
 </nav>
 
