@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 25 · 推拉边界，能在奶茶店上用吗 — 我的供应链学习记录</title>
+<link rel="stylesheet" href="../style.css?v=11">
+<script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
+</head>
+<body class="entry-page">
+<div class="fxbar" id="fxbar">
+  <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
+  <div class="fx-info">
+    <div class="fx-title">推拉边界，能在奶茶店上用吗</div>
+    <div class="fx-sub">DAY 25 · 2026年8月28日 · 第 2 章 · 推拉边界的迁移</div>
+  </div>
+  <div class="fx-actions">
+    <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
+    <button class="fx-theme" id="fxTheme" title="&#20999;&#25442;&#26126;&#26263;">&#127771;</button>
+  </div>
+</div>
+<div class="fx-progress" id="fxProgress"></div>
+
+<div class="wrap">
+<article class="entry">
+  <header class="entry-head">
+    <div class="day-badge"><span class="lab">DAY</span><span class="num">25</span></div>
+    <div>
+      <h1>推拉边界，能在奶茶店上用吗</h1>
+      <p class="date">2026年8月28日 · 第 2 章 · 推拉边界的迁移</p>
+    </div>
+  </header>
+  <div class="entry-body">
+    <p class="lead">今天没开新章节，但脑子一直在转昨天那个「推拉边界」。我发现它的可迁移性比我想的强得多。</p>
+    <p>服务业也一样：理发店是<strong>拉式</strong>（你人到了才开始服务）；自助餐是<strong>推式</strong>（先做出来等你拿）；奶茶店是<strong>推拉结合</strong>（茶汤、珍珠提前备好，你点单了再组合）。</p>
+    <p>顺着这个思路我把拼多多的业务对了一遍：纸巾、垃圾袋这类标品 → 推式（需求稳，预测备到区域仓）；定制礼品 → 拉式；手机 → 推拉结合（标准机身 + 颜色 / 存储）。</p>
+    <p>越想越觉得，"推拉边界画在哪"本质上是个<strong>产品设计决策</strong>：边界越靠近用户，响应越快但成本越高；越远离用户，成本越低但越不灵活。这个 trade-off，和我做产品时在"通用能力"和"定制需求"之间取平衡，完全是同一道题。</p>
+
+    <div class="note">
+      <span class="tag">💭 给自己留的话</span>
+      一个概念如果只能在书里的例子上用，那就是没真懂。能在奶茶店上用一遍，才算。
+    </div>
+
+    <div class="takeaway">
+      <span class="tag">✅ 一句话总结</span>
+      推拉边界 = 一个 trade-off 决策点，和我做产品时在通用 / 定制之间取平衡是同一道题。
+    </div>
+  </div>
+  <nav class="entry-nav">
+  <a class="enav prev " href="2026-08-27.html">
+    <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
+    <span class="enav-title">一天啃完第 2 章主干</span>
+  </a>
+  <a class="enav home" href="../index.html">
+    <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
+  </a>
+  <a class="enav next " href="2026-08-29.html">
+    <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
+    <span class="enav-title">断更一天</span>
+  </a>
+</nav>
+
+
+</article>
+</div>
+<script src="../theme.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  var bar=document.getElementById('fxProgress');
+  var timeEl=document.getElementById('fxTime');
+  var themeBtn=document.getElementById('fxTheme');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    var p=max>0?sc/max*100:0;
+    if(bar) bar.style.width=p+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  try{
+    var body=document.querySelector('.entry-body');
+    var txt=body?body.innerText.replace(/\s/g,''):'';
+    var mins=Math.max(1,Math.round(txt.length/350));
+    if(timeEl) timeEl.textContent='≈ '+mins+' 分钟';
+  }catch(e){}
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var next=cur==='light'?'dark':'light';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('sc-theme',next);}catch(e){}
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
