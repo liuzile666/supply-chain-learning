@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day 20 · 新鲜和快，是一对矛盾 — 我的供应链学习记录</title>
+<title>Day 20 · 安全库存到底怎么算，书终于讲了 — 我的供应链学习记录</title>
 <link rel="stylesheet" href="../style.css?v=11">
 <script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
 </head>
@@ -11,8 +11,8 @@
 <div class="fxbar" id="fxbar">
   <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
   <div class="fx-info">
-    <div class="fx-title">新鲜和快，是一对矛盾</div>
-    <div class="fx-sub">DAY 20 · 2026年8月23日 · 汕头 · 生鲜与库存</div>
+    <div class="fx-title">安全库存到底怎么算，书终于讲了</div>
+    <div class="fx-sub">DAY 20 · 2026年8月23日 · 第6章 · 智能补货与安全库存（p248–261）</div>
   </div>
   <div class="fx-actions">
     <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
@@ -26,38 +26,44 @@
   <header class="entry-head">
     <div class="day-badge"><span class="lab">DAY</span><span class="num">20</span></div>
     <div>
-      <h1>新鲜和快，是一对矛盾</h1>
-      <p class="date">2026年8月23日 · 汕头 · 生鲜与库存</p>
+      <h1>安全库存到底怎么算，书终于讲了</h1>
+      <p class="date">2026年8月23日 · 第6章 · 智能补货与安全库存（p248–261）</p>
     </div>
   </header>
   <div class="entry-body">
-    <p class="lead">旅行最后一天。今天想通了一个之前半懂不懂的问题：为什么「新鲜」和「快」是矛盾的。</p>
-    <p>又去了那家牛肉店。老板说牛肉都是当天现宰，过了夜就不卖了。这句话让我突然理解了<strong>拉式的代价</strong>。</p>
-    <p>完全拉式（现点现做）最新鲜，但用户要等；完全推式（提前做好成品）最快，但不新鲜、还可能卖不动浪费。餐饮这行，本质就是在这两个极端之间找平衡点。</p>
-    <p>放到电商也是一样：生鲜为什么难做？因为它的新鲜度要求高，你没法像卖纸巾那样提前铺一大堆库存到仓里等着卖。所以生鲜必须走<strong>日清</strong>——当天进当天清，用高频小批量替代低频大批量。</p>
-    <p>这也解释了多多买菜为什么是"店仓一体 + 次日自提"：它把履约窗口压缩到一天，用确定的时间去换确定的库存，硬生生在"新鲜"和"快"之间挤出一条路。</p>
+    <p class="lead">前阵子我还在笔记里写"不知道安全库存怎么算"，今天就翻到了这一节。读得比平时都认真。</p>
+    <h2>定量采购与定期采购</h2>
+    <p>定量采购是库存降到某个阈值就触发固定数量的采购；定期采购是按固定周期检查并补到目标水位。前者对库存变化敏感，后者对节奏友好。用我的话说：一个是<strong>事件触发</strong>，一个是<strong>定时轮询</strong>。</p>
+    <h2>库存分类</h2>
+    <p>不是所有商品都值得用同样的精力去管。书里的思路是按价值和动销把库存分层，重点管头部、简化管尾部。这不就是<strong>二八法则加分级治理</strong>吗——高频高价的重点盯，长尾的粗放管，把有限的采购资金和人力压在真正重要的地方。</p>
+    <h2>安全库存</h2>
+    <p>安全库存是应对需求波动和供应不稳定的缓冲，它跟提前期直接相关：<strong>提前期越长、需求波动越大，安全库存就要越高</strong>。这刚好补上第 2 章的坑——提前期（我一直理解成网络延迟）通过这个关系直接变成了库存成本，抽象概念落地成了一个可以算的数。</p>
+    <h2>采购补货资金的分配</h2>
+    <p>这是全章我最喜欢的一段：采购资金是有限的，要在各个商品之间分。它把"补货"从仓库问题上升成了<strong>投资组合问题</strong>——同样的钱，压在哪个 SKU 上回报最高？</p>
+    <h2>我的连接</h2>
+    <p>这三块串起来其实是一条决策链：先按库存分类决定"管多细"，再用需求预测决定"补多少"，最后用资金分配决定"钱给谁"。这是一个典型的<strong>分级 + 预测 + 调度</strong>三层结构，跟我们做资源调度系统的分层完全对得上。</p>
 
     <div class="note">
       <span class="tag">💭 给自己留的话</span>
-      生鲜的难点不在运，在于它几乎没资格用推式。库存不能留这件事，把推式的空间压到几乎没有。
+      安全库存不是拍脑袋，是提前期和波动率的函数。以后看到"库存高"，先问：是提前期长，还是预测不准？
     </div>
 
     <div class="takeaway">
       <span class="tag">✅ 一句话总结</span>
-      新鲜和快是一对矛盾。生鲜难，难在它几乎没有用推式的资格。
+      定量采购 = 事件触发，定期采购 = 定时轮询；安全库存是提前期和波动率的函数。
     </div>
   </div>
   <nav class="entry-nav">
   <a class="enav prev " href="2026-08-22.html">
     <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
-    <span class="enav-title">在汕头，看餐饮的供应链</span>
+    <span class="enav-title">供应商不是越多越好</span>
   </a>
   <a class="enav home" href="../index.html">
     <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
   </a>
   <a class="enav next " href="2026-08-24.html">
     <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
-    <span class="enav-title">慢读第 1 章：建立翻译层</span>
+    <span class="enav-title">第7章：供应链之魂</span>
   </a>
 </nav>
 
