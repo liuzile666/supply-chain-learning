@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day 21 · 慢读第 1 章：建立翻译层 — 我的供应链学习记录</title>
+<title>Day 21 · 第7章：供应链之魂 — 我的供应链学习记录</title>
 <link rel="stylesheet" href="../style.css?v=11">
 <script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
 </head>
@@ -11,8 +11,8 @@
 <div class="fxbar" id="fxbar">
   <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
   <div class="fx-info">
-    <div class="fx-title">慢读第 1 章：建立翻译层</div>
-    <div class="fx-sub">DAY 21 · 2026年8月24日 · 第 1 章 · 定义与五大流程</div>
+    <div class="fx-title">第7章：供应链之魂</div>
+    <div class="fx-sub">DAY 21 · 2026年8月24日 · 第7章 · 中央库存与三层库存模型（p262–270）</div>
   </div>
   <div class="fx-actions">
     <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
@@ -26,37 +26,46 @@
   <header class="entry-head">
     <div class="day-badge"><span class="lab">DAY</span><span class="num">21</span></div>
     <div>
-      <h1>慢读第 1 章：建立翻译层</h1>
-      <p class="date">2026年8月24日 · 第 1 章 · 定义与五大流程</p>
+      <h1>第7章：供应链之魂</h1>
+      <p class="date">2026年8月24日 · 第7章 · 中央库存与三层库存模型（p262–270）</p>
     </div>
   </header>
   <div class="entry-body">
-    <p class="lead">今天开始啃第 1 章。说实话，进度很慢——但慢的原因我找到了，而且找到了解法。</p>
-    <p>第 1 章讲供应链的全貌：定义、五大角色、五大流程（SCOR）。我 8 月 4 号其实就读过一遍，但那次是"扫过去"，这次想"啃下来"。</p>
-    <p>卡住我的不是概念本身，是那些定义的精确表述。比如供应链的定义，书里引的是马士华教授那版，一环扣一环，我第一遍读完脑子里只剩"网链"两个字。</p>
-    <p>后来我想了个办法：<strong>把每个概念都用我自己熟悉的话重写一遍</strong>。五大角色（供应商→制造商→分销商→零售商→用户）= 一条流水线上的五个节点；SCOR 五大流程（计划、采购、生产、配送、退货）= 这条流水线的五个处理阶段。这么一翻译，立刻就顺了。</p>
+    <p class="lead">今天开第 7 章。书管它叫"供应链之魂"，我带着点怀疑翻开，读完第一节，服了。</p>
+    <h2>为什么要有中央库存</h2>
+    <p>因为库存是分散在各个仓库、各个门店里的，而销售是在各个平台上发生的。如果没有一个统一的库存视图，平台和仓库之间就是<strong>多份互相不一致的副本</strong>——卖超了、卖少了、不同平台显示的数字不一样，全都会发生。</p>
+    <h2>三层库存模型</h2>
+    <ul>
+      <li><b>实物库存</b>：仓库里真实有多少货。</li>
+      <li><b>中央库存</b>：把各仓实物汇总起来统一管理的那一层。</li>
+      <li><b>平台销售库存</b>：对消费者展示、能卖的那一层。</li>
+    </ul>
+    <p>书里有一句话信息量极大：中央库存的实物库存来源于各 WMS 的业务操作流水，<strong>与各仓库存之和保持一致，但不是实时一致的</strong>。它明确承认了这是一个最终一致的系统。</p>
+    <h2>我的连接</h2>
+    <p>三层模型可以翻译成：<strong>物理存储层 / 全局状态层 / 对外服务层</strong>。中央库存就是全局状态中心（SSOT），平台销售库存是它对外的一个投影视图。</p>
+    <p>拼多多视角：一个商家在多个平台、多个仓有货，中央库存负责把分散的实物收敛成一个"可卖"的数字，再按策略分发到各个销售渠道。这个"收敛—分发"结构，是后面所有库存玩法的基础。</p>
 
     <div class="note">
       <span class="tag">💭 给自己留的话</span>
-      读不懂不是因为笨，是因为没有自己的翻译层。以后每个新概念，先翻成我能说的话。
+      三层模型的价值不在"多了一层"，而在于它承认了"物理上分散、逻辑上必须统一"这个矛盾，并给了工程解法。
     </div>
 
     <div class="takeaway">
       <span class="tag">✅ 一句话总结</span>
-      建立自己的「翻译层」——把供应链术语翻成计算机语言，这是我这种背景的人最快的路径。
+      实物库存 / 中央库存 / 平台销售库存——中央库存是 SSOT，与各仓之和最终一致而非实时一致。
     </div>
   </div>
   <nav class="entry-nav">
   <a class="enav prev " href="2026-08-23.html">
     <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
-    <span class="enav-title">新鲜和快，是一对矛盾</span>
+    <span class="enav-title">安全库存到底怎么算，书终于讲了</span>
   </a>
   <a class="enav home" href="../index.html">
     <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
   </a>
   <a class="enav next " href="2026-08-25.html">
     <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
-    <span class="enav-title">让 AI 讲全书，然后我把方案否了</span>
+    <span class="enav-title">库存加减：流水模式还是设置模式</span>
   </a>
 </nav>
 
