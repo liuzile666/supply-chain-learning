@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>专题案例 · 叮咚买菜：前置仓，把损耗率抠到 1.5% — 我的供应链学习记录</title>
+<link rel="stylesheet" href="../style.css?v=10">
+<script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
+</head>
+<body class="entry-page">
+<div class="fxbar" id="fxbar">
+  <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
+  <div class="fx-info">
+    <div class="fx-title">叮咚买菜：前置仓，把损耗率抠到 1.5%</div>
+    <div class="fx-sub">案例研究 · 第3章 O2O 与新零售的极端样本</div>
+  </div>
+  <div class="fx-actions">
+    <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
+    <button class="fx-theme" id="fxTheme" title="&#20999;&#25442;&#26126;&#26263;">&#127771;</button>
+  </div>
+</div>
+<div class="fx-progress" id="fxProgress"></div>
+
+<div class="wrap">
+<article class="entry">
+  <header class="entry-head">
+    <div class="day-badge"><span class="lab">案例</span><span class="num">叮咚</span></div>
+    <div>
+      <h1>叮咚买菜：前置仓，把损耗率抠到 1.5%</h1>
+      <p class="date">2026年9月2日 · 案例研究 · 第3章 O2O 与新零售的极端样本</p>
+    </div>
+  </header>
+  <div class="entry-body">
+    <p class="lead">第二个案例挑了叮咚买菜。第 3 章讲 O2O"覆盖范围一般 3～5 公里"、讲新零售"线上线下融合"，叮咚是这两句话最极端的落地版本——<strong>它把仓库直接开到了你家楼下三公里内</strong>。数字来自叮咚财报、东北证券研报和 CTO 蒋旭的公开访谈。</p>
+
+    <h2>先看清这个模式的模样</h2>
+    <p>单仓面积 <strong>300–400 平方米</strong>，覆盖周边 3 公里，承诺 <strong>29–30 分钟送达</strong>，单仓 SKU 约 3000–4000 个。叮咚 2017 年由梁昌霖创立于上海，2021 年在纽交所上市，2024 年首次实现全年盈利，2025 年营收 243.6 亿元。2026 年 2 月，美团以 7.17 亿美元收购其核心中国业务。</p>
+
+    <h2>框架一：前置仓 = 把 FDC 再往前推一层</h2>
+    <p>上一个案例里京东的 FDC 已经很靠前了，叮咚做得更狠——直接铺进社区。<strong>1000 多个仓，每个仓都是一个小 FDC。</strong></p>
+    <p>CS 类比一下就清楚了：这是<strong>边缘节点（edge node）</strong>。京东的 FDC 是区域缓存，叮咚的前置仓是把缓存推到了最后一跳。代价一模一样：<strong>单节点容量小（SKU 少）、节点数极多（1000+）、运维复杂度爆炸</strong>。分布式系统里所有让人头疼的问题——一致性、容量规划、单点故障——在这里一个都不少。</p>
+
+    <h2>框架二：这个模式的生死线，是订单密度</h2>
+    <p>东北证券测算过：一个 300 平方米的前置仓，需要<strong>每天约 1000 单、客单价 60 元以上</strong>才能维持履约成本。因为前置仓的履约费用是传统中心仓电商的 3 倍、平台型电商的 2 倍、社区团购的 6 倍。</p>
+    <p>叮咚把履约费用率从 2019 年的 <strong>49.9% 一路压到 2025 年一季度的 22.9%</strong>。怎么压的？三条：算法接管仓网规划（2023 年起由算法决定在哪开仓）、调整每个仓的配送范围、以及试"中心仓"模式（一个大仓覆盖四五个前置仓）。<strong>全是围绕"让每个仓的单量更密"做的。</strong></p>
+    <p>这也是为什么它 2021 年主动从 37 个城市收缩到长三角为主的 25 个——书里讲规模经济，但前置仓讲的是<strong>密度经济</strong>：撒得越散，每个仓越稀，越亏。这一课很贵：同赛道的每日优鲜就是这么倒下的。</p>
+
+    <h2>框架三：1.5% 的损耗率，是预测堆出来的</h2>
+    <p>生鲜行业平均损耗率约 8%，传统流通链路甚至到 25%–30%。叮咚做到了 <strong>1.5%</strong>（临期损耗率 1% 以下），CTO 蒋旭说刚来的时候是"五点几"。</p>
+    <p>怎么做的？<strong>预测驱动</strong>——叮咚整个公司"以预测来驱动"：预测系统给出每天的需求预测，再据此制定补货计划、生产计划、采购计划。1000 多个仓 × 每仓 4000 多个 SKU，系统每天要给出<strong>超过 400 万种商品组合</strong>的定量决策，其中 90% 以上由系统直接决定，预测准确率 95% 以上，库存周转压到 <strong>2.1–2.3 天</strong>。</p>
+    <p>这就是第 2 章牛鞭效应那节的正面案例：<strong>信息流打通到最上游，需求信号不失真，牛鞭就被压扁了。</strong>叮咚还把源头直采做到 85%，跳过多层中间商——既降了成本，也把链路缩短。</p>
+
+    <h2>框架四：损耗率和缺货率，是一对矛盾体</h2>
+    <p>供应链负责人龚昀浩说过一句很实在的话：货备多一点，缺货率低但损耗高；备少一点，反过来。<strong>这两个数字最能体现供应链效率。</strong></p>
+    <p>叮咚后来明确转向"全链路最优"——所有过程指标都服从销量、GMV、毛利这些结果指标。这话我读了两遍，因为它就是第 2 章那句<strong>"全局最优、整体均衡"</strong>。还有一个细节特别 PM：他们有个指标叫<strong>"七点临期占比"</strong>，早上七点预测临期商品当天能不能卖完，卖不完就从早上开始打折，晚上七点再阶梯出清。<strong>把一个运营痛点，翻译成一个可度量的指标，再让系统按指标自动行动</strong>——这就是我想做的那种需求。</p>
+
+    <h2>拼多多落点：为什么下沉市场是"自提"不是"30 分钟达"</h2>
+    <p>多多买菜走的是社区团购"次日自提"，履约成本率大约只有 4%，远低于前置仓。<strong>不是不想快，是算不过账</strong>——下沉市场的人口密度撑不起前置仓需要的日均千单。同样的用户、同样的生鲜，时效差一天，成本差好几倍。<strong>做需求的时候，先算清楚这道账，再谈体验。</strong></p>
+
+    <div class="note">
+      <span class="tag">💭 今天卡住的地方</span>
+      叮咚把模式跑通了（连续多个季度盈利、损耗率行业头部），但最后还是被美团收购了。<strong>模式成立，不等于生意能独立成立。</strong>这条边界到底画在哪？是流量太贵（获客成本），还是规模天花板？我现在只能看到"独立玩家几乎都归入了巨头体系"这个结果，中间的因果还没理顺。
+    </div>
+
+    <div class="takeaway">
+      <span class="tag">✅ 记住的一句话</span>
+      前置仓不是"离用户近"这么浪漫——它是<strong>用订单密度摊薄固定成本</strong>的一道算术题；而那 1.5% 的损耗率，是<strong>预测准确率</strong>一刀一刀刻出来的。
+    </div>
+  </div>
+  <nav class="entry-nav">
+  <a class="enav prev " href="2026-09-02-case-jd.html">
+    <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
+    <span class="enav-title">京东物流：把仓网做成一台"缓存机器"</span>
+  </a>
+  <a class="enav home" href="../index.html">
+    <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
+  </a>
+  <a class="enav next " href="2026-09-02-case-temu.html">
+    <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
+    <span class="enav-title">Temu：全托管，把跨境链路切成三段</span>
+  </a>
+</nav>
+</article>
+</div>
+<script src="../theme.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  var bar=document.getElementById('fxProgress');
+  var timeEl=document.getElementById('fxTime');
+  var themeBtn=document.getElementById('fxTheme');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    var p=max>0?sc/max*100:0;
+    if(bar) bar.style.width=p+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  try{
+    var body=document.querySelector('.entry-body');
+    var txt=body?body.innerText.replace(/\s/g,''):'';
+    var mins=Math.max(1,Math.round(txt.length/350));
+    if(timeEl) timeEl.textContent='≈ '+mins+' 分钟';
+  }catch(e){}
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var next=cur==='light'?'dark':'light';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('sc-theme',next);}catch(e){}
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
