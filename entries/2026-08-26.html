@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 23 · 读不进去，然后我们改了玩法 — 我的供应链学习记录</title>
+<link rel="stylesheet" href="../style.css?v=11">
+<script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
+</head>
+<body class="entry-page">
+<div class="fxbar" id="fxbar">
+  <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
+  <div class="fx-info">
+    <div class="fx-title">读不进去，然后我们改了玩法</div>
+    <div class="fx-sub">DAY 23 · 2026年8月26日 · 第 2 章 · 三流 · 定 A/B 节奏</div>
+  </div>
+  <div class="fx-actions">
+    <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
+    <button class="fx-theme" id="fxTheme" title="&#20999;&#25442;&#26126;&#26263;">&#127771;</button>
+  </div>
+</div>
+<div class="fx-progress" id="fxProgress"></div>
+
+<div class="wrap">
+<article class="entry">
+  <header class="entry-head">
+    <div class="day-badge"><span class="lab">DAY</span><span class="num">23</span></div>
+    <div>
+      <h1>读不进去，然后我们改了玩法</h1>
+      <p class="date">2026年8月26日 · 第 2 章 · 三流 · 定 A/B 节奏</p>
+    </div>
+  </header>
+  <div class="entry-body">
+    <p class="lead">第 1 章啃完了。但今天我暴露了一个真问题：一个人对着教科书读，读一会儿就走神。</p>
+    <p>我直接说了"看一会书就觉得无聊"。诊断结果是：这不是理解力的问题，是<strong>「纯阅读 + 没有反馈」这个组合天然催眠</strong>。我觉得说中了。</p>
+    <h2>定了两条节奏，穿插着用</h2>
+    <ul>
+      <li>A · 碎片 + 即时反馈：一次只啃 2–3 页，立刻回来答题、吐槽。别读完一整章才说话——那是催眠模式。</li>
+      <li>B · 先讲透再印证：碰到难啃的概念，让助手先用拼多多的例子 + 我能听懂的类比讲 3 分钟，我秒懂后再去书里对应 2 页确认。阅读量能砍掉八成。</li>
+    </ul>
+    <h2>试了「三流」</h2>
+    <p>它用拼多多给我讲：物流 = 货怎么从义乌仓到我手上；资金流 = 我付的 9.9 怎么被平台、商家、仓配、造纸厂一层层分掉；信息流 = 我搜了什么、下单了什么，这些信号怎么反向传到产地。三分钟我就懂了，然后只去书里印证了五分钟。</p>
+    <p>微测：拼多多"农地云拼"把产地真实需求直接打到农民，主要优化哪一流？我答<strong>信息流</strong>，对了。而且顺带想明白——它同时也砍了物流层级、让资金流变短，但"把真实需求透传上游"这个动作本身，是信息流。</p>
+
+    <div class="note">
+      <span class="tag">💭 给自己留的话</span>
+      承认「读不进去」不丢人。那是方法的问题，不是意志力的问题。
+    </div>
+
+    <div class="takeaway">
+      <span class="tag">✅ 一句话总结</span>
+      三流里信息流最该被系统化——它是唯一能被系统直接承载、又能反向压住牛鞭效应的那一条。
+    </div>
+  </div>
+  <nav class="entry-nav">
+  <a class="enav prev " href="2026-08-25.html">
+    <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
+    <span class="enav-title">让 AI 讲全书，然后我把方案否了</span>
+  </a>
+  <a class="enav home" href="../index.html">
+    <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
+  </a>
+  <a class="enav next " href="2026-08-27.html">
+    <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
+    <span class="enav-title">一天啃完第 2 章主干</span>
+  </a>
+</nav>
+
+
+</article>
+</div>
+<script src="../theme.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  var bar=document.getElementById('fxProgress');
+  var timeEl=document.getElementById('fxTime');
+  var themeBtn=document.getElementById('fxTheme');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    var p=max>0?sc/max*100:0;
+    if(bar) bar.style.width=p+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  try{
+    var body=document.querySelector('.entry-body');
+    var txt=body?body.innerText.replace(/\s/g,''):'';
+    var mins=Math.max(1,Math.round(txt.length/350));
+    if(timeEl) timeEl.textContent='≈ '+mins+' 分钟';
+  }catch(e){}
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var next=cur==='light'?'dark':'light';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('sc-theme',next);}catch(e){}
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
