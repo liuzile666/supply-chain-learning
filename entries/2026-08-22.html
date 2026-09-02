@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day 19 · 在汕头，看餐饮的供应链 — 我的供应链学习记录</title>
+<title>Day 19 · 供应商不是越多越好 — 我的供应链学习记录</title>
 <link rel="stylesheet" href="../style.css?v=11">
 <script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
 </head>
@@ -11,8 +11,8 @@
 <div class="fxbar" id="fxbar">
   <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
   <div class="fx-info">
-    <div class="fx-title">在汕头，看餐饮的供应链</div>
-    <div class="fx-sub">DAY 19 · 2026年8月22日 · 汕头 · 餐饮里的供应链</div>
+    <div class="fx-title">供应商不是越多越好</div>
+    <div class="fx-sub">DAY 19 · 2026年8月22日 · 第6章 · 供应商管理、退供与调拨（p238–248）</div>
   </div>
   <div class="fx-actions">
     <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
@@ -26,37 +26,48 @@
   <header class="entry-head">
     <div class="day-badge"><span class="lab">DAY</span><span class="num">19</span></div>
     <div>
-      <h1>在汕头，看餐饮的供应链</h1>
-      <p class="date">2026年8月22日 · 汕头 · 餐饮里的供应链</p>
+      <h1>供应商不是越多越好</h1>
+      <p class="date">2026年8月22日 · 第6章 · 供应商管理、退供与调拨（p238–248）</p>
     </div>
   </header>
   <div class="entry-body">
-    <p class="lead">周末来汕头，说是为了吃。但吃着吃着职业病犯了——我开始看餐厅背后的供应链。</p>
-    <p>汕头这种美食城市餐饮密度极高。我发现一个有意思的现象：那些生意最好的牛肉店、粿条店，出餐都快得离谱。后来想明白了——它们卖的品类极窄，就牛肉、就粿条，<strong>SKU 少，备料简单</strong>，所以能提前备好、现点现出。</p>
-    <p>这不就是书里的<strong>推拉结合</strong>吗？高汤、牛肉丸这些通用的半成品提前备好（推），客人点了再烫粉、加肉、调味（拉）。SKU 越少，推拉边界越好画，出餐就越快。</p>
-    <p>反过来看那些什么都卖的大排档，菜单厚得像本书，每道菜都要单独备料，出餐慢、浪费也多。我第一次这么直观地感受到：<strong>SKU 数量本身就是成本</strong>。</p>
+    <p class="lead">今天读供应商管理。书里有句话我记下来了：供应商管理不要注重数量，而要注重服务质量。</p>
+    <h2>供应商管四件事</h2>
+    <ul>
+      <li><b>供应商绩效管理</b>：对供应商评级，找最稳定可靠的做长期伙伴。</li>
+      <li><b>送货时效管理</b>：到货及不及时。</li>
+      <li><b>供应商商品管理</b>：这个供应商能供什么。</li>
+      <li><b>供应商合同管理</b>：合作条款与价格约定。</li>
+    </ul>
+    <p>其中送货时效这块我多想了一层：它直接决定我要备多少安全库存。<strong>供应商越不靠谱，我就越要用库存去兜底。</strong>这跟昨天读的 7R 连起来了——"价格最优"和"供应稳定"是会被一起权衡的。</p>
+    <h2>退供应商</h2>
+    <p>按与供应商的协定，把未售卖的商品定期退还，确定退供批次和数量，建单下发仓库出库。退供单也有自己的状态机，和采购单那一套是同一个设计套路。</p>
+    <h2>仓间调拨</h2>
+    <p>根据商品的动销与滞销情况、以及库存分布，对多个仓库之间的商品互调，让商品利用率最大化。这个我太熟了——不就是<strong>负载均衡加数据重分片</strong>吗？有的仓压爆了、有的仓空着，把货挪过去平衡一下。</p>
+    <h2>我的连接</h2>
+    <p>拼多多视角：平台模式下退供和调拨更多发生在商家侧与网格仓之间。多多买菜的中心仓、网格仓、门店之间每天都有大量调拨，本质就是"用调拨把库存摆到离需求最近的地方"，而且这个决策频率高到必须靠系统自动做。</p>
 
     <div class="note">
       <span class="tag">💭 给自己留的话</span>
-      供应链不在书里，在楼下那家牛肉店。以后出门多看看别人的货是怎么流转的。
+      供应商数量是成本不是资产。一个靠谱的顶十个不靠谱的。
     </div>
 
     <div class="takeaway">
       <span class="tag">✅ 一句话总结</span>
-      品类窄 = SKU 少 = 推拉边界清晰 = 出餐快。汕头牛肉店给我上了最生动的一课。
+      调拨 = 库存的负载均衡；供应商越不稳定，越要靠安全库存兜底。
     </div>
   </div>
   <nav class="entry-nav">
   <a class="enav prev " href="2026-08-21.html">
     <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
-    <span class="enav-title">我把学习站重做了一遍</span>
+    <span class="enav-title">五张单据的前后顺序，我终于理顺了</span>
   </a>
   <a class="enav home" href="../index.html">
     <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
   </a>
   <a class="enav next " href="2026-08-23.html">
     <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
-    <span class="enav-title">新鲜和快，是一对矛盾</span>
+    <span class="enav-title">安全库存到底怎么算，书终于讲了</span>
   </a>
 </nav>
 
