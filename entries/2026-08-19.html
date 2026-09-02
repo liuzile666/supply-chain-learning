@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 16 · 半月之后：先喘口气 — 我的供应链学习记录</title>
+<link rel="stylesheet" href="../style.css?v=11">
+<script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
+</head>
+<body class="entry-page">
+<div class="fxbar" id="fxbar">
+  <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
+  <div class="fx-info">
+    <div class="fx-title">半月之后：先喘口气</div>
+    <div class="fx-sub">DAY 16 · 2026年8月19日 · 复盘前 15 天 · 没开新章节</div>
+  </div>
+  <div class="fx-actions">
+    <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
+    <button class="fx-theme" id="fxTheme" title="&#20999;&#25442;&#26126;&#26263;">&#127771;</button>
+  </div>
+</div>
+<div class="fx-progress" id="fxProgress"></div>
+
+<div class="wrap">
+<article class="entry">
+  <header class="entry-head">
+    <div class="day-badge"><span class="lab">DAY</span><span class="num">16</span></div>
+    <div>
+      <h1>半月之后：先喘口气</h1>
+      <p class="date">2026年8月19日 · 复盘前 15 天 · 没开新章节</p>
+    </div>
+  </header>
+  <div class="entry-body">
+    <p class="lead">第十五天收官之后，今天第一次没有翻开新的章节。不是放弃，是真的需要缓一下。</p>
+    <p>半个月连续读下来，脑子里塞了五大角色、SCOR、三流、中台、SPU/SKU……信息量其实已经超过了我的消化速度。今天我干的事只有一件：把前面 15 天的笔记从头翻了一遍，把那些"我以为我懂了"的词重新过一遍。</p>
+    <p>结果挺尴尬。牛鞭效应我能讲出比喻，但让我写清楚它的四个成因，我卡壳了。SCOR 五大流程我知道名字，但让我说清它们为什么是"环环相扣、循环往复"而不是线性的，我说不利索。</p>
+    <p>所以我给自己的判断是：这半个月我建立的更多是<strong>语感</strong>，不是能力。语感能让我在会上听懂别人在说什么，但还不足以让我做判断。</p>
+    <p>今天没读新的，但我把第 1–5 章的目录又抄了一遍，逐条标出"听过"还是"会用"。标完有点泄气——会用的几乎没有。</p>
+
+    <div class="note">
+      <span class="tag">💭 给自己留的话</span>
+      别被"连续打卡 15 天"骗了。打卡是仪式，不是进度。真正的进度是：能不能在不看书的情况下讲清楚。
+    </div>
+
+    <div class="takeaway">
+      <span class="tag">✅ 一句话总结</span>
+      今天没学新的，但认清了一件事——我现在的水平是「听得懂」，离「做得出」还差一整个实践。
+    </div>
+  </div>
+  <nav class="entry-nav">
+  <a class="enav prev " href="2026-08-18.html">
+    <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
+    <span class="enav-title">半月收官：我学到了什么</span>
+  </a>
+  <a class="enav home" href="../index.html">
+    <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
+  </a>
+  <a class="enav next " href="2026-08-20.html">
+    <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
+    <span class="enav-title">状态不好的一天</span>
+  </a>
+</nav>
+
+
+</article>
+</div>
+<script src="../theme.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  var bar=document.getElementById('fxProgress');
+  var timeEl=document.getElementById('fxTime');
+  var themeBtn=document.getElementById('fxTheme');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    var p=max>0?sc/max*100:0;
+    if(bar) bar.style.width=p+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  try{
+    var body=document.querySelector('.entry-body');
+    var txt=body?body.innerText.replace(/\s/g,''):'';
+    var mins=Math.max(1,Math.round(txt.length/350));
+    if(timeEl) timeEl.textContent='≈ '+mins+' 分钟';
+  }catch(e){}
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var next=cur==='light'?'dark':'light';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('sc-theme',next);}catch(e){}
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
