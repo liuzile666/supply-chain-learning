@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day 24 · 一天啃完第 2 章主干 — 我的供应链学习记录</title>
+<title>Day 24 · 第8章：从 CDC 到"门店即前置仓" — 我的供应链学习记录</title>
 <link rel="stylesheet" href="../style.css?v=11">
 <script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
 </head>
@@ -11,8 +11,8 @@
 <div class="fxbar" id="fxbar">
   <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
   <div class="fx-info">
-    <div class="fx-title">一天啃完第 2 章主干</div>
-    <div class="fx-sub">DAY 24 · 2026年8月27日 · 第 2 章 · 牛鞭、降本增效、推拉</div>
+    <div class="fx-title">第8章：从 CDC 到"门店即前置仓"</div>
+    <div class="fx-sub">DAY 24 · 2026年8月27日 · 第8章 · 仓储与仓网布局（p285–293）</div>
   </div>
   <div class="fx-actions">
     <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
@@ -26,41 +26,51 @@
   <header class="entry-head">
     <div class="day-badge"><span class="lab">DAY</span><span class="num">24</span></div>
     <div>
-      <h1>一天啃完第 2 章主干</h1>
-      <p class="date">2026年8月27日 · 第 2 章 · 牛鞭、降本增效、推拉</p>
+      <h1>第8章：从 CDC 到"门店即前置仓"</h1>
+      <p class="date">2026年8月27日 · 第8章 · 仓储与仓网布局（p285–293）</p>
     </div>
   </header>
   <div class="entry-body">
-    <p class="lead">今天效率意外地高。用 A/B 穿插的节奏，把第 2 章的主干基本啃完了。</p>
-    <h2>牛鞭效应（B 模式）</h2>
-    <p>终端需求只抖一下，越往上游抖得越凶。成因四个：<strong>需求预测修正、批量订货、价格波动、短缺博弈</strong>。治本是把终端真实需求共享到最上游——用我的话说就是单一真相源。这跟分布式系统里"信号在多跳链路被级联放大"完全是一回事。</p>
-    <h2>目标 / 核心思想 / 原则（A 模式，三道选择题全对）</h2>
-    <p>目标 = <strong>降本增效</strong>；核心思想 = <strong>精简</strong>（less is more）；原则 = <strong>整体最优，不是局部最优</strong>。书里有句扎心的：降本 1 块 = 利润 +1 块；增收 1 块扣掉 80% 成本只剩 2 毛。</p>
-    <h2>推拉战略（B 模式，烧饼小店）</h2>
-    <p>书里老王卖烧饼的三次调整，把三种战略串起来了：一开始把各种馅的饼提前烙好等客人挑（<strong>推式</strong>）→ 畅销的缺货、不畅销的浪费、还不新鲜；改成现烙现包（<strong>拉式</strong>）→ 新鲜了，但早高峰客人等不及直接走了，收入反降；最后他先把饼批量烙好、馅备着，客人来了再把馅包进去（<strong>推拉结合</strong>）→ 两全。</p>
-    <p>关键是那个<strong>推拉边界</strong>：从"预测"转向"真实订单"、从"半成品"变成"成品"的那一刻。拼多多的手机，边界就画在"标准机身"和"颜色 / 存储组合"之间。</p>
+    <p class="lead">第 7 章收尾，开第 8 章 WMS。今天最让我兴奋的是仓网布局那张图——它把拼多多的打法解释了一半。</p>
+    <h2>仓库的四个阶段</h2>
+    <ul>
+      <li><b>原始作业</b>：没系统，靠记忆或纸质账簿存取。</li>
+      <li><b>纸单作业</b>：有 WMS 或 ERP，但所有操作都依赖打印出来的纸单。</li>
+      <li><b>无纸化作业</b>：引入 PDA、电子标签、自动播种墙，信息实时交互。</li>
+      <li><b>无人化作业</b>：机械手、穿梭车、分拣机、AGV 加人工智能，彻底释放人力。</li>
+    </ul>
+    <p>这四个阶段我读成了一个系统的演进史：纸单阶段的痛点，本质上是<strong>信息滞后</strong>——现实里的动作和系统里的记录之间，隔着一张纸。</p>
+    <h2>传统电商 vs 新零售的仓网</h2>
+    <ul>
+      <li>传统：供应商 → <b>CDC 中央仓</b> → <b>RDC 区域仓</b> → <b>FDC 前置仓</b> → 客户</li>
+      <li>新零售：供应商 → RDC → <b>门店（门店即前置仓）</b>，供应链路<strong>缩短了一半</strong>，就近提货或门店直配，门店发不了再由 RDC 补发</li>
+    </ul>
+    <p>这就是我一直想找的答案：新零售为什么能快。不是因为物流变快了，是<strong>因为把仓挪到了离人更近的地方</strong>，用空间换时间。</p>
+    <h2>我的连接</h2>
+    <p>这不就是 CDN 吗？CDC = 源站，RDC = 区域节点，FDC / 门店 = 边缘节点。把内容（货）提前放到离用户最近的边缘节点，用户请求（下单）来了就近命中。<strong>仓储网络布局，就是 CDN 分层缓存的物理版本。</strong></p>
+    <p>拼多多视角：多多买菜的"中心仓—网格仓—自提点"，就是这个模型的生鲜版。网格仓和自提点就是下沉市场里的边缘节点。</p>
 
     <div class="note">
       <span class="tag">💭 给自己留的话</span>
-      A/B 穿插这个节奏有效，继续。抽象概念用 B，轻量内容用 A。
+      看到"门店即前置仓"那张图的时候，我第一次觉得这本书和我要去的地方是连着的。
     </div>
 
     <div class="takeaway">
       <span class="tag">✅ 一句话总结</span>
-      推拉光谱：MTS(全推) → ATO(推拉) → MTO(全拉) → ETO(深度拉)。看懂业务在光谱哪一端，就懂它该用什么库存策略。
+      CDC/RDC/FDC → 门店即前置仓，链路缩短一半。仓网 = CDN 的物理版本：用空间换时间。
     </div>
   </div>
   <nav class="entry-nav">
   <a class="enav prev " href="2026-08-26.html">
     <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
-    <span class="enav-title">读不进去，然后我们改了玩法</span>
+    <span class="enav-title">预占，就是一把分布式锁</span>
   </a>
   <a class="enav home" href="../index.html">
     <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
   </a>
   <a class="enav next " href="2026-08-28.html">
     <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
-    <span class="enav-title">推拉边界，能在奶茶店上用吗</span>
+    <span class="enav-title">仓库里不让走回头路</span>
   </a>
 </nav>
 
