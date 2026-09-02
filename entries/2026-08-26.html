@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day 23 · 读不进去，然后我们改了玩法 — 我的供应链学习记录</title>
+<title>Day 23 · 预占，就是一把分布式锁 — 我的供应链学习记录</title>
 <link rel="stylesheet" href="../style.css?v=11">
 <script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
 </head>
@@ -11,8 +11,8 @@
 <div class="fxbar" id="fxbar">
   <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
   <div class="fx-info">
-    <div class="fx-title">读不进去，然后我们改了玩法</div>
-    <div class="fx-sub">DAY 23 · 2026年8月26日 · 第 2 章 · 三流 · 定 A/B 节奏</div>
+    <div class="fx-title">预占，就是一把分布式锁</div>
+    <div class="fx-sub">DAY 23 · 2026年8月26日 · 第7章 · 订单分仓、预占与库存成本（p280–284）</div>
   </div>
   <div class="fx-actions">
     <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
@@ -26,43 +26,42 @@
   <header class="entry-head">
     <div class="day-badge"><span class="lab">DAY</span><span class="num">23</span></div>
     <div>
-      <h1>读不进去，然后我们改了玩法</h1>
-      <p class="date">2026年8月26日 · 第 2 章 · 三流 · 定 A/B 节奏</p>
+      <h1>预占，就是一把分布式锁</h1>
+      <p class="date">2026年8月26日 · 第7章 · 订单分仓、预占与库存成本（p280–284）</p>
     </div>
   </header>
   <div class="entry-body">
-    <p class="lead">第 1 章啃完了。但今天我暴露了一个真问题：一个人对着教科书读，读一会儿就走神。</p>
-    <p>我直接说了"看一会书就觉得无聊"。诊断结果是：这不是理解力的问题，是<strong>「纯阅读 + 没有反馈」这个组合天然催眠</strong>。我觉得说中了。</p>
-    <h2>定了两条节奏，穿插着用</h2>
-    <ul>
-      <li>A · 碎片 + 即时反馈：一次只啃 2–3 页，立刻回来答题、吐槽。别读完一整章才说话——那是催眠模式。</li>
-      <li>B · 先讲透再印证：碰到难啃的概念，让助手先用拼多多的例子 + 我能听懂的类比讲 3 分钟，我秒懂后再去书里对应 2 页确认。阅读量能砍掉八成。</li>
-    </ul>
-    <h2>试了「三流」</h2>
-    <p>它用拼多多给我讲：物流 = 货怎么从义乌仓到我手上；资金流 = 我付的 9.9 怎么被平台、商家、仓配、造纸厂一层层分掉；信息流 = 我搜了什么、下单了什么，这些信号怎么反向传到产地。三分钟我就懂了，然后只去书里印证了五分钟。</p>
-    <p>微测：拼多多"农地云拼"把产地真实需求直接打到农民，主要优化哪一流？我答<strong>信息流</strong>，对了。而且顺带想明白——它同时也砍了物流层级、让资金流变短，但"把真实需求透传上游"这个动作本身，是信息流。</p>
+    <p class="lead">今天读到"订单分仓与预占服务"，我几乎是从椅子上坐直了——这不就是分布式锁吗。</p>
+    <h2>预占</h2>
+    <p>用户下单后，系统先把这批货从可销售库存里扣下来占住，等业务真正出库了再核销。为什么要占？因为从下单到出库有时间间隔，不占住，这段时间货可能被别人抢走——那就是<strong>超卖</strong>。</p>
+    <p>用我的语言翻译：预占 = 对库存资源加一把<strong>带过期时间的分布式锁</strong>。锁住期间别人拿不走；订单取消或支付超时，锁自动释放，库存还回去。释放在哪一步、超时设多长，就是业务规则。</p>
+    <h2>订单分仓</h2>
+    <p>一张订单要决定从哪个仓发货。书里给了三种规则：<strong>最少包裹原则</strong>（拆得越少越好）、<strong>距离最近原则</strong>（离用户最近）、<strong>成本最优原则</strong>（运费和时效综合最省）。这三条经常打架——最近的仓不一定包裹最少，包裹最少不一定最省钱。</p>
+    <p>我的理解：这是一个<strong>多目标约束下的路由算法</strong>，输入是库存分布 + 收货地址 + 时效承诺，输出是一个发货方案。</p>
+    <h2>库存成本</h2>
+    <p>同一个 SKU 不同批次进价不同，出库时按哪个成本算？书里讲了库存成本的计算方式。这块和财务直接挂钩，也是我一直想补的"真实业务数字"。</p>
 
     <div class="note">
       <span class="tag">💭 给自己留的话</span>
-      承认「读不进去」不丢人。那是方法的问题，不是意志力的问题。
+      预占的本质是用锁换一致性、用超时换可用性。这就是 CAP 在业务场景里长什么样。
     </div>
 
     <div class="takeaway">
       <span class="tag">✅ 一句话总结</span>
-      三流里信息流最该被系统化——它是唯一能被系统直接承载、又能反向压住牛鞭效应的那一条。
+      预占 = 带过期时间的分布式锁；分仓 = 多目标约束下的路由算法（最少包裹 / 距离最近 / 成本最优）。
     </div>
   </div>
   <nav class="entry-nav">
   <a class="enav prev " href="2026-08-25.html">
     <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
-    <span class="enav-title">让 AI 讲全书，然后我把方案否了</span>
+    <span class="enav-title">库存加减：流水模式还是设置模式</span>
   </a>
   <a class="enav home" href="../index.html">
     <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
   </a>
   <a class="enav next " href="2026-08-27.html">
     <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
-    <span class="enav-title">一天啃完第 2 章主干</span>
+    <span class="enav-title">第8章：从 CDC 到"门店即前置仓"</span>
   </a>
 </nav>
 
