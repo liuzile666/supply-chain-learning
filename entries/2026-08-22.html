@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 19 · 在汕头，看餐饮的供应链 — 我的供应链学习记录</title>
+<link rel="stylesheet" href="../style.css?v=11">
+<script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
+</head>
+<body class="entry-page">
+<div class="fxbar" id="fxbar">
+  <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
+  <div class="fx-info">
+    <div class="fx-title">在汕头，看餐饮的供应链</div>
+    <div class="fx-sub">DAY 19 · 2026年8月22日 · 汕头 · 餐饮里的供应链</div>
+  </div>
+  <div class="fx-actions">
+    <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
+    <button class="fx-theme" id="fxTheme" title="&#20999;&#25442;&#26126;&#26263;">&#127771;</button>
+  </div>
+</div>
+<div class="fx-progress" id="fxProgress"></div>
+
+<div class="wrap">
+<article class="entry">
+  <header class="entry-head">
+    <div class="day-badge"><span class="lab">DAY</span><span class="num">19</span></div>
+    <div>
+      <h1>在汕头，看餐饮的供应链</h1>
+      <p class="date">2026年8月22日 · 汕头 · 餐饮里的供应链</p>
+    </div>
+  </header>
+  <div class="entry-body">
+    <p class="lead">周末来汕头，说是为了吃。但吃着吃着职业病犯了——我开始看餐厅背后的供应链。</p>
+    <p>汕头这种美食城市餐饮密度极高。我发现一个有意思的现象：那些生意最好的牛肉店、粿条店，出餐都快得离谱。后来想明白了——它们卖的品类极窄，就牛肉、就粿条，<strong>SKU 少，备料简单</strong>，所以能提前备好、现点现出。</p>
+    <p>这不就是书里的<strong>推拉结合</strong>吗？高汤、牛肉丸这些通用的半成品提前备好（推），客人点了再烫粉、加肉、调味（拉）。SKU 越少，推拉边界越好画，出餐就越快。</p>
+    <p>反过来看那些什么都卖的大排档，菜单厚得像本书，每道菜都要单独备料，出餐慢、浪费也多。我第一次这么直观地感受到：<strong>SKU 数量本身就是成本</strong>。</p>
+
+    <div class="note">
+      <span class="tag">💭 给自己留的话</span>
+      供应链不在书里，在楼下那家牛肉店。以后出门多看看别人的货是怎么流转的。
+    </div>
+
+    <div class="takeaway">
+      <span class="tag">✅ 一句话总结</span>
+      品类窄 = SKU 少 = 推拉边界清晰 = 出餐快。汕头牛肉店给我上了最生动的一课。
+    </div>
+  </div>
+  <nav class="entry-nav">
+  <a class="enav prev " href="2026-08-21.html">
+    <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
+    <span class="enav-title">我把学习站重做了一遍</span>
+  </a>
+  <a class="enav home" href="../index.html">
+    <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
+  </a>
+  <a class="enav next " href="2026-08-23.html">
+    <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
+    <span class="enav-title">新鲜和快，是一对矛盾</span>
+  </a>
+</nav>
+
+
+</article>
+</div>
+<script src="../theme.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  var bar=document.getElementById('fxProgress');
+  var timeEl=document.getElementById('fxTime');
+  var themeBtn=document.getElementById('fxTheme');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    var p=max>0?sc/max*100:0;
+    if(bar) bar.style.width=p+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  try{
+    var body=document.querySelector('.entry-body');
+    var txt=body?body.innerText.replace(/\s/g,''):'';
+    var mins=Math.max(1,Math.round(txt.length/350));
+    if(timeEl) timeEl.textContent='≈ '+mins+' 分钟';
+  }catch(e){}
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var next=cur==='light'?'dark':'light';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('sc-theme',next);}catch(e){}
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
