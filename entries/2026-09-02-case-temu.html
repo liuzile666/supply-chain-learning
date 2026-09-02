@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>专题案例 · Temu：全托管，把跨境链路切成三段 — 我的供应链学习记录</title>
+<link rel="stylesheet" href="../style.css?v=10">
+<script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
+</head>
+<body class="entry-page">
+<div class="fxbar" id="fxbar">
+  <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
+  <div class="fx-info">
+    <div class="fx-title">Temu：全托管，把跨境链路切成三段</div>
+    <div class="fx-sub">案例研究 · 拼多多的海外业务，我必须搞懂</div>
+  </div>
+  <div class="fx-actions">
+    <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
+    <button class="fx-theme" id="fxTheme" title="&#20999;&#25442;&#26126;&#26263;">&#127771;</button>
+  </div>
+</div>
+<div class="fx-progress" id="fxProgress"></div>
+
+<div class="wrap">
+<article class="entry">
+  <header class="entry-head">
+    <div class="day-badge"><span class="lab">案例</span><span class="num">Temu</span></div>
+    <div>
+      <h1>Temu：全托管，把跨境链路切成三段</h1>
+      <p class="date">2026年9月2日 · 案例研究 · 拼多多的海外业务，我必须搞懂</p>
+    </div>
+  </header>
+  <div class="entry-body">
+    <p class="lead">第三个案例留给我即将入职的这家公司的海外业务——Temu。2022 年上线，覆盖全球 40 多个国家。我把它放在最后，是因为它把前两篇讲的东西<strong>全串起来了</strong>：跨境的仓网、推拉的选择、还有库存风险归谁。数字与规则来自平台官方说明和跨境服务商的公开整理，平台规则一直在调，这里只取骨架。</p>
+
+    <h2>先看清跨境这条路被切成了几段</h2>
+    <p>国内电商是从仓到用户，一跳。跨境不是——它被切成<strong>三段</strong>：</p>
+    <p><strong>头程</strong>：国内集运仓收货 → 国际干线运输（空运/海运）→ 目的国清关。<br>
+    <strong>中段</strong>：入海外仓或中转仓，做分拣与二次分拨。<br>
+    <strong>尾程</strong>：本地快递派送到买家手上。</p>
+    <p>CS 类比：这就是一次<strong>跨地域的多段 RPC</strong>。每一段有自己的时延、成本、失败率和责任方，端到端体验 = 三段之和，任何一段成为瓶颈，前面再快都没用。<strong>做跨境供应链，第一件事是找出关键路径。</strong></p>
+
+    <h2>框架一：全托管 vs 半托管，本质是"库存风险归谁"</h2>
+    <p>这两个词看着像运营术语，翻译过来其实很朴素——<strong>货压在谁手里，谁承担卖不掉的风险</strong>：</p>
+    <p><strong>全托管</strong>：卖家只管供货，平台负责定价、运营、物流、售后。货发到平台国内集运仓，头程和尾程都由平台承担，卖家只出"首程"（国内送到集运仓那一段）。对工厂型卖家来说，出海这件事被压缩成了"接单—发货"两件事。<br>
+    <strong>半托管（本对本）</strong>：卖家提前把货备到自己在海外的仓，订单产生后由海外仓直接发本地买家，尾程 2–5 天。卖家自担头程、滞销和滞港风险，换回定价权和更高的毛利空间。</p>
+
+    <h2>框架二：JIT 与 VMI，就是推拉光谱在跨境的落点</h2>
+    <p>全托管内部还有两种备货方式，对照第 2 章的推拉战略特别清楚：</p>
+    <p><strong>JIT（Just-In-Time，按需供货）</strong>：不出单不备货，订单或备货单产生后，卖家要在 <strong>24–72 小时</strong>内把货送到平台国内集货仓。资金占用低、滞销风险小，代价是对供货时效要求极高，<strong>断货就直接下架</strong>。适合 SKU 多、单款销量不稳的轻小件和测款期新品。<br>
+    <strong>VMI（提前备货到平台仓）</strong>：卖家先把货压到平台指定的国内仓，由平台按销售节奏拉动。流量权重和流量倾斜更高、断货风险低，代价是压资金、滞销要退回。</p>
+    <p><strong>JIT 就是拉式，VMI 就是推式。</strong>书里讲 MTS / ATO / MTO / ETO 是一条"生产时机"的光谱，这里则是"备货时机"的光谱：<strong>选哪个位置，取决于你对这个款销量的把握有多大。</strong>有把握就 VMI 吃流量，没把握就 JIT 试水。这跟第 2 章推拉战略的判断逻辑是同一套。</p>
+
+    <h2>框架三：半托管备 15 天货，是"库存前置换时效"</h2>
+    <p>传统跨境通常要备 45 天货，半托管要求大约 <strong>15 天</strong>。为什么能压下来？因为货已经前置到目的国的海外仓——<strong>这跟京东把爆款铺到 FDC、叮咚把仓铺到社区，是同一个动作</strong>：用库存前置换时效。三个行业、三种形态，底层都是"把库存往用户那边挪，挪多少取决于你能预测多准"。</p>
+    <p>反过来，全托管的集运直发时效是 7–14 天甚至更长。<strong>你要 2–5 天，就得承担海外压货的风险；你要低风险，就接受 7–14 天。</strong>这不就是第 2 章那句"没有最优，只有权衡"？</p>
+
+    <h2>框架四：资金流——谁担风险，谁拿定价权</h2>
+    <p>全托管下平台掌握定价权和运营权，卖家按供货价结算、T+N 回款，库存滞销压力主要由平台承担（VMI 除外）。半托管下卖家自主定价、自己承担退货和滞港，毛利空间大但风险自担。</p>
+    <p><strong>风险和收益总是一起走的。</strong>书里说资金流是反向回流、要顺畅——跨境这里还多了一层：<strong>库存风险也是一种"资金流"</strong>，它决定了谁有资格赚那份溢价。</p>
+
+    <h2>我的拼多多落点</h2>
+    <p>把 Temu 和国内拼多多放一起看，会发现同一个内核：<strong>平台把复杂度吃掉，让上游只做自己最擅长的事。</strong>国内是"农地云拼"把聚合后的真实需求直接打到产地，农民只管种好；海外是全托管把定价、物流、清关、售后全部接走，工厂只管把货做好。<strong>平台不是在卖物流，是在卖"不确定性的打包服务"。</strong></p>
+
+    <div class="note">
+      <span class="tag">💭 今天卡住的地方</span>
+      半托管要求备 15 天货（传统跨境 45 天），这个数字为什么能压到三分之一？是平台预测更准，还是平台替卖家多扛了一段库存？如果答案是预测更准，那<strong>平台凭什么比卖家更懂需求</strong>——靠的是全站销量数据，还是退回机制兜底？这可能是我入职后能真正碰到的问题，先记着。
+    </div>
+
+    <div class="takeaway">
+      <span class="tag">✅ 记住的一句话</span>
+      全托管卖的不是物流，是<strong>把跨境供应链的不确定性打包收走</strong>；而 JIT 与 VMI 之间怎么选，说白了就是一句——<strong>谁来承担预测误差</strong>。
+    </div>
+
+    <p style="margin-top:8px;font-size:14px;color:var(--ink-soft)">📎 三篇连着看：<a href="2026-09-02-case-jd.html" style="color:var(--green)">京东物流（仓网分层）</a> → <a href="2026-09-02-case-dingdong.html" style="color:var(--green)">叮咚买菜（前置仓）</a> → 本篇（跨境三段），其实都是同一道题：<strong>把库存放在离用户多远的地方</strong>。</p>
+  </div>
+  <nav class="entry-nav">
+  <a class="enav prev " href="2026-09-02-case-dingdong.html">
+    <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
+    <span class="enav-title">叮咚买菜：前置仓，把损耗率抠到 1.5%</span>
+  </a>
+  <a class="enav home" href="../index.html">
+    <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
+  </a>
+  <a class="enav next " href="glossary.html">
+    <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
+    <span class="enav-title">供应链易混术语对照表</span>
+  </a>
+</nav>
+</article>
+</div>
+<script src="../theme.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  var bar=document.getElementById('fxProgress');
+  var timeEl=document.getElementById('fxTime');
+  var themeBtn=document.getElementById('fxTheme');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    var p=max>0?sc/max*100:0;
+    if(bar) bar.style.width=p+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  try{
+    var body=document.querySelector('.entry-body');
+    var txt=body?body.innerText.replace(/\s/g,''):'';
+    var mins=Math.max(1,Math.round(txt.length/350));
+    if(timeEl) timeEl.textContent='≈ '+mins+' 分钟';
+  }catch(e){}
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var next=cur==='light'?'dark':'light';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('sc-theme',next);}catch(e){}
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
