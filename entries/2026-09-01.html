@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 29 · 我到底缺什么 — 我的供应链学习记录</title>
+<link rel="stylesheet" href="../style.css?v=11">
+<script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
+</head>
+<body class="entry-page">
+<div class="fxbar" id="fxbar">
+  <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
+  <div class="fx-info">
+    <div class="fx-title">我到底缺什么</div>
+    <div class="fx-sub">DAY 29 · 2026年9月1日 · 反思 · 入职倒计时</div>
+  </div>
+  <div class="fx-actions">
+    <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
+    <button class="fx-theme" id="fxTheme" title="&#20999;&#25442;&#26126;&#26263;">&#127771;</button>
+  </div>
+</div>
+<div class="fx-progress" id="fxProgress"></div>
+
+<div class="wrap">
+<article class="entry">
+  <header class="entry-head">
+    <div class="day-badge"><span class="lab">DAY</span><span class="num">29</span></div>
+    <div>
+      <h1>我到底缺什么</h1>
+      <p class="date">2026年9月1日 · 反思 · 入职倒计时</p>
+    </div>
+  </header>
+  <div class="entry-body">
+    <p class="lead">九月了。学历认证说 9 号能下来，入职真的近了。今天我开始想一个更实际的问题：我到底缺什么。</p>
+    <p>供应链的书读了快一个月，第 1、2 章算扎住了。但我很清楚自己的短板：我懂的是<strong>概念和类比</strong>，缺的是<strong>真实的业务数字</strong>。</p>
+    <p>比如我知道牛鞭效应会让库存积压，但一个真实的仓，安全库存到底怎么算？周转天数多少算健康？缺货率控制在几个点？这些数字我一个都答不上来。而进了拼多多，会上讨论的就是这些数字。</p>
+    <p>所以接下来想调一下重心：概念继续学，但要开始找真实的数据和案例往里填。书后面讲中央库存、WMS 那几块，应该就是补这个的。</p>
+
+    <div class="note">
+      <span class="tag">💭 给自己留的话</span>
+      从「懂概念」到「能干活」，中间隔着一层真实业务数字。这层得自己找补。
+    </div>
+
+    <div class="takeaway">
+      <span class="tag">✅ 一句话总结</span>
+      我知道牛鞭效应是什么，但不知道安全库存怎么算——这就是我和「能上手」之间的真实距离。
+    </div>
+  </div>
+  <nav class="entry-nav">
+  <a class="enav prev " href="2026-08-31.html">
+    <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
+    <span class="enav-title">试着把前两章讲出来</span>
+  </a>
+  <a class="enav home" href="../index.html">
+    <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
+  </a>
+  <a class="enav next " href="2026-09-02.html">
+    <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
+    <span class="enav-title">补打卡，然后开第 3 章</span>
+  </a>
+</nav>
+
+
+</article>
+</div>
+<script src="../theme.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  var bar=document.getElementById('fxProgress');
+  var timeEl=document.getElementById('fxTime');
+  var themeBtn=document.getElementById('fxTheme');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    var p=max>0?sc/max*100:0;
+    if(bar) bar.style.width=p+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  try{
+    var body=document.querySelector('.entry-body');
+    var txt=body?body.innerText.replace(/\s/g,''):'';
+    var mins=Math.max(1,Math.round(txt.length/350));
+    if(timeEl) timeEl.textContent='≈ '+mins+' 分钟';
+  }catch(e){}
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var next=cur==='light'?'dark':'light';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('sc-theme',next);}catch(e){}
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
