@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day 28 · 试着把前两章讲出来 — 我的供应链学习记录</title>
+<title>Day 28 · 播种式和摘果式 — 我的供应链学习记录</title>
 <link rel="stylesheet" href="../style.css?v=11">
 <script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
 </head>
@@ -11,8 +11,8 @@
 <div class="fxbar" id="fxbar">
   <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
   <div class="fx-info">
-    <div class="fx-title">试着把前两章讲出来</div>
-    <div class="fx-sub">DAY 28 · 2026年8月31日 · 输出 · 复述第 1–2 章</div>
+    <div class="fx-title">播种式和摘果式</div>
+    <div class="fx-sub">DAY 28 · 2026年8月31日 · 第8章 · WMS 出库与库内管理（p316–344）</div>
   </div>
   <div class="fx-actions">
     <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
@@ -26,38 +26,48 @@
   <header class="entry-head">
     <div class="day-badge"><span class="lab">DAY</span><span class="num">28</span></div>
     <div>
-      <h1>试着把前两章讲出来</h1>
-      <p class="date">2026年8月31日 · 输出 · 复述第 1–2 章</p>
+      <h1>播种式和摘果式</h1>
+      <p class="date">2026年8月31日 · 第8章 · WMS 出库与库内管理（p316–344）</p>
     </div>
   </header>
   <div class="entry-body">
-    <p class="lead">八月最后一天。今天没读新内容，而是试着把第 1、2 章讲一遍——用的是费曼那套。</p>
-    <p>假装对面坐着雪之哥（我以后的领导），我要用三分钟给他讲清楚"供应链到底在管什么"。</p>
-    <p>第一次讲得稀烂。我开口就是"供应链就是物流、资金流、信息流"，然后卡住了——因为我在<strong>背定义</strong>，不是在讲逻辑。</p>
-    <p>第二次我换了个开头："供应链管的其实是一件事——<strong>怎么让对的货，在对的时间，用最低的成本，出现在对的地方</strong>。为了实现这个，要管三样东西：货怎么流（物流）、钱怎么分（资金流）、信息怎么传（信息流）。其中信息流最关键，因为另外两条流都是被它带起来的。"</p>
-    <p>这么讲完我自己都觉得清楚了。原来"讲得出"和"知道"之间，差的不是记住了多少个词，而是<strong>有没有一条自己的逻辑主线</strong>。</p>
+    <p class="lead">今天读到两种拣货方式，我觉得这是全书最有画面感的一段。</p>
+    <h2>两种拣货方式</h2>
+    <ul>
+      <li><b>播种式拣选</b>：电商订单每个单的 SKU 数量不多（大多不超过 5 个），如果每个订单都在仓库跑一大圈，时间全浪费在路上。所以把多张订单合并成一张大的合拣单（批拣单），跑一次把货全拣回来，再按订单把商品分拣到每个订单里，像<strong>播种</strong>一样。</li>
+      <li><b>摘果式拣选</b>：门店请货、退供应商、调拨、B2B 销售这类单，每张单商品成百上千，合拣没意义，更适合按单去每个货位拣选，像<strong>摘果子</strong>一样。</li>
+    </ul>
+    <p>两种方式并存，电商新零售仓储以播种式为主。我的理解：这是<strong>批处理与单条处理</strong>的取舍——单小而多的用批处理摊薄固定成本，单大而少的直接处理更划算。</p>
+    <h2>库内管理那一堆动作</h2>
+    <p>库内补货、移库、移位、盘点、商品借还、库存冻结与解冻、商品报损。其中两个我特别记了一下：</p>
+    <ul>
+      <li><b>冻结与解冻</b>：把某批库存锁住不让动，一般用在质量存疑或待处理时——又是一把锁。</li>
+      <li><b>盘点</b>：系统里的数和实际数对不上是常态，盘点就是<strong>定期做一致性校验并纠偏</strong>，正好印证了第 7 章"设置模式"为什么必须存在。</li>
+    </ul>
+    <h2>WCS</h2>
+    <p>自动化设备控制系统，驱动堆垛机、AGV 等设备完成作业。一句话区分：<strong>WMS 管"该做什么"，WCS 管"让机器怎么做"</strong>。</p>
 
     <div class="note">
       <span class="tag">💭 给自己留的话</span>
-      以后每学完一块，就试着讲一遍。讲不通的地方，就是没真懂的地方——这是最便宜的自测。
+      播种式 vs 摘果式，本质是批处理与单条处理的成本取舍。看到拣货那张图我笑了。
     </div>
 
     <div class="takeaway">
       <span class="tag">✅ 一句话总结</span>
-      能不能不看书讲清楚，是检验「懂没懂」的唯一标准。背定义不算懂。
+      播种式 = 合批拣货再分拣（电商为主），摘果式 = 按单直拣（B2B/调拨）；盘点就是一致性校验。
     </div>
   </div>
   <nav class="entry-nav">
   <a class="enav prev " href="2026-08-30.html">
     <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
-    <span class="enav-title">补一补第 2 章的常识词典</span>
+    <span class="enav-title">上架那一刻，才叫真的在库了</span>
   </a>
   <a class="enav home" href="../index.html">
     <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
   </a>
   <a class="enav next " href="2026-09-01.html">
     <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
-    <span class="enav-title">我到底缺什么</span>
+    <span class="enav-title">OFC：承上启下的调度中心</span>
   </a>
 </nav>
 
