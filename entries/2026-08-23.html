@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 20 · 新鲜和快，是一对矛盾 — 我的供应链学习记录</title>
+<link rel="stylesheet" href="../style.css?v=11">
+<script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
+</head>
+<body class="entry-page">
+<div class="fxbar" id="fxbar">
+  <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
+  <div class="fx-info">
+    <div class="fx-title">新鲜和快，是一对矛盾</div>
+    <div class="fx-sub">DAY 20 · 2026年8月23日 · 汕头 · 生鲜与库存</div>
+  </div>
+  <div class="fx-actions">
+    <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
+    <button class="fx-theme" id="fxTheme" title="&#20999;&#25442;&#26126;&#26263;">&#127771;</button>
+  </div>
+</div>
+<div class="fx-progress" id="fxProgress"></div>
+
+<div class="wrap">
+<article class="entry">
+  <header class="entry-head">
+    <div class="day-badge"><span class="lab">DAY</span><span class="num">20</span></div>
+    <div>
+      <h1>新鲜和快，是一对矛盾</h1>
+      <p class="date">2026年8月23日 · 汕头 · 生鲜与库存</p>
+    </div>
+  </header>
+  <div class="entry-body">
+    <p class="lead">旅行最后一天。今天想通了一个之前半懂不懂的问题：为什么「新鲜」和「快」是矛盾的。</p>
+    <p>又去了那家牛肉店。老板说牛肉都是当天现宰，过了夜就不卖了。这句话让我突然理解了<strong>拉式的代价</strong>。</p>
+    <p>完全拉式（现点现做）最新鲜，但用户要等；完全推式（提前做好成品）最快，但不新鲜、还可能卖不动浪费。餐饮这行，本质就是在这两个极端之间找平衡点。</p>
+    <p>放到电商也是一样：生鲜为什么难做？因为它的新鲜度要求高，你没法像卖纸巾那样提前铺一大堆库存到仓里等着卖。所以生鲜必须走<strong>日清</strong>——当天进当天清，用高频小批量替代低频大批量。</p>
+    <p>这也解释了多多买菜为什么是"店仓一体 + 次日自提"：它把履约窗口压缩到一天，用确定的时间去换确定的库存，硬生生在"新鲜"和"快"之间挤出一条路。</p>
+
+    <div class="note">
+      <span class="tag">💭 给自己留的话</span>
+      生鲜的难点不在运，在于它几乎没资格用推式。库存不能留这件事，把推式的空间压到几乎没有。
+    </div>
+
+    <div class="takeaway">
+      <span class="tag">✅ 一句话总结</span>
+      新鲜和快是一对矛盾。生鲜难，难在它几乎没有用推式的资格。
+    </div>
+  </div>
+  <nav class="entry-nav">
+  <a class="enav prev " href="2026-08-22.html">
+    <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
+    <span class="enav-title">在汕头，看餐饮的供应链</span>
+  </a>
+  <a class="enav home" href="../index.html">
+    <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
+  </a>
+  <a class="enav next " href="2026-08-24.html">
+    <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
+    <span class="enav-title">慢读第 1 章：建立翻译层</span>
+  </a>
+</nav>
+
+
+</article>
+</div>
+<script src="../theme.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  var bar=document.getElementById('fxProgress');
+  var timeEl=document.getElementById('fxTime');
+  var themeBtn=document.getElementById('fxTheme');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    var p=max>0?sc/max*100:0;
+    if(bar) bar.style.width=p+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  try{
+    var body=document.querySelector('.entry-body');
+    var txt=body?body.innerText.replace(/\s/g,''):'';
+    var mins=Math.max(1,Math.round(txt.length/350));
+    if(timeEl) timeEl.textContent='≈ '+mins+' 分钟';
+  }catch(e){}
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var next=cur==='light'?'dark':'light';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('sc-theme',next);}catch(e){}
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
