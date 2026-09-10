@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 34 · 包裹在分拣中心经历了什么 — 我的供应链学习记录</title>
+<link rel="stylesheet" href="../style.css?v=11">
+<script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
+</head>
+<body class="entry-page">
+<div class="fxbar" id="fxbar">
+  <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
+  <div class="fx-info">
+    <div class="fx-title">包裹在分拣中心经历了什么</div>
+    <div class="fx-sub">DAY 34 · 2026年9月6日 · 第10章 · 分拣管理与 O2O 配送（p386–398）</div>
+  </div>
+  <div class="fx-actions">
+    <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
+    <button class="fx-theme" id="fxTheme" title="&#20999;&#25442;&#26126;&#26263;">&#127771;</button>
+  </div>
+</div>
+<div class="fx-progress" id="fxProgress"></div>
+
+<div class="wrap">
+<article class="entry">
+  <header class="entry-head">
+    <div class="day-badge"><span class="lab">DAY</span><span class="num">34</span></div>
+    <div>
+      <h1>包裹在分拣中心经历了什么</h1>
+      <p class="date">2026年9月6日 · 第10章 · 分拣管理与 O2O 配送（p386–398）</p>
+    </div>
+  </header>
+  <div class="entry-body">
+    <p class="lead">今天最触动我的是一句很朴素的话：收货不算真正到达，验货才算。这句话背后是一整套关于"信任边界"的设计。</p>
+    <h2>分拣中心里的三步</h2>
+    <ul>
+      <li><b>收货</b>：扫封车号或车牌开启任务，再依次扫箱号收货；大件可直接扫包裹号。异常（箱号损坏、非本站箱、破损受潮）要登记拍照提交异常组。</li>
+      <li><b>拆箱验货</b>：扫箱号开箱，逐一扫箱内包裹号并检查完好。<strong>只有箱内所有包裹都验完，整箱才算验完</strong>；实物比系统记录少，就是遗失，要提报异常。</li>
+      <li><b>分拣装箱</b>：按目的地、商品属性归类，把同去向的装进同一周转箱。分拣机分拣和人工分拣原理一样——扫条码 → 查下一目的地 → 分到对应区域。</li>
+    </ul>
+    <h2>为什么验货才算到</h2>
+    <p>收货只代表"这辆车到了"，箱子里到底有没有少，得拆开扫完才知道。所以系统以<strong>验货扫描</strong>作为包裹真正到达分拣中心的时点。另外，只在本中心中转的箱子原则上不拆验，直接发货——不做无用功。</p>
+    <h2>O2O 配送是另一套</h2>
+    <p>饿了么、美团、叮当快药这类从门店发货的场景，<strong>根本不经过分拣中心和配送站点</strong>：用户下单 → 商家备货 → 按位置和可配送范围匹配骑手 → 骑手到店取件 → 送达。链路短得多。</p>
+    <h2>我的连接</h2>
+    <p>收货 vs 验货，本质是<strong>传输层签收与校验和比对</strong>的区别：收到一个包只说明它到了，checksum 对上才说明内容完整。而分拣这一步，就是<strong>查路由表、按下一跳分组转发</strong>——分拣中心其实是一台路由器，包裹是数据包。</p>
+
+    <div class="note">
+      <span class="tag">💭 给自己留的话</span>
+      "中转箱不拆验"这个例外很关键：流程设计的功力，体现在知道哪些环节可以省。
+    </div>
+
+    <div class="takeaway">
+      <span class="tag">✅ 一句话总结</span>
+      收货=包到了，验货=内容对上了；分拣中心就是一台按路由表转发数据包的路由器。
+    </div>
+  </div>
+  <nav class="entry-nav">
+  <a class="enav prev " href="2026-09-05.html">
+    <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
+    <span class="enav-title">调度员每天早上在跟什么较劲</span>
+  </a>
+  <a class="enav home" href="../index.html">
+    <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
+  </a>
+  <a class="enav next " href="2026-09-07.html">
+    <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
+    <span class="enav-title">不用自己养车，也得有一套系统</span>
+  </a>
+</nav>
+
+
+</article>
+</div>
+<script src="../theme.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  var bar=document.getElementById('fxProgress');
+  var timeEl=document.getElementById('fxTime');
+  var themeBtn=document.getElementById('fxTheme');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    var p=max>0?sc/max*100:0;
+    if(bar) bar.style.width=p+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  try{
+    var body=document.querySelector('.entry-body');
+    var txt=body?body.innerText.replace(/\s/g,''):'';
+    var mins=Math.max(1,Math.round(txt.length/350));
+    if(timeEl) timeEl.textContent='≈ '+mins+' 分钟';
+  }catch(e){}
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var next=cur==='light'?'dark':'light';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('sc-theme',next);}catch(e){}
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
