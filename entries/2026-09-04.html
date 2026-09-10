@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 32 · 电子面单、子母单，和那 9 个状态 — 我的供应链学习记录</title>
+<link rel="stylesheet" href="../style.css?v=11">
+<script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
+</head>
+<body class="entry-page">
+<div class="fxbar" id="fxbar">
+  <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
+  <div class="fx-info">
+    <div class="fx-title">电子面单、子母单，和那 9 个状态</div>
+    <div class="fx-sub">DAY 32 · 2026年9月4日 · 第10章 · 快递单与配送状态（p372–376）</div>
+  </div>
+  <div class="fx-actions">
+    <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
+    <button class="fx-theme" id="fxTheme" title="&#20999;&#25442;&#26126;&#26263;">&#127771;</button>
+  </div>
+</div>
+<div class="fx-progress" id="fxProgress"></div>
+
+<div class="wrap">
+<article class="entry">
+  <header class="entry-head">
+    <div class="day-badge"><span class="lab">DAY</span><span class="num">32</span></div>
+    <div>
+      <h1>电子面单、子母单，和那 9 个状态</h1>
+      <p class="date">2026年9月4日 · 第10章 · 快递单与配送状态（p372–376）</p>
+    </div>
+  </header>
+  <div class="entry-body">
+    <p class="lead">今天两小节，都短，但读完我发现它们其实是同一件事的两面：一个包裹怎么被标识，以及它的一生被切成几个状态。</p>
+    <h2>快递单号是整条链路的主键</h2>
+    <p>下单时，系统根据始发地和目的地就能算出<strong>起点分拣中心、终点配送站点和最优路线</strong>；运输中，扫一下条码系统就知道这包该去下一站，像接力一样级级传递。</p>
+    <h2>手写面单的三个坑，电子面单全解决了</h2>
+    <ul>
+      <li><b>效率低</b>：手工写、肉眼识别、再人工录系统。电子面单直接接口传数据、打印即可。</li>
+      <li><b>易出错</b>：字迹潦草录错，包裹就送不到。电子面单发货前信息已在物流公司系统里，配送员扫码即得。</li>
+      <li><b>超区不可知</b>：手写面单经常送到才发现超区被退回。电子面单在发货前就能问出超区，提前换物流公司。</li>
+    </ul>
+    <h2>子母单</h2>
+    <p>一个快递单号可以对应多个包裹，每个包裹贴一张包裹单——叫<strong>子母单</strong>。分拣配送时系统知道这几个包裹是一伙的，会安排到一起，避免漏件。</p>
+    <h2>9 个状态</h2>
+    <p>正向 5 个：已揽件 → 在途运输中 → 派送中 → 待取件 → 已签收。逆向 4 个：拒收 → 逆向在途 → 逆向派送 → 逆向签收。各个环节的操作日志串起来，就是用户看到的<strong>物流轨迹</strong>。</p>
+    <h2>我的连接</h2>
+    <p>这不就是<strong>分布式链路追踪</strong>吗。快递单号 = trace_id，每一次扫描 = 一个 span 上报，9 个状态 = 状态机的节点，物流轨迹 = 把 span 按时间排出来给用户看的那个列表。我在实习里接过的全链路追踪，跟这是一模一样的结构。</p>
+
+    <div class="note">
+      <span class="tag">💭 给自己留的话</span>
+      以前只把快递单号当成"查物流的输入框"。今天才意识到它是一条 trace 的主键，整条链路都靠它串。
+    </div>
+
+    <div class="takeaway">
+      <span class="tag">✅ 一句话总结</span>
+      快递单号 = trace_id，扫描 = span 上报，物流轨迹 = 按时间排出的 span 列表。
+    </div>
+  </div>
+  <nav class="entry-nav">
+  <a class="enav prev " href="2026-09-03.html">
+    <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
+    <span class="enav-title">货出了仓库，才刚开始</span>
+  </a>
+  <a class="enav home" href="../index.html">
+    <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
+  </a>
+  <a class="enav next " href="2026-09-05.html">
+    <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
+    <span class="enav-title">调度员每天早上在跟什么较劲</span>
+  </a>
+</nav>
+
+
+</article>
+</div>
+<script src="../theme.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  var bar=document.getElementById('fxProgress');
+  var timeEl=document.getElementById('fxTime');
+  var themeBtn=document.getElementById('fxTheme');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    var p=max>0?sc/max*100:0;
+    if(bar) bar.style.width=p+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  try{
+    var body=document.querySelector('.entry-body');
+    var txt=body?body.innerText.replace(/\s/g,''):'';
+    var mins=Math.max(1,Math.round(txt.length/350));
+    if(timeEl) timeEl.textContent='≈ '+mins+' 分钟';
+  }catch(e){}
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var next=cur==='light'?'dark':'light';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('sc-theme',next);}catch(e){}
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
