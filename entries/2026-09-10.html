@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 38 · RBAC、单点登录，和项目怎么真正落地 — 我的供应链学习记录</title>
+<link rel="stylesheet" href="../style.css?v=11">
+<script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
+</head>
+<body class="entry-page">
+<div class="fxbar" id="fxbar">
+  <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
+  <div class="fx-info">
+    <div class="fx-title">RBAC、单点登录，和项目怎么真正落地</div>
+    <div class="fx-sub">DAY 38 · 2026年9月10日 · 第11章 · 统一权限 · 开第12章（p463–482）</div>
+  </div>
+  <div class="fx-actions">
+    <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
+    <button class="fx-theme" id="fxTheme" title="&#20999;&#25442;&#26126;&#26263;">&#127771;</button>
+  </div>
+</div>
+<div class="fx-progress" id="fxProgress"></div>
+
+<div class="wrap">
+<article class="entry">
+  <header class="entry-head">
+    <div class="day-badge"><span class="lab">DAY</span><span class="num">38</span></div>
+    <div>
+      <h1>RBAC、单点登录，和项目怎么真正落地</h1>
+      <p class="date">2026年9月10日 · 第11章 · 统一权限 · 开第12章（p463–482）</p>
+    </div>
+  </header>
+  <div class="entry-body">
+    <p class="lead">今天收掉第 11 章，开了最后一章。第 12 章开篇那句"纯理论并不能保证项目成功"，读着像是对我说的。</p>
+    <h2>为什么要有统一权限系统</h2>
+    <p>每套系统各做一套权限，代码能复制，但账号体系割裂——一个人要记多套账号密码和链接。供应链系统又偏偏高度关联，业务方希望"多个系统像一套"。于是权限被抽出来独立成系统，<strong>在多套系统独立设计的同时，对业务方呈现一套系统的效果</strong>。</p>
+    <h2>功能权限 vs 数据权限</h2>
+    <ul>
+      <li><b>功能权限</b>：页面（菜单）、操作（按钮）、字段三层。操作权限有两种做法——点击后再校验报错，或前端直接不显示按钮；<strong>后者体验更好，成本也更高</strong>。</li>
+      <li><b>数据权限</b>：同一个菜单，不同角色看到的数据不同。维度可以是仓库、站点、岗位、部门、地区。比如上海仓员工只看上海仓数据，总监能看全部。</li>
+    </ul>
+    <h2>RBAC</h2>
+    <p>基于角色的访问控制：不把权限直接绑给用户，而是<strong>用户—角色—权限</strong>三层。仓储系统常用"岗位+仓库"做数据维度，采购系统常用"岗位"。</p>
+    <h2>第 12 章：项目不是只有软件</h2>
+    <p>开篇就纠正了我的认知：仓储、配送、门店这类有一线实体的项目，系统只是一部分，还要和<strong>基建、硬件设备、现场运营</strong>协同。整体流程分四阶段：规划立项 → 项目建设 → 上线实施 → 项目收尾。</p>
+    <p>建设阶段是<strong>三驾马车并行</strong>：基建（业务规划→设计→土方→地面→装修）、硬件（调研→规划→招标→采购→制造→安装调试）、软件（需求调研→分析→设计→研发→联调→测试→发布）。书里点明了它们之间的依赖：<strong>前期可以并行，后期只能串行</strong>——基建最慢所以先动，通水通电才能装设备，设备调完才能和系统联调。</p>
+    <h2>模式验证的四种方法</h2>
+    <p>德尔菲法（专家意见）、数据建模（用历史数据算可行性，例子是建模后发现东北订单量撑不起新物流中心于是放弃）、MVP 实验法（先租个小门面用 Excel 跑通再正式立项）、A/B 测试（两家物流各分一部分订单跑一个月再决定）。</p>
+    <h2>我的连接</h2>
+    <p>RBAC 就是权限中间件，数据权限就是<strong>行级权限与多租户隔离</strong>。而项目三驾马车的依赖关系，是一道<strong>关键路径问题</strong>——先找出最长那条链（基建），其他两条绕着它排。</p>
+
+    <div class="note">
+      <span class="tag">💭 给自己留的话</span>
+      书里说"在只有系统类的项目中，常常由产品经理兼职项目经理"——这句话我读了两遍，感觉说的就是我入职后的状态。
+    </div>
+
+    <div class="takeaway">
+      <span class="tag">✅ 一句话总结</span>
+      RBAC = 用户—角色—权限；数据权限是行级隔离；项目三驾马车前期并行后期串行，基建是关键路径。
+    </div>
+  </div>
+  <nav class="entry-nav">
+  <a class="enav prev " href="2026-09-09.html">
+    <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
+    <span class="enav-title">物权归谁，决定了系统怎么设计</span>
+  </a>
+  <a class="enav home" href="../index.html">
+    <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
+  </a>
+  <a class="enav next " href="2026-08-18-case-shein.html">
+    <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
+    <span class="enav-title">希音 SHEIN：小单快反怎么把库存压到个位数</span>
+  </a>
+</nav>
+
+
+</article>
+</div>
+<script src="../theme.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  var bar=document.getElementById('fxProgress');
+  var timeEl=document.getElementById('fxTime');
+  var themeBtn=document.getElementById('fxTheme');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    var p=max>0?sc/max*100:0;
+    if(bar) bar.style.width=p+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  try{
+    var body=document.querySelector('.entry-body');
+    var txt=body?body.innerText.replace(/\s/g,''):'';
+    var mins=Math.max(1,Math.round(txt.length/350));
+    if(timeEl) timeEl.textContent='≈ '+mins+' 分钟';
+  }catch(e){}
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var next=cur==='light'?'dark':'light';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('sc-theme',next);}catch(e){}
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
