@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 33 · 调度员每天早上在跟什么较劲 — 我的供应链学习记录</title>
+<link rel="stylesheet" href="../style.css?v=11">
+<script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
+</head>
+<body class="entry-page">
+<div class="fxbar" id="fxbar">
+  <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
+  <div class="fx-info">
+    <div class="fx-title">调度员每天早上在跟什么较劲</div>
+    <div class="fx-sub">DAY 33 · 2026年9月5日 · 第10章 · 配送基础数据与车辆调度（p376–386）</div>
+  </div>
+  <div class="fx-actions">
+    <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
+    <button class="fx-theme" id="fxTheme" title="&#20999;&#25442;&#26126;&#26263;">&#127771;</button>
+  </div>
+</div>
+<div class="fx-progress" id="fxProgress"></div>
+
+<div class="wrap">
+<article class="entry">
+  <header class="entry-head">
+    <div class="day-badge"><span class="lab">DAY</span><span class="num">33</span></div>
+    <div>
+      <h1>调度员每天早上在跟什么较劲</h1>
+      <p class="date">2026年9月5日 · 第10章 · 配送基础数据与车辆调度（p376–386）</p>
+    </div>
+  </header>
+  <div class="entry-body">
+    <p class="lead">今天读自营配送系统的第一部分。书里那句"物流成本占销售成本的 30% 以上"我看完愣了一下——怪不得调度这么重要。</p>
+    <h2>六类基础数据</h2>
+    <ul>
+      <li><b>司机</b>：账号、驾照号、驾照类型与有效期、从业资格证、所属站点……要能发调度指令，就得先有账号和权限。</li>
+      <li><b>车辆</b>：车牌、车型、承载重量/体积/包裹数、长宽高、GPS 设备号、采购日期（算折旧）。</li>
+      <li><b>零部件</b>：维修保养用的件。</li>
+      <li><b>包装耗材</b>：箱子、胶带、文件袋，数据量巨大。</li>
+      <li><b>三方承运商</b>：自营覆盖不到的地方要转出去，结算方式、是否支持代收货款都得记。</li>
+      <li><b>限行规则</b>：城市 × 动力系统（燃油/电车）× 限行周期，还要在失效前预警。</li>
+    </ul>
+    <h2>调度六步</h2>
+    <p>司机排班 → 接送货任务（接货任务是上门收件，配送任务是往站点/中心送）→ 生成运输路线 → 安排车辆 → 司机接收任务 → 回车登记。</p>
+    <p>最后一步<strong>回车登记</strong>有两个目的：把车辆状态改成空闲让它能接下一趟，以及录入这一趟产生的加油费、高速费、停车费、里程、票据。</p>
+    <h2>我的连接</h2>
+    <p>这是一个典型的<strong>带约束的资源调度问题</strong>：任务集、车辆集、路线集三者的匹配，约束有车辆载重体积、司机资质、限行规则、时间窗。学术上叫 VRP（车辆路径问题），是 NP-hard——现实里没人求最优解，都是用启发式规则给一个"够好"的方案。</p>
+    <p>回车登记那两个目的也很有意思：一个是<strong>资源释放</strong>（状态改空闲），一个是<strong>成本归集</strong>（把这一趟的真实花记账进去）。资源释放和成本核算放在同一个动作里，设计得很实在。</p>
+
+    <div class="note">
+      <span class="tag">💭 给自己留的话</span>
+      限行规则要"在失效前提前预警"——这种细节只有真正做过调度系统的人才会写进书里。
+    </div>
+
+    <div class="takeaway">
+      <span class="tag">✅ 一句话总结</span>
+      车辆调度 = 带约束的 VRP，NP-hard，现实靠启发式；回车登记同时做资源释放和成本归集。
+    </div>
+  </div>
+  <nav class="entry-nav">
+  <a class="enav prev " href="2026-09-04.html">
+    <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
+    <span class="enav-title">电子面单、子母单，和那 9 个状态</span>
+  </a>
+  <a class="enav home" href="../index.html">
+    <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
+  </a>
+  <a class="enav next " href="2026-09-06.html">
+    <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
+    <span class="enav-title">包裹在分拣中心经历了什么</span>
+  </a>
+</nav>
+
+
+</article>
+</div>
+<script src="../theme.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  var bar=document.getElementById('fxProgress');
+  var timeEl=document.getElementById('fxTime');
+  var themeBtn=document.getElementById('fxTheme');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    var p=max>0?sc/max*100:0;
+    if(bar) bar.style.width=p+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  try{
+    var body=document.querySelector('.entry-body');
+    var txt=body?body.innerText.replace(/\s/g,''):'';
+    var mins=Math.max(1,Math.round(txt.length/350));
+    if(timeEl) timeEl.textContent='≈ '+mins+' 分钟';
+  }catch(e){}
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var next=cur==='light'?'dark':'light';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('sc-theme',next);}catch(e){}
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
