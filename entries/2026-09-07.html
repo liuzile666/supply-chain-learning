@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 35 · 不用自己养车，也得有一套系统 — 我的供应链学习记录</title>
+<link rel="stylesheet" href="../style.css?v=11">
+<script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
+</head>
+<body class="entry-page">
+<div class="fxbar" id="fxbar">
+  <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
+  <div class="fx-info">
+    <div class="fx-title">不用自己养车，也得有一套系统</div>
+    <div class="fx-sub">DAY 35 · 2026年9月7日 · 第10章 · 三方物流配送系统（p398–408）</div>
+  </div>
+  <div class="fx-actions">
+    <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
+    <button class="fx-theme" id="fxTheme" title="&#20999;&#25442;&#26126;&#26263;">&#127771;</button>
+  </div>
+</div>
+<div class="fx-progress" id="fxProgress"></div>
+
+<div class="wrap">
+<article class="entry">
+  <header class="entry-head">
+    <div class="day-badge"><span class="lab">DAY</span><span class="num">35</span></div>
+    <div>
+      <h1>不用自己养车，也得有一套系统</h1>
+      <p class="date">2026年9月7日 · 第10章 · 三方物流配送系统（p398–408）</p>
+    </div>
+  </header>
+  <div class="entry-body">
+    <p class="lead">今天是第 10 章我最看重的一节。因为拼多多就是这么干的——不养车，但必须把多家物流管明白。</p>
+    <h2>只做三件事</h2>
+    <p>用三方物流就不用管车辆调度、分拣、配送了，系统收窄成三件事：<strong>发货前分配物流商并申请电子面单、包裹在途全程跟踪、签收后与物流商对账</strong>。</p>
+    <h2>四个模块</h2>
+    <ul>
+      <li><b>基础数据</b>：物流商信息、地址库、面单模板、月结账号。前两者属于全公司公共数据，放基础数据中心共享。</li>
+      <li><b>配送策略</b>：策略配置、物流商分配策略、时效承诺、绩效计算。</li>
+      <li><b>接口对接</b>：单号申请/取消、状态与轨迹获取、物流拦截查询。</li>
+      <li><b>财务结算</b>：运费计算模板、运费及代收货款预算、物流对账。</li>
+    </ul>
+    <h2>面单模板要收敛到一处</h2>
+    <p>仓储、配送、门店多个系统都要打面单，如果各做一套就是重复造轮子，而且物流商的面单还在不断升级。<strong>好的做法是所有面单模板统一放在配送系统里，由专人维护，外围系统来调用。</strong></p>
+    <h2>月结账号是两用的</h2>
+    <p>物流商给企业开月结账号并提供密钥，它既是<strong>结算的唯一账号</strong>（不用每单现付，按月对账），也是<strong>申请电子面单的令牌</strong>。</p>
+    <h2>分配物流：两步走 + 可降级</h2>
+    <p>先按仓配置"这个仓能用哪些物流"，再按策略分配。订单过来时带上发货仓、收件地址、支付方式、代收货款金额、物流付款方式、商品属性，系统<strong>①分配物流商 ②获取面单</strong>。指定物流商就直接取面单；系统分配则按优先级排序匹配，接口挂了或欠费就切下一家；实在匹配不到还能退回手写面单。</p>
+    <h2>我的连接</h2>
+    <p>这整节就是一个标准的<strong>适配器/网关层</strong>：把 N 家异构的物流 API 抽象成统一接口，上游只调用一次；分配策略是路由 + 优先级 + fallback，跟我们做服务路由的降级链一模一样。月结账号同时是结算 ID 和 API token，也很有意思——现实中身份和鉴权确实经常是同一个东西。</p>
+    <p>而"面单模板统一维护"这件事，本质是<strong>把易变的外部依赖收敛到一个地方</strong>——外部世界会变，变的时候只改一处。这条原则我记住了。</p>
+
+    <div class="note">
+      <span class="tag">💭 给自己留的话</span>
+      一家公司同时接十几家物流，每家接口、面单、结算方式都不同——这就是适配器模式最真实的业务场景。
+    </div>
+
+    <div class="takeaway">
+      <span class="tag">✅ 一句话总结</span>
+      三方配送系统 = 适配器 + 路由降级 + 对账；面单模板统一维护，把易变的外部依赖收敛到一处。
+    </div>
+  </div>
+  <nav class="entry-nav">
+  <a class="enav prev " href="2026-09-06.html">
+    <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
+    <span class="enav-title">包裹在分拣中心经历了什么</span>
+  </a>
+  <a class="enav home" href="../index.html">
+    <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
+  </a>
+  <a class="enav next " href="2026-09-08.html">
+    <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
+    <span class="enav-title">前店后仓：门店就是个前置仓</span>
+  </a>
+</nav>
+
+
+</article>
+</div>
+<script src="../theme.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  var bar=document.getElementById('fxProgress');
+  var timeEl=document.getElementById('fxTime');
+  var themeBtn=document.getElementById('fxTheme');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    var p=max>0?sc/max*100:0;
+    if(bar) bar.style.width=p+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  try{
+    var body=document.querySelector('.entry-body');
+    var txt=body?body.innerText.replace(/\s/g,''):'';
+    var mins=Math.max(1,Math.round(txt.length/350));
+    if(timeEl) timeEl.textContent='≈ '+mins+' 分钟';
+  }catch(e){}
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var next=cur==='light'?'dark':'light';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('sc-theme',next);}catch(e){}
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
