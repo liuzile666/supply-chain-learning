@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 37 · 物权归谁，决定了系统怎么设计 — 我的供应链学习记录</title>
+<link rel="stylesheet" href="../style.css?v=11">
+<script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
+</head>
+<body class="entry-page">
+<div class="fxbar" id="fxbar">
+  <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
+  <div class="fx-info">
+    <div class="fx-title">物权归谁，决定了系统怎么设计</div>
+    <div class="fx-sub">DAY 37 · 2026年9月9日 · 第11章 · SRM、商家发货与售后（p433–462）</div>
+  </div>
+  <div class="fx-actions">
+    <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
+    <button class="fx-theme" id="fxTheme" title="&#20999;&#25442;&#26126;&#26263;">&#127771;</button>
+  </div>
+</div>
+<div class="fx-progress" id="fxProgress"></div>
+
+<div class="wrap">
+<article class="entry">
+  <header class="entry-head">
+    <div class="day-badge"><span class="lab">DAY</span><span class="num">37</span></div>
+    <div>
+      <h1>物权归谁，决定了系统怎么设计</h1>
+      <p class="date">2026年9月9日 · 第11章 · SRM、商家发货与售后（p433–462）</p>
+    </div>
+  </header>
+  <div class="entry-body">
+    <p class="lead">今天一天读了三个系统，读到最后发现它们有一条暗线：<strong>物权归谁，系统就长什么样</strong>。</p>
+    <h2>SRM：把录入工作还给数据提供方</h2>
+    <p>供应商管理系统（SRM）是开给供应商用的协同系统。最打动我的是这一条：供应商的资质证件（营业执照、许可证、GMP/GSP 证书……）原来要采购员一个个找供应商要再录入，现在<strong>交给供应商自己在系统里维护和上传，采购员只做审核，效率提升 10 倍以上</strong>。</p>
+    <p>还有"供应商库存查询"——让供应商能看到自己商品在企业各仓的库存和历史销量。因为供应商在上游，接触不到真实交易数据，只能靠猜。这正好是<strong>牛鞭效应信息流打通</strong>的那味药。</p>
+    <h2>POP：两种模式，差别在物权</h2>
+    <ul>
+      <li><b>开店模式</b>：商家开独立店铺、自主发布商品自主定价、下单即发、按佣金结算给平台。</li>
+      <li><b>代发模式</b>：商品运营主导权在平台，商家只当发货仓，SKU 编码和定价跟平台一致，按发货量结算。</li>
+    </ul>
+    <p>书里特意点破了<strong>供应商和发货商家的本质区别</strong>：供应商是供应链上游，与企业是购销关系，采购后<strong>物权归企业</strong>、进企业仓；发货商家相当于企业的外部仓，帮平台代发货，<strong>物权归商家</strong>。</p>
+    <h2>售后 AMS：四种动作</h2>
+    <ul>
+      <li><b>仅退款</b>：没收到实物，或退货物流成本已超过商品价值（生鲜、低值品），直接退钱不退货。</li>
+      <li><b>退货退款</b>：先生成退货单，仓里收到并核验无误，<strong>才</strong>生成退款单退钱。</li>
+      <li><b>换货</b>：在履约中心生成一张换货类型的出库单。质保期按<strong>原订单</strong>算，不因换新重来。</li>
+      <li><b>补寄</b>：客服核实错发漏发后手动建单，流程同普通出库，只是下单人是客服、金额 0 元。</li>
+    </ul>
+    <p>一条约束很有意思：一张订单可以多次发起售后、生成多张售后单、多次换货补寄，但<strong>不能被多次退款</strong>。</p>
+    <h2>我的连接</h2>
+    <p>SRM 那招"让供应商自己录"，本质是<strong>把数据维护成本外包给数据的提供方</strong>——众包式主数据治理。而售后这四个动作，就是<strong>补偿事务（compensating transaction）</strong>：正向流程已经提交，只能用反向操作把状态掰回来，而且每种补偿的代价不同，所以要分四种。</p>
+
+    <div class="note">
+      <span class="tag">💭 给自己留的话</span>
+      供应商 vs 发货商家的区别，我以前从没往"物权"上想过。但一想通，两者的系统边界、结算方式、库存归属全都顺了。
+    </div>
+
+    <div class="takeaway">
+      <span class="tag">✅ 一句话总结</span>
+      物权归谁是分水岭：供应商是购销（物权归企业），商家是代发（物权归商家）；售后四种动作都是补偿事务。
+    </div>
+  </div>
+  <nav class="entry-nav">
+  <a class="enav prev " href="2026-09-08.html">
+    <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
+    <span class="enav-title">前店后仓：门店就是个前置仓</span>
+  </a>
+  <a class="enav home" href="../index.html">
+    <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
+  </a>
+  <a class="enav next " href="2026-09-10.html">
+    <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
+    <span class="enav-title">RBAC、单点登录，和项目怎么真正落地</span>
+  </a>
+</nav>
+
+
+</article>
+</div>
+<script src="../theme.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  var bar=document.getElementById('fxProgress');
+  var timeEl=document.getElementById('fxTime');
+  var themeBtn=document.getElementById('fxTheme');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    var p=max>0?sc/max*100:0;
+    if(bar) bar.style.width=p+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  try{
+    var body=document.querySelector('.entry-body');
+    var txt=body?body.innerText.replace(/\s/g,''):'';
+    var mins=Math.max(1,Math.round(txt.length/350));
+    if(timeEl) timeEl.textContent='≈ '+mins+' 分钟';
+  }catch(e){}
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var next=cur==='light'?'dark':'light';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('sc-theme',next);}catch(e){}
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
