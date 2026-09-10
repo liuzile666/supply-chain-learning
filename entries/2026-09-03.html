@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 31 · 货出了仓库，才刚开始 — 我的供应链学习记录</title>
+<link rel="stylesheet" href="../style.css?v=11">
+<script>var t=localStorage.getItem('sc-theme');document.documentElement.setAttribute('data-theme',(t&&t==='light')?'light':'dark');</script>
+</head>
+<body class="entry-page">
+<div class="fxbar" id="fxbar">
+  <a class="fx-back" href="../index.html" title="返回指挥中心">&#8592;</a>
+  <div class="fx-info">
+    <div class="fx-title">货出了仓库，才刚开始</div>
+    <div class="fx-sub">DAY 31 · 2026年9月3日 · 第10章 · 配送业务与物流方式（p367–372）</div>
+  </div>
+  <div class="fx-actions">
+    <span class="fx-time" id="fxTime">&#8776; 1 &#20998;&#38047;</span>
+    <button class="fx-theme" id="fxTheme" title="&#20999;&#25442;&#26126;&#26263;">&#127771;</button>
+  </div>
+</div>
+<div class="fx-progress" id="fxProgress"></div>
+
+<div class="wrap">
+<article class="entry">
+  <header class="entry-head">
+    <div class="day-badge"><span class="lab">DAY</span><span class="num">31</span></div>
+    <div>
+      <h1>货出了仓库，才刚开始</h1>
+      <p class="date">2026年9月3日 · 第10章 · 配送业务与物流方式（p367–372）</p>
+    </div>
+  </header>
+  <div class="entry-body">
+    <p class="lead">第 9 章收在"下发仓库"，今天正式进第 10 章配送。开篇第一句就把它的位置说清楚了：仓储负责把信息流和实物对上，配送负责把商品送达。</p>
+    <h2>TMS 到底管什么</h2>
+    <p>配送管理系统（TMS / DMS）管的是<strong>商品从出仓以后，到用户签收，以及逆向返回的全流程</strong>。关键词是"无论包裹在眼前，还是在千里之外"——它追求的是包裹位置的可观测和在线调度。</p>
+    <h2>自营、第三方、第四方</h2>
+    <ul>
+      <li><b>自营物流</b>：自己养车队和配送员，如京东、唯品会。投入巨大（团队、车辆、网点、线路规划），但能按业务特性灵活调整，大促不会被人卡脖子。</li>
+      <li><b>第三方物流（3PL）</b>：顺丰、"三通一达"这类，把配送能力对外开放。前期投入少、按单付费，但只能提供标准配送，冷链、危化品、特殊时效要看人家脸色。</li>
+      <li><b>第四方物流（4PL）</b>：既不是买方也不是卖方，也不直接送，而是把一、二、三方资源整合起来提供整体方案——做信息发布、交易撮合、资源集成。</li>
+    </ul>
+    <p>书里给了判断标准：规模小、单量少、形态单一 → 用三方；规模大、配送成本高、有自建诉求和能力 → 自建。</p>
+    <h2>一条包裹的正向之旅</h2>
+    <p>揽收（PDA 扫面单）→ 送到分拣中心卸货扫描 → 按配送方向分拣 → 重新装车（本地去站点，外地走干线）→ 配送站点收货验货 → 配送员按路线送货 → 签收。拒收或退货就走<strong>原路反向</strong>的镜像流程。</p>
+    <h2>两种装载 + 四种运输</h2>
+    <ul>
+      <li><b>整车运输</b>：一车装满，相当于包车；<b>零担运输</b>：不够一车，要等凑满才发，相当于拼车，所以慢。</li>
+      <li><b>干线</b>：跨大区分拣机构之间，长距离大批量；<b>支线</b>：同区域不同城市之间；<b>传站</b>：同城分拣中心到站点；<b>长途传站</b>：跨城市分拣中心到站点。</li>
+    </ul>
+    <h2>我的连接</h2>
+    <p>这套翻译几乎是直给的：<strong>自营=自建机房，三方=上云，四方=多云编排层</strong>。整车是独占带宽，零担是分组交换多路复用。而干线/支线/传站这个划分，活脱脱就是骨干网、城域网、接入网。</p>
+    <p>拼多多视角：平台自己不养车队，主要靠三方和极兔这类，所以对我来说更值得研究的是第 10.3 节——怎么用系统把多家物流管起来、把成本算清楚。</p>
+
+    <div class="note">
+      <span class="tag">💭 给自己留的话</span>
+      一直以为物流就是"找个快递公司寄出去"。今天才知道光"运"这件事就被切成了整车/零担 × 干线/支线/传站这么多格。
+    </div>
+
+    <div class="takeaway">
+      <span class="tag">✅ 一句话总结</span>
+      自营/3PL/4PL = 自建/上云/多云编排；物流成本占销售成本 30% 以上，所以调度值钱。
+    </div>
+  </div>
+  <nav class="entry-nav">
+  <a class="enav prev " href="2026-09-02.html">
+    <span class="enav-lab">&#8592; &#19978;&#19968;&#31687;</span>
+    <span class="enav-title">分仓、拆单、合并，还有暂停和加急</span>
+  </a>
+  <a class="enav home" href="../index.html">
+    <span class="enav-lab">&#127968; &#36820;&#22238;&#30446;&#24405;</span>
+  </a>
+  <a class="enav next " href="2026-09-04.html">
+    <span class="enav-lab">&#19979;&#19968;&#31687; &#8594;</span>
+    <span class="enav-title">电子面单、子母单，和那 9 个状态</span>
+  </a>
+</nav>
+
+
+</article>
+</div>
+<script src="../theme.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  var bar=document.getElementById('fxProgress');
+  var timeEl=document.getElementById('fxTime');
+  var themeBtn=document.getElementById('fxTheme');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    var p=max>0?sc/max*100:0;
+    if(bar) bar.style.width=p+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  try{
+    var body=document.querySelector('.entry-body');
+    var txt=body?body.innerText.replace(/\s/g,''):'';
+    var mins=Math.max(1,Math.round(txt.length/350));
+    if(timeEl) timeEl.textContent='≈ '+mins+' 分钟';
+  }catch(e){}
+  if(themeBtn){
+    themeBtn.addEventListener('click',function(){
+      var cur=root.getAttribute('data-theme');
+      var next=cur==='light'?'dark':'light';
+      root.setAttribute('data-theme',next);
+      try{localStorage.setItem('sc-theme',next);}catch(e){}
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
